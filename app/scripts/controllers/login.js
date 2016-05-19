@@ -25,19 +25,13 @@
 //   }]);
 
 'use strict';
-
-/**
- * @ngdoc function
- * @name uGisFrontApp.controller:AboutCtrl
- * @description
- * # AboutCtrl
- * Controller of the uGisFrontApp
- */
 angular.module('uGisFrontApp')
-  .controller('LoginCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('LoginCtrl', ['$scope', '$location', function ($scope, $location) {
+
+    //TODO test login
+    $scope.login = function(){
+        $location.path('/map');
+    }
+
+
+  }]);

@@ -1,0 +1,32 @@
+
+<!-- <p>This is the maplist view.</p>
+ -->
+
+<!DOCTYPE html>
+<html ng-app="uGisFrontApp">
+<head>
+	<!-- <script src="../scripts/services/mapservice.js"></script> -->
+</head>
+<body ng-controller="MapListCtrl">
+
+
+<a ui-sref="newMap" class="btn-primary btn-lg nodecoration" ng-click="newMap()">Add New Map</a>
+
+	<table class="table maptable">
+	<tbody>
+	  <tr>
+	    <td><h3>All Maps</h3></td>
+	    <td></td>
+	  </tr>
+	  <tr ng-repeat="map in maps">
+	    <td>{{map.name}}</td>
+	    <td>
+	      <a class="btn btn-primary" href="#/map/{{map.id}}">View</a>
+	      <a class="btn btn-danger"  ng-click="deleteMap(map.id)">Delete</a>
+	    </td>
+	  </tr>
+	 </tbody>
+	</table>
+
+  </body>
+</html>

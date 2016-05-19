@@ -12,6 +12,10 @@ angular
 		  post: {method: 'POST', params:{projectid: '@projectid'}, cache: false, isArray: false},
 		  //update: {method: 'PUT', cache: false, isArray: false},
 		  //delete: {method: 'DELETE', cache: false, isArray: false}
+
+		  },
+		  {
+		  	stripTrailingSlashes: true
 		  });
 
 		}

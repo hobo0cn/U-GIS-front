@@ -8,7 +8,10 @@
  * Controller of the uGisFrontApp
  */
 angular.module('uGisFrontApp')
-  .controller('RegisterCtrl', ['$scope', function ($scope) {
-    
+  .controller('RegisterCtrl', ['$scope', '$location', function ($scope, $location) {
+	    //TODO test register
+	    $scope.register = function(){
+	        $location.path('/map');
+	    }
     
   }]);

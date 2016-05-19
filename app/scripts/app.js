@@ -27,7 +27,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'uGisServices'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -46,6 +47,14 @@ angular
       .when('/register', {
         templateUrl: 'views/register.html',
         controller: 'RegisterCtrl'
+      })
+      .when('/map', {
+        templateUrl: 'views/maplist.html',
+        controller: 'MapListCtrl'
+      })
+      .when('/map/:id', {
+        templateUrl: 'views/map.html',
+        controller: 'MapViewCtrl'
       })
       .otherwise({
         redirectTo: '/'
