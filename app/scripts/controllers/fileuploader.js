@@ -1,15 +1,19 @@
 'use strict';
 
-
 angular
 
 
     .module('uGisFrontApp', ['angularFileUpload'])
 
 
-    .controller('FileUploadController', ['$scope', '$attrs', 'FileUploader', function($scope,$attrs, FileUploader) {
+    .controller('FileUploadController', ['$scope', '$attrs', '$http', '$location', 'FileUploader',
+        function($scope, $attrs, $http, $location, FileUploader) {
+        $scope.isAllComplete = false;
+        $scope.isProcessing = false;
+        $scope.processUserTip = "Start process";
+        
         var uploader = $scope.uploader = new FileUploader({
-            url: 'http://localhost:3000/upload',
+            url: 'http://192.168.66.136:3000/upload',
         });
 
 
@@ -59,7 +63,57 @@ angular
         };
         uploader.onCompleteAll = function() {
             console.info('onCompleteAll');
+            $scope.isAllComplete = true;
         };
+
+        $scope.isAllCompleteSuccess = function(){
+            // return $scope.isAllComplete;
+
+            if($scope.processUserTip == "Start process" && $scope.isAllComplete==true){
+                return true;
+            }
+            else if($scope.processUserTip == "Open")
+            {
+                return true;
+            }
+            return false;
+        }
+        $scope.clearImageQueue = function(){
+            uploader.clearQueue();
+            $scope.isAllComplete = false;
+        }
+
+        $scope.startProcess = function(){
+            // //TODO Just test projectid
+            // UGISPost.post({projectid: '2', function(){
+            //     $location.path('/');
+            // }});
+            // var data = $.param({
+            // json: JSON.stringify({
+            //     projectid: $attrs.project
+            //     })
+            // });
+            if($scope.processUserTip == "Start process"){
+                var data = JSON.stringify({
+                    projectid: $attrs.project
+                    });
+                
+                $http.post("http://localhost:8000/UGIS/start/", data).success(function(data, status) {
+                    $scope.rtn = data;
+                })
+                $scope.isProcessing = true;
+                $scope.processUserTip = "Open";
+            }
+            else if($scope.processUserTip == "Open")
+            {
+                //TODO Open Map html
+                var mapview = '/map.html';
+                $location.path(mapview);
+            }
+
+            
+            
+        }
 
         console.info('uploader', uploader);
     }]);

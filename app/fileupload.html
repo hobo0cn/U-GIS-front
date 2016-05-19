@@ -14,12 +14,15 @@
 
         <!--<script src="../bower_components/angular/angular.js"></script>-->
         <script src="http://code.angularjs.org/1.1.5/angular.min.js"></script>
+        <!-- <script src="../bower_components/angular/angular.js"></script> -->
         <script src="../bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+        <!-- <script src="../bower_components/angular-resource/angular-resource.js"></script> -->
         <script src="./scripts/controllers/fileuploader.js"></script>
        
         <!--thumbnails for images-->
         <script src="./scripts/controllers/directives.js"></script>
 
+        <!-- <script src="./scripts/controllers/services.js"></script> -->
         <style>
             .my-drop-zone { border: dotted 3px lightgray; }
             .nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
@@ -41,10 +44,6 @@
     </head>
 
     <!-- Example: nv-file-drop="" uploader="{Object}" options="{Object}" filters="{String}" -->
-    <script>
-    
-        $scope.project_id = '2';
-    };
 
     </script>
 
@@ -142,11 +141,11 @@
                         <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
                             <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
                         </button>
-                        <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                        <button type="button" class="btn btn-danger btn-s" ng-click="clearImageQueue()" ng-disabled="!uploader.queue.length">
                             <span class="glyphicon glyphicon-trash"></span> Remove all
                         </button>
-                        <button type="button" class="btn btn-primary btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
-                            <span class="glyphicon glyphicon-time"></span> Start Process
+                        <button type="button" class="btn btn-primary btn-s" ng-click="startProcess()" ng-disabled=!isAllCompleteSuccess()>
+                            <span class="glyphicon glyphicon-time"></span> {{processUserTip}}
                         </button>
                     </div>
 
