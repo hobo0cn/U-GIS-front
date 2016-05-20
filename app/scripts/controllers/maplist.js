@@ -8,10 +8,10 @@
  * Controller of the uGisFrontApp
  */
 angular.module('uGisFrontApp')
-  .controller('MapListCtrl', ['$scope', '$location', 'MapListService', 'MapService', 
+	.controller('MapListCtrl', ['$scope', '$location', 'MapListService', 'MapService', 
   	function ($scope, $location, MapListService, MapService) {
      
-      $scope.maps = MapListService.query()
+      $scope.maps = MapListService.query();
 
       $scope.newMap = function(){
         MapListService.post({name: "New Map",
@@ -21,12 +21,12 @@ angular.module('uGisFrontApp')
 							center_y: 0})
 
         $scope.maps = MapListService.query()
-    }
+    };
 
     $scope.deleteMap = function(mapId){
         MapService.delete({id: mapId})
 
         $scope.maps = MapListService.query()
-    }
+    };
 
   }]);

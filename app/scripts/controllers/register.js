@@ -12,6 +12,6 @@ angular.module('uGisFrontApp')
 	    //TODO test register
 	    $scope.register = function(){
 	        $location.path('/map');
-	    }
+	    };
     
   }]);

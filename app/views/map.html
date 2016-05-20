@@ -1,50 +1,79 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html ng-app="uGisFrontApp">
   <head>
-    <script src="../bower_components/openlayers3/build/ol.js"></script>
-    <script src="../bower_components/angular/angular.min.js"></script>
-    <script src="../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-    <script src="../bower_components/angular-openlayers-directive/dist/angular-openlayers-directive.js"></script>
-    <link rel="stylesheet" href="../bower_components/openlayers3/build/ol.css" />
-    <script>
-        var app = angular.module("uGisFrontApp", ["openlayers-directive"]);
-        app.controller('MapController', [ '$scope', function($scope) {
-            angular.extend($scope, {
-                usa: {
-                    lat: 37.7,
-                    lon: -96.67,
-                    zoom: 5
-                },
-                 layers: [
-	                {
-	                    name: 'mapquest',
-	                    source: {
-	                       type: 'MapQuest',
-	                        layer: 'sat'
-	                    }
-	                },
-	                {
-	                    name: 'wms',
-	                    source: {
-	                        type: 'ImageWMS',
-	                        url: 'http://localhost:8080/geoserver/demo/wms',
-	                        params: { LAYERS: 'demo:odm_orthphoto' },
-	                        serverType: 'geoserver'
-	                    }
-	                }
-            	],
-            });
-        } ]);
-    </script>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   </head>
-  <body ng-controller="MapController">
-    <openlayers ol-center="usa" height="700px">
-        <ol-layer ol-layer-properties="layer" ng-repeat="layer in layers"></ol-layer>
-    </openlayers>
-
+  <body ng-controller="MapViewCtrl">
+    <div id="mapid"></div>
     <h1>WMS Image Layer</h1>
     <p>This map uses a WMS image layer from a geoserver.</p>
   </div>
 
   </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Quick Start Guide Example</title>
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+  <!-- <script src="../bower_components/ng-dialog/js/ngDialog.js"></script> -->
+
+</head>
+<body ng-controller="MapViewCtrl">
+
+  <div id="dialogbtn" class="btn btn-primary" ng-click="clickToOpen()">Upload images</div>
+
+  <div id="mapid" style="width: 800px; height: 600px"></div>
+
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  
+  <script>
+
+    var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
+      maxZoom: 18,
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+      id: 'mapbox.streets'
+    }).addTo(mymap);
+
+
+    // L.marker([51.5, -0.09]).addTo(mymap)
+    //   .bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+
+    // L.circle([51.508, -0.11], 500, {
+    //   color: 'red',
+    //   fillColor: '#f03',
+    //   fillOpacity: 0.5
+    // }).addTo(mymap).bindPopup("I am a circle.");
+
+    // L.polygon([
+    //   [51.509, -0.08],
+    //   [51.503, -0.06],
+    //   [51.51, -0.047]
+    // ]).addTo(mymap).bindPopup("I am a polygon.");
+
+
+    var popup = L.popup();
+
+    function onMapClick(e) {
+      popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(mymap);
+    }
+
+    mymap.on('click', onMapClick);
+
+  </script>
+</body>
 </html>

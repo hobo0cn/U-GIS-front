@@ -28,8 +28,47 @@
   <script src="../bower_components/angular/angular.js"></script>
   <script src="../bower_components/ng-flow/dist/ng-flow-standalone.js"></script>
   <script src="./scripts/app.js"></script>
-  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css"
-        rel="stylesheet"/>
+ <!--  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css"
+        rel="stylesheet"/> -->
+
+   <link rel="stylesheet" href="../bower_components/ng-dialog/css/ngDialog-theme-default.css">
+
+    <style>
+        a, button {
+            font: 14px 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+            display: block;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        /* The following 'important' styles are just here to show off trapFocus */
+        button.ngdialog-button {
+            border: solid transparent 1px !important;
+        }
+        button.ngdialog-button:focus {
+            border: solid black 1px !important;
+        }
+        .ngdialog h2:focus { outline: none; }
+        button.inline {
+            display: inline
+        }
+        .ngdialog.ngdialog-theme-default .ngdialog-content {
+  -webkit-animation: ngdialog-flyin .5s;
+  animation: ngdialog-flyin .5s;
+  background: #f0f0f0;
+  border-radius: 5px;
+  color: #444;
+  font-family: 'Helvetica',sans-serif;
+  font-size: 1.1em;
+  line-height: 1.5em;
+  margin: 0 auto;
+  max-width: 500%;
+  padding: 1em;
+  position: relative;
+  width: 800px;
+}
+
+    </style>
+
 </head>
 <body flow-prevent-drop
       flow-drag-enter="style={border: '5px solid green'}"

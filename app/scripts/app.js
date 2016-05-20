@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 // var uGisFrontApp = angular.module('uGisFrontApp',['ngRoute']);
 // uGisFrontApp.config(['$routeProvider',function ($routeProvider) {
@@ -28,7 +28,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'uGisServices'
+    'uGisServices',
+    'ngDialog'
   ])
   .config(function ($routeProvider) {
     $routeProvider
