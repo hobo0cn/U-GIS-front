@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html ng-app="uGisFrontApp" flow-init>
+<head>
+  <title>Upload images</title>
+  <script src="../bower_components/angular/angular.js"></script>
+  <script src="../bower_components/ng-flow/dist/ng-flow-standalone.js"></script>
+  <script src="../scripts/controllers/upload.js"></script>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../styles/upload.css">
+  <link rel="stylesheet" href="../styles/uploadstyles.css">
+
+</head>
+
+<body flow-prevent-drop flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass=''">
+
+<h3>
+<a name="gallery-example" class="anchor" href="#gallery-example"><span class="octicon octicon-link"></span></a>Upload</h3>
+<div ng-controller="UploadController"
+     flow-init="config"
+     flow-files-submitted="$flow.upload()"
+     flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+     flow-complete="startAnalysis()">
+
+  <div class="drop" flow-drop ng-class="dropClass">
+    <span class="btn btn-default" flow-btn>Upload Image</span>
+    <span class="btn btn-default" flow-btn flow-directory ng-show="$flow.supportDirectory">Upload Folder of Images</span>
+    <b>OR</b>
+    Drag And Drop your images here
+  </div>
+
+  <br/>
+
+  <div>
+
+    <div ng-repeat="file in $flow.files" class="gallery-box">
+      <span class="title">{{file.name}}</span>
+      <div class="thumbnail" ng-show="$flow.files.length">
+        <img flow-img="file" />
+      </div>
+      <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
+        <div class="progress-bar" role="progressbar"
+             aria-valuenow="{{file.progress() * 100}}"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             ng-style="{width: (file.progress() * 100) + '%'}">
+          <span class="sr-only">{{file.progress()}}% Complete</span>
+        </div>
+      </div>
+      <div class="btn-group">
+        <a class="btn btn-xs btn-danger" ng-click="file.cancel()">
+          Remove
+        </a>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <span class="btn btn-primary btn-s" ng-click="startAnalysis()">Start Analysis</span>
+</div>
+
+</body>
+</html>

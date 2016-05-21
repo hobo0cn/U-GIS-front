@@ -29,7 +29,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'uGisServices',
-    'ngDialog'
+    'ngDialog',
+    'flow'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -56,6 +57,10 @@ angular
       .when('/map/:id', {
         templateUrl: 'views/map.html',
         controller: 'MapViewCtrl'
+      })
+      .when('/upload/:mapid/:layerid', {
+        templateUrl: 'views/upload.html',
+        controller: 'UploadController'
       })
       .otherwise({
         redirectTo: '/'

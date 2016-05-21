@@ -8,7 +8,7 @@
  * Controller of the uGisFrontApp
  */
 angular.module('uGisFrontApp')
-	.controller('MapListCtrl', ['$scope', '$location', 'MapListService', 'MapService', 
+	.controller('MapListCtrl', ['$scope', '$location', 'MapListService', 'MapService',
   	function ($scope, $location, MapListService, MapService) {
      
       $scope.maps = MapListService.query();
@@ -28,5 +28,7 @@ angular.module('uGisFrontApp')
 
         $scope.maps = MapListService.query()
     };
+
+
 
   }]);
