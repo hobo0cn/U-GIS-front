@@ -26,12 +26,7 @@ angular.module('uGisFrontApp')
         id: 'mapbox.satellite'
       }).addTo(map);
 
-      var wmsLayer = $window.L.tileLayer.wms('http://192.168.66.136:8080/geoserver/demo/wms?', {
-          layers: 'demo:odm_orthphoto',
-          format: 'image/png',
-          transparent: true,
-          maxZoom: 30
-      }).addTo(map);
+      
 
       
 
@@ -54,6 +49,15 @@ angular.module('uGisFrontApp')
 
         $scope.loadLayerUploadImageInfo = function(layer){
            $scope.currentViewLayer = layer;
+
+           if(layer.maplayerimages.length > 0){
+              $scope.currentViewLayerWMSName = layer.maplayerimages[0].layer_wms_path;
+              _loadWMSLayer($scope.currentViewLayerWMSName);
+           }
+           else
+              $scope.currentViewLayerWMSName = '';
+
+
            LayerImageListService.query({mapid: $scope.map.id, layerid: layer.id},
             function success(response){
                 $scope.images = response;
@@ -65,7 +69,12 @@ angular.module('uGisFrontApp')
             function error(errorResponse){
                 console.log('Error:' + JSON.stringify(errorResponse));
             });
+
+           
+           
           };
+
+
 
         $scope.startProcess = function(){
           LayerStartProcess.post({mapid: $scope.map.id, layerid: $scope.currentViewLayer.id},
@@ -80,6 +89,14 @@ angular.module('uGisFrontApp')
             });
         }
         
+        var _loadWMSLayer  = function(layerName){
+          var wmsLayer = $window.L.tileLayer.wms('http://192.168.66.136:8080/geoserver/wsgeotiff/wms?', {
+                  layers: layerName,
+                  format: 'image/png',
+                  transparent: true,
+                  maxZoom: 30
+                  }).addTo(map);
+        };
 
         var _addNewLayer = function(){
           var mapStatus = $scope.map.status;

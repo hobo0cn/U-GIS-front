@@ -3,7 +3,7 @@
 angular.module('uGisFrontApp')
 .config(['flowFactoryProvider', function (flowFactoryProvider) {
   flowFactoryProvider.defaults = {
-    target: 'http://localhost:3000/upload/',
+    target: 'http://192.168.66.136:3000/upload/',
     permanentErrors: [404, 500, 501],
     chunkRetryInterval: 5000,
     testChunks:false,
@@ -32,6 +32,7 @@ angular
                       project_id: layerId, 
                    }
           };
+
 
         $scope.startAnalysis = function(){
            //TODO start analysis image process
