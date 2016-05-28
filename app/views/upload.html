@@ -6,6 +6,9 @@
   <script src="../bower_components/angular/angular.js"></script>
   <script src="../bower_components/ng-flow/dist/ng-flow-standalone.js"></script>
   <script src="../scripts/controllers/upload.js"></script>
+  <script src="../scripts/models/selfilesmodel.js"></script>
+
+
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="../styles/upload.css">
   <link rel="stylesheet" href="../styles/uploadstyles.css">
@@ -16,11 +19,16 @@
 
 <h3>
 <a name="gallery-example" class="anchor" href="#gallery-example"><span class="octicon octicon-link"></span></a>Upload</h3>
+<!-- flow-files-submitted="$flow.upload()" -->
+
 <div ng-controller="UploadController"
      flow-init="config"
-     flow-files-submitted="$flow.upload()"
      flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
-     flow-complete="startAnalysis()">
+     flow-files-submitted="filesAdded($flow.files, $flow)"
+     SelectFilesServices="SelectFilesServices"
+     flow-complete="SelectFilesServices.uploadComplete()"
+     flowobj=$flow
+     >
 
   <div class="drop" flow-drop ng-class="dropClass">
     <span class="btn btn-default" flow-btn>Upload Image</span>

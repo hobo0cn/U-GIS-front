@@ -73,7 +73,7 @@ uGisServices
 			return $resource('http://localhost:8000/map/:mapid/layer/:layerid/analysis-image/', 
 				{mapid: '@mapid', layerid: '@layerid'},
 				{
-				  post: {method: 'POST', cache: false, isArray: false}
+				  post: {method: 'POST', cache: false, isArray: true}
 			  	},
 
 			  {

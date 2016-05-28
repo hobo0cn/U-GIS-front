@@ -30,8 +30,8 @@
 		<a href="http://threejs.org" target="_blank">three.js</a> - OBJLoader test
 		</div>
 
-		<script src="../bower_components/three.js/build/three.js"></script>
-		<!-- <script src="js/loaders/OBJLoader.js"></script> -->
+		<script src="../../bower_components/three.js/build/three.js"></script>
+		<script src="../../bower_components/three.js/examples/js/loaders/OBJLoader.js"></script>
 
 		<script>
 			var container;
@@ -68,13 +68,13 @@
 				var onError = function ( xhr ) {
 				};
 				var loader = new THREE.ImageLoader( manager );
-				loader.load( 'textures/UV_Grid_Sm.jpg', function ( image ) {
+				loader.load( '../obj/odm_texturing/texture_1.jpg', function ( image ) {
 					texture.image = image;
 					texture.needsUpdate = true;
 				} );
 				// model
 				var loader = new THREE.OBJLoader( manager );
-				loader.load( 'obj/male02/male02.obj', function ( object ) {
+				loader.load( '../obj/odm_texturing/odm_textured_model_geo.obj', function ( object ) {
 					object.traverse( function ( child ) {
 						if ( child instanceof THREE.Mesh ) {
 							child.material.map = texture;

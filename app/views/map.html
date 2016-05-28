@@ -30,29 +30,35 @@
 
 <!--   <div id="dialogbtn" class="btn btn-primary" ng-click="addNewLayer()" ng-disable="!$scope.isUploadEnable">"Upload Image"</div> -->
 
-  <button type="button" class="btn btn-primary btn-s" ng-click="uploadOnClick()" ng-show=isUploadEnable>
+  <button type="button" class="btn btn-primary btn-s" ng-click="uploadOnClick()" ng-show=!isUploadEnable>
        <span class="glyphicon glyphicon-cloud-upload"></span> {{uploadBtnTxt}}
   </button>
 
-  <button type="button" class="btn btn-danger" ng-click="startProcess()" ng-show=isWaitProcess>
-       <span class="glyphicon glyphicon-time"></span> Start process
+  <button type="button" class="btn btn-success" ng-click="uploadOnClick()" ng-show=isUploadEnable>
+       <span class="glyphicon glyphicon-ok"></span> {{uploadBtnTxt}}
   </button>
 
-  <label ng-show="!isUploadEnable && !isWaitProcess">Processing</label>
+ 
   
   <table class="table layertable">
   <tbody>
     <tr ng-repeat="layer in layers">
       <td>{{layer.upload_time}}</td>
+      <td>{{layer.status}}</td>
       <td>
         <a class="btn btn-primary" ng-click="loadLayerUploadImageInfo(layer)">View</a>
-        <a class="btn btn-danger"  ng-click="deleteLayer(layer.id)">Delete</a>
+        <!-- <a class="btn btn-danger"  ng-click="deleteLayer(layer.id)">Delete</a> -->
       </td>
     </tr>
    </tbody>
   </table>
 
   <div id="mapid" style="width: 800px; height: 600px"></div>
+  <div flow-init flow-object="flowObj"
+      flow-complete="uploadComplete()"
+    >
+  </div>
+
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   
   <script>

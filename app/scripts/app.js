@@ -58,10 +58,14 @@ angular
         templateUrl: 'views/map.html',
         controller: 'MapViewCtrl'
       })
-      .when('/upload/:mapid/:layerid', {
+      .when('/upload/:mapid', {
         templateUrl: 'views/upload.html',
         controller: 'UploadController'
       })
+      // .when('/file', {
+      //   templateUrl: 'views/fileinfo.html',
+      //   controller: 'FileInfoCtrl'
+      // })
       .otherwise({
         redirectTo: '/'
       });
