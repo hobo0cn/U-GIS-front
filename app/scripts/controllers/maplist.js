@@ -18,7 +18,16 @@ angular.module('uGisFrontApp')
 							owner: 1,
 							zoom: 1 ,
 							center_x: 0,
-							center_y: 0})
+							center_y: 0},
+              function success(response){
+                
+                console.log('Success:' + JSON.stringify(response));     
+                      
+                     
+              },
+              function error(errorResponse){
+                  console.log('Error:' + JSON.stringify(errorResponse));
+              });
 
         $scope.maps = MapListService.query()
     };

@@ -30,12 +30,16 @@
 
 <!--   <div id="dialogbtn" class="btn btn-primary" ng-click="addNewLayer()" ng-disable="!$scope.isUploadEnable">"Upload Image"</div> -->
 
-  <button type="button" class="btn btn-primary btn-s" ng-click="uploadOnClick()" ng-show=!isUploadEnable>
-       <span class="glyphicon glyphicon-cloud-upload"></span> {{uploadBtnTxt}}
+  <button type="button" class="btn btn-success" ng-click="uploadOnClick()" ng-show=!isUploadEnable>
+       <span class="glyphicon glyphicon-cloud-upload"></span> 新快照
+  </button>
+
+  <button type="button" class="btn btn-info" ng-click="uploadOnClick()" ng-show=isUploadEnable>
+       <span class="glyphicon glyphicon-equalizer"></span> 分析
   </button>
 
   <button type="button" class="btn btn-success" ng-click="uploadOnClick()" ng-show=isUploadEnable>
-       <span class="glyphicon glyphicon-ok"></span> {{uploadBtnTxt}}
+       <span class="glyphicon glyphicon-ok"></span> 开始处理
   </button>
 
  
@@ -44,7 +48,7 @@
   <tbody>
     <tr ng-repeat="layer in layers">
       <td>{{layer.upload_time}}</td>
-      <td>{{layer.status}}</td>
+      <td>{{getLayerStatusTxt(layer)}}</td>
       <td>
         <a class="btn btn-primary" ng-click="loadLayerUploadImageInfo(layer)">View</a>
         <!-- <a class="btn btn-danger"  ng-click="deleteLayer(layer.id)">Delete</a> -->

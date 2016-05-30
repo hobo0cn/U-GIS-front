@@ -20,13 +20,12 @@
 <h3>
 <a name="gallery-example" class="anchor" href="#gallery-example"><span class="octicon octicon-link"></span></a>Upload</h3>
 <!-- flow-files-submitted="$flow.upload()" -->
-
+<!--  SelectFilesServices="SelectFilesServices"
+     flow-complete="SelectFilesServices.uploadComplete()" -->
 <div ng-controller="UploadController"
      flow-init="config"
      flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
      flow-files-submitted="filesAdded($flow.files, $flow)"
-     SelectFilesServices="SelectFilesServices"
-     flow-complete="SelectFilesServices.uploadComplete()"
      flowobj=$flow
      >
 
@@ -63,7 +62,7 @@
     </div>
     <div class="clear"></div>
   </div>
-  <span class="btn btn-primary btn-s" ng-click="startAnalysis()">Start Analysis</span>
+  <span class="btn btn-primary btn-s" ng-click="startAnalysis()">完成选择</span>
 </div>
 
 </body>

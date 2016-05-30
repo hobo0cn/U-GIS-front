@@ -4,7 +4,7 @@ angular.module('uGisFrontApp')
 .config(['flowFactoryProvider', 
   function (flowFactoryProvider) {
   flowFactoryProvider.defaults = {
-    target: 'http://192.168.66.136:3000/upload/',
+    target: 'http://192.168.66.137:3000/upload/',
     permanentErrors: [404, 500, 501],
     chunkRetryInterval: 5000,
     testChunks:false,
@@ -44,15 +44,15 @@ angular
 
         var exifinfo = new Array();
         var filenum = 0;
-
+        var exifJSON;
 
         var isFinishLoadFiles = function(Files){
            if(Files.length == filenum)
            {
-              var exifJSON = JSON.stringify(exifinfo)
+              exifJSON = JSON.stringify(exifinfo)
               console.log('exinfo:' + exifJSON);
               //TODO invoke anaylsis images API
-              $scope.startAnalysis(exifJSON);
+              //$scope.startAnalysis(exifJSON);
            }
         };
 
@@ -96,10 +96,10 @@ angular
         };
 
 
-        $scope.startAnalysis = function(exifJSONinfo){
+        $scope.startAnalysis = function(){
            //TODO start analysis image process
            LayerStartAnalysis.post({mapid: $scope.mapid, layerid: 1, 
-                                    exifinfo: exifJSONinfo},
+                                    exifinfo: exifJSON},
               function success(response){
                 var info = JSON.parse(JSON.stringify(response));
                 SelectFilesServices.setFilesInfo(info);

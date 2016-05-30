@@ -75,7 +75,6 @@ angular.module('uGisFrontApp')
   };
     
        
-  
 
   $window.addEventListener('load', function () {
     document.getElementById('file').addEventListener('change', handleFile, false);

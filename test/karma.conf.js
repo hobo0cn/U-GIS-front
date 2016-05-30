@@ -39,6 +39,10 @@ module.exports = function(config) {
       'bower_components/leaflet/dist/leaflet-src.js',
       'bower_components/ng-dialog/js/ngDialog.js',
       'bower_components/exifreader/js/ExifReader.js',
+      'bower_components/leaflet-dist/leaflet.js',
+      'bower_components/leaflet-search/dist/leaflet-search.src.js',
+      'bower_components/leaflet-dialog/Leaflet.Dialog.js',
+      'bower_components/ng-popup/dist/ngPopup.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

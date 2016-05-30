@@ -62,6 +62,14 @@ angular
         templateUrl: 'views/upload.html',
         controller: 'UploadController'
       })
+      .when('/dashboard', {
+        templateUrl: 'views/dashboard.html',
+        controller: 'DashboardCtrl'
+      })
+      // .when('/uploaddlg', {
+      //   templateUrl: 'views/uploadDlg.html',
+      //   controller: 'uploadDlgCtrl'
+      // })
       // .when('/file', {
       //   templateUrl: 'views/fileinfo.html',
       //   controller: 'FileInfoCtrl'

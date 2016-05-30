@@ -20,13 +20,10 @@ angular.module('uGisFrontApp')
                 //zoom: 13
             };
 
-      var baselayer = $window.L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
+      var baselayer = $window.L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaG9ibzBjbiIsImEiOiJjaW9zNXRjdmowMDZldWxtNXM1OThqazczIn0.UTfVL-F6P3n0xM1G0KCipA', {
         maxZoom: 30,
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-          '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-          'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        id: 'mapbox.satellite'
-      }).addTo(map);
+        }).addTo(map);
+
 
       
 
@@ -48,11 +45,23 @@ angular.module('uGisFrontApp')
             else{ 
               //开始上传
                 //_addNewLayer();
-                var flowObj = SelectFilesServices.getFlow();
-                flowObj.upload();
+                // var flowObj = SelectFilesServices.getFlow();
+                // flowObj.upload();
+                //打开进度条对话框
+                ngDialog.open({
+                template: '../views/uploadDlg.html',
+                controller: ['$scope', 'SelectFilesServices', function($scope, SelectFilesServices) {
+                    // controller logic
+                    $scope.flowObj = SelectFilesServices.getFlow();
+                    $scope.flowObj.upload();
+                }]
+            });
+
             }
             
         };
+
+
 
         $scope.loadLayerUploadImageInfo = function(layer){
            $scope.currentViewLayer = layer;
@@ -84,7 +93,7 @@ angular.module('uGisFrontApp')
         $scope.startProcess = function(){
           LayerStartProcess.post({mapid: $scope.map.id, layerid: $scope.currentViewLayer.id},
             function success(response){
-                
+                $scope.isUploadEnable = false;
                 console.log('Success:' + JSON.stringify(response));     
                 _getMap();          
                      
@@ -92,15 +101,27 @@ angular.module('uGisFrontApp')
             function error(errorResponse){
                 console.log('Error:' + JSON.stringify(errorResponse));
             });
-        }
+        };
 
         $scope.uploadComplete = function(){
             //TODO 上传完毕,创建图层、导入图片到databse、开始生成模型（三步一体）
             _addNewLayer();
-        }
+        };
+
+        $scope.getLayerStatusTxt = function(layer){
+            if(layer.status == 'N'){
+              return "新创建";
+            }
+            else if(layer.status == "P"){
+              return "处理中";
+            }
+            else if(layer.status == "D"){
+              return "处理完成";
+            }
+        };
         
         var _loadWMSLayer  = function(layerName){
-          var wmsLayer = $window.L.tileLayer.wms('http://192.168.66.136:8080/geoserver/wsgeotiff/wms?', {
+          var wmsLayer = $window.L.tileLayer.wms('http://192.168.66.137:8080/geoserver/wsgeotiff/wms?', {
                   layers: layerName,
                   format: 'image/png',
                   transparent: true,
@@ -114,7 +135,7 @@ angular.module('uGisFrontApp')
           LayerListService.post({mapid: $scope.map.id, stack_order:1},
             function success(response){
                 $scope.currentViewLayer = response;
-                console.log('Success:' + JSON.stringify(response));
+                console.log('Success:' + JSON.stringify(response)); 
                 //创建图层成功后开始处理图片
                 $scope.startProcess();
         
@@ -141,6 +162,8 @@ angular.module('uGisFrontApp')
               }
             );
         }
+
+
         
        // var _drawImageCircle = function(){
        //    if($scope.images.length>0){
@@ -182,6 +205,14 @@ angular.module('uGisFrontApp')
                   fillOpacity: 0.1
                 }).addTo(map).bindPopup(selFilesInfo[i].ImageDescription);  
        }
+
+        $(window).on("resize", function() {
+          $("#mapid").height($(window).height())
+                .width($(window).width());
+          
+          map.invalidateSize();
+        }).trigger("resize");
+
 
   }]);
 
