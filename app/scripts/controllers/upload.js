@@ -53,6 +53,7 @@ angular
               console.log('exinfo:' + exifJSON);
               //TODO invoke anaylsis images API
               //$scope.startAnalysis(exifJSON);
+              SelectFilesServices.setFilesOriginExifInfo(exifJSON);
            }
         };
 

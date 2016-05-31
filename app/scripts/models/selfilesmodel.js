@@ -25,6 +25,17 @@
 				return filesInfo;
 			};
 
+			var filesOriginExifInfo = [];
+			var setFilesOriginExifInfo = function(info){
+				filesOriginExifInfo = info;
+			};
+
+			var getFilesOriginExifInfo = function()
+			{
+				return filesOriginExifInfo;
+			};
+
+
 			var flowObj;
 			var setFlow = function(_flowObj){
 				flowObj = _flowObj;
@@ -42,6 +53,8 @@
     			getFiles: getFiles,
     			setFilesInfo: setFilesInfo,
     			getFilesInfo: getFilesInfo,
+    			setFilesOriginExifInfo: setFilesOriginExifInfo,
+    			getFilesOriginExifInfo: getFilesOriginExifInfo,
     			setFlow: setFlow,
     			getFlow: getFlow,
     			uploadComplete: uploadComplete

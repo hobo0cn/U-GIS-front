@@ -24,7 +24,7 @@
 
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
   <!-- <script src="../bower_components/ng-dialog/js/ngDialog.js"></script> -->
-
+ <script src="../../bower_components/leaflet.heat-gh-pages/dist/leaflet-heat.js"></script>
 </head>
 <body ng-controller="MapViewCtrl">
 
@@ -34,7 +34,7 @@
        <span class="glyphicon glyphicon-cloud-upload"></span> 新快照
   </button>
 
-  <button type="button" class="btn btn-info" ng-click="uploadOnClick()" ng-show=isUploadEnable>
+  <button type="button" class="btn btn-info" ng-click="coverageAnalysis()" ng-show=isUploadEnable>
        <span class="glyphicon glyphicon-equalizer"></span> 分析
   </button>
 
@@ -104,6 +104,16 @@
     // }
 
     // mymap.on('click', onMapClick);
+
+    var _addCoverageLayer = function(heatpoints){
+
+              if($scope.heatpoints){
+                var heat = L.heatLayer(heatpoints, {radius: 25, 
+                gradient: {0.1: 'red', 0.65: 'lime', 1: 'blue'}}).addTo(map);
+              }
+             
+    };
+
 
   </script>
 

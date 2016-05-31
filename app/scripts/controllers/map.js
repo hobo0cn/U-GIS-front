@@ -3,9 +3,10 @@
 angular.module('uGisFrontApp')
   .controller('MapViewCtrl', ['$scope', '$window', '$location', '$routeParams',
    'ngDialog', 'MapService', 'LayerListService', 'LayerImageListService', 'LayerStartProcess',
-   'SelectFilesServices',
+   'SelectFilesServices', 'LayerCoverageAnalysis',
   	function ($scope, $window, $location, $routeParams, 
-      ngDialog, MapService, LayerListService, LayerImageListService, LayerStartProcess, SelectFilesServices) {
+      ngDialog, MapService, LayerListService, LayerImageListService, LayerStartProcess,
+       SelectFilesServices, LayerCoverageAnalysis) {
       $scope.isWaitProcess = false;
       $scope.isUploadEnable = false;
 
@@ -24,8 +25,10 @@ angular.module('uGisFrontApp')
         maxZoom: 30,
         }).addTo(map);
 
-
-      
+        $scope.heatpoints = null;
+        if($scope.heatpoints){
+          var heat = $window.L.heatLayer(heatpoints, {radius: 25}).addTo(map);
+        }
 
          $scope.clickToOpen = function () {
           ngDialog.open({ template: 'index_ng-flow.html'});
@@ -119,6 +122,22 @@ angular.module('uGisFrontApp')
               return "处理完成";
             }
         };
+
+        $scope.coverageAnalysis = function(){
+            var orginFilesExif = SelectFilesServices.getFilesOriginExifInfo();
+            LayerCoverageAnalysis.post({mapid: mapId, layerid: 1, 
+                                    exifinfo: orginFilesExif},
+              function success(response){
+                console.log('Success:' + JSON.stringify(response));
+                 $scope.heatpoints = JSON.parse(JSON.stringify(response));   
+                _addCoverageLayer($scope.heatpoints);
+
+              },
+              function error(errorResponse){
+                console.log('Error:' + JSON.stringify(errorResponse));
+              });
+
+        };
         
         var _loadWMSLayer  = function(layerName){
           var wmsLayer = $window.L.tileLayer.wms('http://192.168.66.137:8080/geoserver/wsgeotiff/wms?', {
@@ -144,6 +163,9 @@ angular.module('uGisFrontApp')
                 console.log('Error:' + JSON.stringify(errorResponse));
             });
           };
+
+         
+
         
         var _getMap = function(){
            MapService.get({id: mapId},

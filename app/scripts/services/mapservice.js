@@ -82,6 +82,21 @@ uGisServices
 
 		}
 	])
+	.factory('LayerCoverageAnalysis', ['$resource',
+		function($resource) {
+			//TODO Just for test address
+			return $resource('http://localhost:8000/map/:mapid/layer/:layerid/coverage-analysis/', 
+				{mapid: '@mapid', layerid: '@layerid'},
+				{
+				  post: {method: 'POST', cache: false, isArray: true}
+			  	},
+
+			  {
+			  	stripTrailingSlashes: false
+			  });
+
+		}
+	])
 	.factory('LayerStartProcess', ['$resource',
 		function($resource) {
 			//TODO Just for test address
