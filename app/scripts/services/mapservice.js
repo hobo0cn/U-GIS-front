@@ -3,12 +3,13 @@
 /* Services */
 var uGisServices = 
 	angular.module('uGisServices', ['ngResource']);
-
+// var API_SERVER_PATH = 'http://localhost:8000';
+var API_SERVER_PATH = 'http://112.74.189.43:9000';
 uGisServices
 	.factory('MapListService', ['$resource',
 		function($resource) {
 			//TODO Just for test address
-			return $resource('http://localhost:8000/map/', {}, {
+			return $resource( API_SERVER_PATH+'/map/', {}, {
 			  // get: {method: 'GET'},
 			  post: {method: 'POST',  cache: false, isArray: false},
 			  // update: {method: 'PUT', cache: false, isArray: false},
@@ -25,7 +26,7 @@ uGisServices
 	.factory('MapService', ['$resource',
 		function($resource) {
 			//TODO Just for test address
-			return $resource('http://localhost:8000/map/:id/', {}, {
+			return $resource(API_SERVER_PATH+'/map/:id/', {}, {
 			   get: {method: 'GET'},
 			  //post: {method: 'POST', cache: false, isArray: false},
 			  // update: {method: 'PUT', cache: false, isArray: false},
@@ -42,7 +43,7 @@ uGisServices
 	.factory('LayerListService', ['$resource',
 		function($resource) {
 			//TODO Just for test address
-			return $resource('http://localhost:8000/map/:mapid/layer/', {mapid: '@mapid'}, {
+			return $resource(API_SERVER_PATH+'/map/:mapid/layer/', {mapid: '@mapid'}, {
 			  post: {method: 'POST', cache: false, isArray: false},
 			  },
 			  {
@@ -56,7 +57,7 @@ uGisServices
 	.factory('LayerService', ['$resource',
 		function($resource) {
 			//TODO Just for test address
-			return $resource('http://localhost:8000/map/:mapid/layer/:layerid', {}, {
+			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid', {}, {
 				  get: {method: 'GET', cache: false, isArray: false},
 				  update: {method: 'PUT', cache: false, isArray: false},
 				  delete: {method: 'DELETE', cache: false, isArray: false}
@@ -70,7 +71,7 @@ uGisServices
 	.factory('LayerStartAnalysis', ['$resource',
 		function($resource) {
 			//TODO Just for test address
-			return $resource('http://localhost:8000/map/:mapid/layer/:layerid/analysis-image/', 
+			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/analysis-image/', 
 				{mapid: '@mapid', layerid: '@layerid'},
 				{
 				  post: {method: 'POST', cache: false, isArray: true}
@@ -85,7 +86,7 @@ uGisServices
 	.factory('LayerCoverageAnalysis', ['$resource',
 		function($resource) {
 			//TODO Just for test address
-			return $resource('http://localhost:8000/map/:mapid/layer/:layerid/coverage-analysis/', 
+			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/coverage-analysis/', 
 				{mapid: '@mapid', layerid: '@layerid'},
 				{
 				  post: {method: 'POST', cache: false, isArray: true}
@@ -100,7 +101,7 @@ uGisServices
 	.factory('LayerStartProcess', ['$resource',
 		function($resource) {
 			//TODO Just for test address
-			return $resource('http://localhost:8000/map/:mapid/layer/:layerid/process-image/', 
+			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/process-image/', 
 				{mapid: '@mapid', layerid: '@layerid'},
 				{
 				  post: {method: 'POST', cache: false, isArray: false}
@@ -117,7 +118,7 @@ uGisServices
 	.factory('LayerImageListService', ['$resource',
 		function($resource) {
 			//TODO Just for test address
-			return $resource('http://localhost:8000/map/:mapid/layer/:layerid/image/', 
+			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/image/', 
 							{mapid: '@mapid', layerid: '@layerid'},
 						  {
 						  		get: {method: 'GET', cache: false, isArray: false},
@@ -131,7 +132,7 @@ uGisServices
 	.factory('LayerImageService', ['$resource',
 		function($resource) {
 			//TODO Just for test address
-			return $resource('http://localhost:8000/map/:mapid/layer/:layerid/image/:imageid', 
+			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/image/:imageid', 
 				{mapid: '@mapid', layerid: '@layerid', imageid: '@imageid'},
 				  {
 				  	get: {method: 'GET', cache: false, isArray: false},

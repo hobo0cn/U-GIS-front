@@ -4,7 +4,9 @@ angular.module('uGisFrontApp')
 .config(['flowFactoryProvider', 
   function (flowFactoryProvider) {
   flowFactoryProvider.defaults = {
-    target: 'http://192.168.66.137:3000/upload/',
+    
+    //target: 'http://192.168.66.137:3000/upload/',
+    target: 'http://112.74.189.43:3000/upload/',
     permanentErrors: [404, 500, 501],
     chunkRetryInterval: 5000,
     testChunks:false,
