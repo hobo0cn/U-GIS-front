@@ -56,6 +56,7 @@ angular.module('uGisFrontApp')
                 template: '../views/uploadDlg.html',
                 closeByDocument: false,
                 scope: $scope,
+                className: 'ngdialog-theme-default',
                 controller: ['$scope', 'SelectFilesServices', function($scope, SelectFilesServices) {
                     // controller logic
                     $scope.flowObj = SelectFilesServices.getFlow();
