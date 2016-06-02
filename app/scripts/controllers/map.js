@@ -9,7 +9,7 @@ angular.module('uGisFrontApp')
        SelectFilesServices, LayerCoverageAnalysis) {
       $scope.isWaitProcess = false;
       $scope.isUploadEnable = false;
-      $scpoe.isUploadComplete = false;
+      $scope.isUploadComplete = false;
 
       $scope.uploadBtnTxt = 'Select images for analysis';
       var mapId = $routeParams.id;
@@ -55,7 +55,7 @@ angular.module('uGisFrontApp')
                 ngDialog.open({
                 template: '../views/uploadDlg.html',
                 closeByDocument: false,
-                scpoe: $scope,
+                scope: $scope,
                 controller: ['$scope', 'SelectFilesServices', function($scope, SelectFilesServices) {
                     // controller logic
                     $scope.flowObj = SelectFilesServices.getFlow();
@@ -118,7 +118,7 @@ angular.module('uGisFrontApp')
         $scope.uploadComplete = function(){
             //TODO 上传完毕,创建图层、导入图片到databse、开始生成模型（三步一体）
             //_addNewLayer();
-            $scpoe.isUploadComplete = true;
+            $scope.isUploadComplete = true;
 
         };
 
