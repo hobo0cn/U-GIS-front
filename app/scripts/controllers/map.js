@@ -9,6 +9,7 @@ angular.module('uGisFrontApp')
        SelectFilesServices, LayerCoverageAnalysis) {
       $scope.isWaitProcess = false;
       $scope.isUploadEnable = false;
+      $scpoe.isUploadComplete = false;
 
       $scope.uploadBtnTxt = 'Select images for analysis';
       var mapId = $routeParams.id;
@@ -40,7 +41,7 @@ angular.module('uGisFrontApp')
             //等待上传图片信息进行覆盖分析状态
             if($scope.isUploadEnable == false){
               var uploadpath = '/upload/' + mapId;
-              $location.path(uploadpath);
+              $location.path(uploadpath); 
               //_addNewLayer();
                
             }
@@ -53,10 +54,13 @@ angular.module('uGisFrontApp')
                 //打开进度条对话框
                 ngDialog.open({
                 template: '../views/uploadDlg.html',
+                closeByDocument: false,
+                scpoe: $scope,
                 controller: ['$scope', 'SelectFilesServices', function($scope, SelectFilesServices) {
                     // controller logic
                     $scope.flowObj = SelectFilesServices.getFlow();
                     $scope.flowObj.upload();
+
                 }]
             });
 
@@ -83,6 +87,11 @@ angular.module('uGisFrontApp')
                 console.log('Success:' + JSON.stringify(response));    
                 //Draw circle
                 //_drawImageCircle();
+                //set center
+                if(response.length>0){
+                  map.panTo({lat: response[0].lat, lng: response[0].lon});
+                }
+                
                      
             },
             function error(errorResponse){
@@ -108,7 +117,9 @@ angular.module('uGisFrontApp')
 
         $scope.uploadComplete = function(){
             //TODO 上传完毕,创建图层、导入图片到databse、开始生成模型（三步一体）
-            _addNewLayer();
+            //_addNewLayer();
+            $scpoe.isUploadComplete = true;
+
         };
 
         $scope.getLayerStatusTxt = function(layer){
@@ -148,7 +159,7 @@ angular.module('uGisFrontApp')
                   }).addTo(map);
         };
 
-        var _addNewLayer = function(){
+        $scope.addNewLayer = function(){
           var mapStatus = $scope.map.status;
 
           LayerListService.post({mapid: $scope.map.id, stack_order:1},
