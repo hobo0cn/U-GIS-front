@@ -22,8 +22,12 @@ angular.module('uGisFrontApp')
                 //zoom: 13
             };
 
-      var baselayer = $window.L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaG9ibzBjbiIsImEiOiJjaW9zNXRjdmowMDZldWxtNXM1OThqazczIn0.UTfVL-F6P3n0xM1G0KCipA', {
-        maxZoom: 30,
+      // var baselayer = $window.L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaG9ibzBjbiIsImEiOiJjaW9zNXRjdmowMDZldWxtNXM1OThqazczIn0.UTfVL-F6P3n0xM1G0KCipA', {
+      //   maxZoom: 30,
+      //   }).addTo(map);
+      var baselayer = $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
+          maxZoom: 30,
+        
         }).addTo(map);
 
         $scope.heatpoints = null;
