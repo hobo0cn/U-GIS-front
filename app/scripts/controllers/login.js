@@ -30,7 +30,7 @@ angular.module('uGisFrontApp')
 
     //TODO test login
     $scope.login = function(){
-        $location.path('/map');
+        $location.path('/dashboard');
     }
 
 
