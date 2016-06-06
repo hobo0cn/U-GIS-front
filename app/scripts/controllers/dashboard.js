@@ -56,7 +56,7 @@ angular.module('uGisFrontApp')
 	
 	}).addTo(map);
 
-	
+	$window.L.Icon.Default.imagePath = 'bower_components/leaflet/dist/images';
 	// map.addLayer(new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'));	//base layer
 	
 	map.addControl( new L.Control.Search({
