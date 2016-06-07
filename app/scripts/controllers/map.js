@@ -160,6 +160,7 @@ angular.module('uGisFrontApp')
                   layers: layerName,
                   format: 'image/png',
                   transparent: true,
+                  crs: $window.L.CRS.EPSG4326,
                   maxZoom: 30
                   }).addTo(map);
         };
