@@ -39,7 +39,7 @@ angular.module('uGisFrontApp')
             	console.log('Success:' + JSON.stringify(response));  
                 ProfileServices.setUserToken(response.token);
                 ProfileServices.setUserName($scope.username);
-                $location.path('/map');
+                $location.path('/dashboard');
                      
             },
             function error(errorResponse){

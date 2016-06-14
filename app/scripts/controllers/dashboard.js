@@ -12,9 +12,28 @@ angular.module('uGisFrontApp')
 		'MapListService', 'MapService', 'ProfileServices',
   	function ($scope, $location, $window, MapListService, MapService, ProfileServices) {
     
-      $scope.maps = MapListService.query();
+      $scope.maps = MapListService.query({owner__username: ProfileServices.getUserName()},
 
-      
+              function success(response){
+                $scope.maps = response;
+               //add makers
+				for (var i = $scope.maps.length - 1; i >= 0; i--) {
+					var marker = $window.L.marker([$scope.maps[i].center_x, $scope.maps[i].center_y]);
+					marker.mapid = $scope.maps[i].id;
+					marker.on('click', onMarkerClick);
+					// marker.addTo(map)
+					map.addLayer(marker)
+					//$window.L.marker([$scope.maps[i].center_x, $scope.maps[i].center_y]).addTo(map)
+						
+				}
+                //_jugeMapStatus();
+              },
+              function error(errorResponse){
+                console.log('Error:' + JSON.stringify(errorResponse));
+              });
+
+
+
       $scope.newMap = function(){
         MapListService.post({name: "New Map",
 							// owner: 1,
@@ -32,7 +51,7 @@ angular.module('uGisFrontApp')
 				                console.log('Error:' + JSON.stringify(errorResponse));
 				            });
 
-        $scope.maps = MapListService.query();
+        $scope.maps = MapListService.query({owner__username: ProfileServices.getUserName()});
     };
 
     $scope.deleteMap = function(mapId){
@@ -41,9 +60,17 @@ angular.module('uGisFrontApp')
         $scope.maps = MapListService.query()
     };
 
-	var map = $window.L.map('mapid').setView([51.505, -0.09], 5);
+    $scope.openMap = function(mapId){
+       var clickmappath = '/#/map/' + mapId;
+       // $location.path(clickmappath);
+       	map.remove()
+       $window.location.href = clickmappath;
+    };
 
-	
+
+
+	var map = $window.L.map('mapid').setView([22.5393964800083, 113.895525099986], 5);
+
 	// $window.L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaG9ibzBjbiIsImEiOiJjaW9zNXRjdmowMDZldWxtNXM1OThqazczIn0.UTfVL-F6P3n0xM1G0KCipA', {
  //        maxZoom: 30,
      
@@ -71,7 +98,14 @@ angular.module('uGisFrontApp')
 			minLength: 3
 		}) );
 
+	
 
+	var onMarkerClick = function(e){
+           //alert("hi. you clicked the marker at " + e.latlng);
+           //var clickmappath = '/map/' + e.target.mapid;
+           $scope.openMap(e.target.mapid)
+        }
+    
 
 	$(window).on("resize", function() {
 	    $("#mapid").height($(window).height())

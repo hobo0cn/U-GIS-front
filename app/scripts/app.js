@@ -76,6 +76,6 @@ angular
       //   controller: 'FileInfoCtrl'
       // })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/login'
       });
   });
