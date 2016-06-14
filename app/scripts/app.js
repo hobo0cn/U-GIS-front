@@ -29,6 +29,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'uGisServices',
+    'uGisAuthServices',
     'ngDialog',
     'flow'
   ])

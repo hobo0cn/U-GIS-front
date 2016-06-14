@@ -9,15 +9,15 @@
  */
 angular.module('uGisFrontApp')
 	.controller('DashboardCtrl', ['$scope', '$location', '$window', 
-		'MapListService', 'MapService',
-  	function ($scope, $location, $window, MapListService, MapService) {
+		'MapListService', 'MapService', 'ProfileServices',
+  	function ($scope, $location, $window, MapListService, MapService, ProfileServices) {
     
       $scope.maps = MapListService.query();
 
       
       $scope.newMap = function(){
         MapListService.post({name: "New Map",
-							owner: 1,
+							// owner: 1,
 							zoom: 1 ,
 							center_x: 0,
 							center_y: 0},

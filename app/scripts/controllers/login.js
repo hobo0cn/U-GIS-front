@@ -26,11 +26,26 @@
 
 'use strict';
 angular.module('uGisFrontApp')
-  .controller('LoginCtrl', ['$scope', '$location', function ($scope, $location) {
-
+  .controller('LoginCtrl', ['$scope', '$location', 'TokenAuthService', 'ProfileServices',
+   function ($scope, $location, TokenAuthService, ProfileServices) {
+   	$scope.username = "";
+   	$scope.password = "";
     //TODO test login
+    
     $scope.login = function(){
-        $location.path('/dashboard');
+        
+        TokenAuthService.post({username: $scope.username, password: $scope.password},
+            function success(response){
+            	console.log('Success:' + JSON.stringify(response));  
+                ProfileServices.setUserToken(response.token);
+                ProfileServices.setUserName($scope.username);
+                $location.path('/map');
+                     
+            },
+            function error(errorResponse){
+                console.log('Error:' + JSON.stringify(errorResponse));
+            });
+        
     }
 
 

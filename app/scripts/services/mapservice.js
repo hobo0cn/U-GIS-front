@@ -3,15 +3,19 @@
 /* Services */
 var uGisServices = 
 	angular.module('uGisServices', ['ngResource']);
-// var API_SERVER_PATH = 'http://localhost:8000';
-var API_SERVER_PATH = 'http://112.74.189.43:9000';
+ var API_SERVER_PATH = 'http://localhost:8000';
+//var API_SERVER_PATH = 'http://112.74.189.43:9000';
 uGisServices
-	.factory('MapListService', ['$resource',
-		function($resource) {
+	.factory('MapListService', ['$resource', 'ProfileServices',
+		function($resource, ProfileServices) {
 			//TODO Just for test address
 			return $resource( API_SERVER_PATH+'/map/', {}, {
 			  // get: {method: 'GET'},
-			  post: {method: 'POST',  cache: false, isArray: false},
+			  post: {method: 'POST',  cache: false, isArray: false, 
+						 headers: {
+			                    'Authorization': 'Token ' + ProfileServices.getUserToken()
+			                }
+              },
 			  // update: {method: 'PUT', cache: false, isArray: false},
 			  // delete: {method: 'DELETE', cache: false, isArray: false}
 			  },
