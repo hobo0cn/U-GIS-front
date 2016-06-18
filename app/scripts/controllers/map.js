@@ -13,7 +13,7 @@ angular.module('uGisFrontApp')
 
       $scope.uploadBtnTxt = 'Select images for analysis';
       var mapId = $routeParams.id;
-
+      //map.remove();
       var map = $window.L.map('mapid').setView([40.1965679722222, 116.167953], 15);
       $scope.MapModel = {
                 map: map,
