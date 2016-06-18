@@ -102,13 +102,17 @@ uGisServices
 
 		}
 	])
-	.factory('LayerStartProcess', ['$resource',
-		function($resource) {
+	.factory('LayerStartProcess', ['$resource','ProfileServices',
+		function($resource, ProfileServices) {
 			//TODO Just for test address
 			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/process-image/', 
 				{mapid: '@mapid', layerid: '@layerid'},
 				{
-				  post: {method: 'POST', cache: false, isArray: false}
+				  post: {method: 'POST', cache: false, isArray: false,
+						headers: {
+			                    'Authorization': 'Token ' + ProfileServices.getUserToken()
+			                }
+			            }
 			  	},
 
 			  {

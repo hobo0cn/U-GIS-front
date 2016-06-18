@@ -188,7 +188,7 @@ angular.module('uGisFrontApp')
            MapService.get({id: mapId},
               function success(response){
                 $scope.map = response;
-                map.setView([$scope.map.center_x, $scope.map.center_y], 15);
+                //map.setView([$scope.map.center_x, $scope.map.center_y], 15);
                 $scope.layers = response.layer_set;
                 if($scope.layers.length > 0){
                     $scope.loadLayerUploadImageInfo($scope.layers[0]);
