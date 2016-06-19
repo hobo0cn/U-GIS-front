@@ -8,11 +8,11 @@
  * Controller of the uGisFrontApp
  */
 angular.module('uGisFrontApp')
-	.controller('MapListCtrl', ['$scope', '$location', 'MapListService', 
+	.controller('MapListCtrl', ['$scope', '$location', '$cookies', 'MapListService', 
     'MapService', 'ProfileServices',
-  	function ($scope, $location, MapListService, MapService, ProfileServices) {
+  	function ($scope, $location, $cookies, MapListService, MapService, ProfileServices) {
      
-      $scope.maps = MapListService.query({owner__username: ProfileServices.getUserName()});
+      $scope.maps = MapListService.query({owner__username: $cookies.get('EDM_username')});
 
       $scope.newMap = function(){
         MapListService.post({name: "New Map",

@@ -6,14 +6,14 @@ var uGisServices =
 //var API_SERVER_PATH = 'http://localhost:8000';
 var API_SERVER_PATH = 'http://112.74.189.43:9000';
 uGisServices
-	.factory('MapListService', ['$resource', 'ProfileServices',
-		function($resource, ProfileServices) {
+	.factory('MapListService', ['$resource', '$cookies', 'ProfileServices',
+		function($resource, $cookies, ProfileServices) {
 			//TODO Just for test address
 			return $resource( API_SERVER_PATH+'/map/', {}, {
 			  // get: {method: 'GET'},
 			  post: {method: 'POST',  cache: false, isArray: false, 
 						 headers: {
-			                    'Authorization': 'Token ' + ProfileServices.getUserToken()
+			                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
 			                }
               },
 			  // update: {method: 'PUT', cache: false, isArray: false},
@@ -102,15 +102,15 @@ uGisServices
 
 		}
 	])
-	.factory('LayerStartProcess', ['$resource','ProfileServices',
-		function($resource, ProfileServices) {
+	.factory('LayerStartProcess', ['$resource', '$cookies', 'ProfileServices',
+		function($resource, $cookies, ProfileServices) {
 			//TODO Just for test address
 			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/process-image/', 
 				{mapid: '@mapid', layerid: '@layerid'},
 				{
 				  post: {method: 'POST', cache: false, isArray: false,
 						headers: {
-			                    'Authorization': 'Token ' + ProfileServices.getUserToken()
+			                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
 			                }
 			            }
 			  	},

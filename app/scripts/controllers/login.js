@@ -26,8 +26,8 @@
 
 'use strict';
 angular.module('uGisFrontApp')
-  .controller('LoginCtrl', ['$scope', '$location', 'TokenAuthService', 'ProfileServices',
-   function ($scope, $location, TokenAuthService, ProfileServices) {
+  .controller('LoginCtrl', ['$scope', '$location', '$cookies', 'TokenAuthService', 'ProfileServices',
+   function ($scope, $location, $cookies, TokenAuthService, ProfileServices) {
    	$scope.username = "";
    	$scope.password = "";
     //TODO test login
@@ -37,8 +37,8 @@ angular.module('uGisFrontApp')
         TokenAuthService.post({username: $scope.username, password: $scope.password},
             function success(response){
             	console.log('Success:' + JSON.stringify(response));  
-                ProfileServices.setUserToken(response.token);
-                ProfileServices.setUserName($scope.username);
+                $cookies.put('EDM_username', $scope.username);
+                $cookies.put('EDM_usertoken', response.token);
                 $location.path('/dashboard');
                      
             },
