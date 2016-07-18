@@ -1,0 +1,120 @@
+<!-- <p>This is the projectlist view.</p>
+ -->
+
+<!DOCTYPE html>
+<html ng-app="uGisFrontApp">
+<head>
+<link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css">
+</head>
+
+<<!-- script type="text/ng-template" id="nodes_renderer.html">
+  <div ui-tree-handle class="tree-node tree-node-content">
+    <a class="btn btn-success btn-xs"  data-nodrag ng-click="toggle(this)"><span
+        class="glyphicon"
+        ng-class="{
+          'glyphicon-chevron-right': collapsed,
+          'glyphicon-chevron-down': !collapsed
+        }"></span></a>
+    {{map.name}}
+    {{map.id}}
+    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span
+        class="glyphicon glyphicon-remove"></span></a>
+    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span
+        class="glyphicon glyphicon-plus"></span></a>
+  </div>
+  <ol ui-tree-nodes="" ng-model="map.layer_set" ng-class="{hidden: collapsed}">
+    <li ng-repeat="task in map.layer_set" ui-tree-node>
+    </li>
+  </ol>
+</script> -->
+
+<body ng-controller="ProjectListCtrl">
+
+	<a ui-sref="newMap" class="btn-primary btn-lg nodecoration" ng-click="newProject()">创建新项目</a>
+
+<!-- 	<table class="table maptable">
+	<tbody>
+	  <tr>
+	    <td><h3>所有项目</h3></td>
+	    <td></td>
+	  </tr>
+	  <tr ng-repeat="map in maps">
+	    <td>{{map.name}}</td>
+	    
+	    <td>
+	      <a class="btn btn-primary" href="#/map/{{map.id}}">View</a>
+	      <a class="btn btn-danger"  ng-click="deleteMap(map.id)">Delete</a>
+	    </td>
+	  </tr>
+	 </tbody>
+	</table> -->
+
+  <!-- div class="row">
+  <div class="col-sm-6">
+    <div ui-tree id="tree-root">
+      <ol ui-tree-nodes ng-model="maps">
+        <li ng-repeat="map in maps" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+
+      </ol>
+    </div>
+  </div> -->
+
+  <div ui-tree>
+  <ol ui-tree-nodes="" ng-model="maps">
+    <li ng-repeat="map in maps" ui-tree-node>
+      <div ui-tree-handle class="tree-node tree-node-content">
+          <a class="btn btn-success btn-xs"  
+          ng-if="map.layer_set && map.layer_set.length > 0"
+          data-nodrag ng-click="toggle(this)">
+	          <span
+	        class="glyphicon"
+	        ng-class="{
+	          'glyphicon-chevron-right': collapsed,
+	          'glyphicon-chevron-down': !collapsed
+	        }"></span>
+	       </a>
+       {{map.name}}
+	    <!-- <td>
+	      <a class="btn btn-primary" href="#/map/{{map.id}}">编辑</a>
+	      <a class="btn btn-danger"  ng-click="deleteMap(map.id)">删除</a>
+	    </td> -->
+	    <a class="btn btn-primary btn-xs" data-nodrag ng-click="newTask(this)" style="margin-left: 78px;">
+	    	<span class="glyphicon glyphicon-plus"></span>
+	    </a>
+		<!-- <a class="btn btn-info btn-xs" data-nodrag ng-click="remove(this)" style="margin-left: 8px;">
+	    	<span class="glyphicon glyphicon-edit"> </span>
+        </a> -->
+        <a class="btn btn-info btn-xs" style="margin-left: 8px;" 
+        href="#/map/{{map.id}}">
+        <span class="glyphicon glyphicon-edit"> </span>
+        </a>
+	    <a class="btn btn-danger btn-xs" data-nodrag ng-click="deleteProject(map.id)" style="margin-left: 8px;">
+	    	<span class="glyphicon glyphicon-remove"> </span>
+        </a>
+
+      </div>
+      <ol ui-tree-nodes="" ng-model="map.layer_set">
+        <li ng-repeat="layer in map.layer_set" ui-tree-node>
+          <div ui-tree-handle>
+            {{layer.name}}
+            <!-- <a class="btn btn-primary" href="#/map/{{map.id}}">编辑</a>
+	      	<a class="btn btn-danger"  ng-click="deleteMap(map.id)">删除</a> -->
+	      	<a class="btn btn-info btn-xs" data-nodrag ng-click="editTask(this)" style="margin-left: 78px;">
+	    	    <span class="glyphicon glyphicon-edit"> </span>
+        	</a>
+
+		      <a class="btn btn-danger btn-xs" data-nodrag ng-click="deleteTask(this)" style="margin-left: 8px;">
+		    	   <span class="glyphicon glyphicon-remove"> </span>
+	        </a>
+
+          </div>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</div>
+
+  </body>
+
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>创建任务</title>
+
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
+
+    <!-- <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" /> -->
+    <link rel="stylesheet" href="../bower_components/leaflet-sidebar/src/L.Control.Sidebar.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.ie.css" /><![endif]-->
+    
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        html, body, #map {
+            height: 100%;
+        }
+
+        .lorem {
+            font-style: italic;
+            color: #AAA;
+        }
+
+ 
+
+    </style>
+
+</head>
+
+<body ng-controller="NewTaskCtrl"> 
+    <div id="sidebar">
+        <form class="form-horizontal" role="form">
+      <div class="form-group">
+        <label for="projectName" class="col-sm-2 control-label">任务</label>
+        <div class="col-sm-4">
+          <input class="form-control" id="projectName" placeholder="任务名称" ng-model="project_name" required>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="projectDesc" class="col-sm-2 control-label">描述</label>
+        <div class="col-sm-10">
+          <!-- <input class="form-control" id="projectDesc" placeholder="描述" ng-model="project_desc"> -->
+          <textarea id="textareaEdit" id="projectDesc" placeholder="描述" ng-model="textareaValue"></textarea>
+        </div>
+      </div>
+
+        <div class="form-group">
+            <label for="startDate" class="col-sm-2 control-label">开始</label>
+
+            <div class="col-md-6">
+                <p class="input-group">
+                  <input type="text" class="form-control" uib-datepicker-popup ng-model="startdate" is-open="popup_startdate.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open_startdate()"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </p>
+              </div>
+        </div>
+
+        <div class="form-group">
+            <label for="endDate" class="col-sm-2 control-label">结束</label>
+
+            <div class="col-md-6">
+                <p class="input-group">
+                  <input type="text" class="form-control" uib-datepicker-popup ng-model="enddate" is-open="popup_enddate.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open_enddate()"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </p>
+              </div>
+        </div>
+
+         <div class="form-group">
+            <label for="projectArea" class=" col-sm-4 control-label">任务范围</label>
+            <div class="col-xs-3 ">
+                <button class="btn btn-info" ng-click="drawArea()">绘制</button>
+            </div> 
+        </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+          <button class="btn btn-primary" ng-click="createProject()">创建任务</button>
+        </div>
+      </div>
+    </form>
+    </div>
+
+    <div id="mapid"></div>
+
+</body>
+</html>
