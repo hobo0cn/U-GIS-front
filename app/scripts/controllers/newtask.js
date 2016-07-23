@@ -8,11 +8,63 @@
  * Controller of the uGisFrontApp
  */
 angular.module('uGisFrontApp')
-	.controller('NewTaskCtrl', ['$scope', '$window', '$location', '$cookies', 'MapListService', 
-    'MapService', 'ProfileServices',
-  	function ($scope, $window, $location, $cookies, MapListService, MapService, ProfileServices) {
+	.controller('NewTaskCtrl', ['$scope', '$window', '$location', '$routeParams', 
+    '$cookies', 'LayerListService', 
+    'MapService', 'ProfileService',
+  	function ($scope, $window, $location, $routeParams, 
+      $cookies, LayerListService, 
+      MapService, ProfileService) {
      
-      
+     var mapId = $routeParams.projectid;
+
+     var _getProjectArea = function(){
+           MapService.get({id: mapId},
+              function success(response){
+                $scope.map = response;
+                //map.setView([$scope.map.center_x, $scope.map.center_y], 15);
+                //$scope.area_geojson = JSON.stringify(eval("(" + response.area + ")"));
+                $scope.area_geojson  = JSON.parse(response.area );
+                console.log('Success:' + JSON.stringify(response));
+
+                $window.L.geoJson($scope.area_geojson).addTo(map);
+                //_jugeMapStatus();
+              },
+              function error(errorResponse){
+                console.log('Error:' + JSON.stringify(errorResponse));
+              }
+            );
+        }
+
+      var _getServiceUsers = function() {
+        ProfileService.get({user_cate: 'S'},
+            function success(response){
+                $scope.serviceUsers = response;
+                
+                console.log('Success:' + JSON.stringify(response));
+
+              },
+              function error(errorResponse){
+                console.log('Error:' + JSON.stringify(errorResponse));
+              }
+          );
+      };
+
+      var _getPilotUsers = function() {
+         ProfileService.get({user_cate: 'A'},
+            function success(response){
+                $scope.pilotUsers = response;
+                console.log('Success:' + JSON.stringify(response));
+              },
+              function error(errorResponse){
+                console.log('Error:' + JSON.stringify(errorResponse));
+              }
+          );
+      };
+
+      _getProjectArea();
+      _getServiceUsers();
+      _getPilotUsers();
+
       $scope.start_today = function() {
         $scope.startdate = new Date();
       };
@@ -55,6 +107,8 @@ angular.module('uGisFrontApp')
         
         }).addTo(map);
 
+
+
         var sidebar = $window.L.control.sidebar('sidebar', {
             // closeButton: true,
             position: 'left'
@@ -63,16 +117,67 @@ angular.module('uGisFrontApp')
         sidebar.show();
         
 
-        var marker = $window.L.marker([51.2, 7]).addTo(map).on('click', function () {
-            sidebar.toggle();
+        // Initialise the FeatureGroup to store editable layers
+        var drawnItems = new $window.L.FeatureGroup();
+        map.addLayer(drawnItems);
+
+        // Initialise the draw control and pass it the FeatureGroup of editable layers
+        var drawControl = new $window.L.Control.Draw({
+            draw: {
+              polyline: false,
+              marker: false,
+              rectangle: false,
+              circle: false
+            },
+            edit: {
+                featureGroup: drawnItems
+            }
+        });
+        map.addControl(drawControl);
+
+        map.on('draw:created', function (e) {
+            var type = e.layerType,
+            layer = e.layer;
+            drawnItems.addLayer(layer);
+            $scope.taskShape = layer.toGeoJSON()
+            $scope.taskAreaPoly= JSON.stringify($scope.taskShape);
+
         });
 
+        //TODO画出项目范围
         $(window).on("resize", function() {
           $("#mapid").height($(window).height())
                 .width($(window).width());
           
           map.invalidateSize();
       }).trigger("resize");
+
+        
+
+      $scope.createTask = function() {
+          
+          LayerListService.post(
+             {
+              mapid: $scope.map.id,
+              name: $scope.taskName,
+              description: $scope.taskDesc,
+              start_date: $scope.startdate.getFullYear()+ '-'+ $scope.startdate.getMonth() + '-' + $scope.startdate.getDate(),
+              end_date: $scope.enddate.getFullYear()+ '-'+ $scope.enddate.getMonth() + '-' + $scope.enddate.getDate(),
+              area: $scope.taskAreaPoly,
+              stack_order: 1, 
+              //指派的飞行员、数据处理工程师
+              service: $scope.selectedService,
+              pilot: $scope.selectedPilot
+              // project_category: 1
+            }, 
+            function success(response){
+               $location.path('/project');
+        
+            },
+            function error(errorResponse){
+                console.log('Error:' + JSON.stringify(errorResponse));
+            });
+        };
 
 
   }]);

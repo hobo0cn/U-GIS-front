@@ -30,6 +30,7 @@ angular
     'ngTouch',
     'uGisServices',
     'uGisAuthServices',
+    'uGisProfileServices',
     'ngDialog',
     'flow',
     'ui.bootstrap'

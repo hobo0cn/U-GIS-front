@@ -74,7 +74,7 @@ uGisServices
 	.factory('LayerService', ['$resource',
 		function($resource) {
 			//TODO Just for test address
-			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid', {}, {
+			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/', {mapid: '@mapid', layerid:'@layerid'}, {
 				  get: {method: 'GET', cache: false, isArray: false},
 				  update: {method: 'PUT', cache: false, isArray: false},
 				  delete: {method: 'DELETE', cache: false, isArray: false}

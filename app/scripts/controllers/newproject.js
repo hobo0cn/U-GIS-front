@@ -11,34 +11,24 @@ angular.module('uGisFrontApp')
 	.controller('NewProjectCtrl', ['$scope', '$window', '$location', '$cookies', 'MapListService', 
     'MapService', 'ProfileServices',
   	function ($scope, $window, $location, $cookies, MapListService, MapService, ProfileServices) {
-     
-      // var map = $window.L.map('mapid');
-      //   map.setView([51.2, 7], 9);
-
-      //   // $window.L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      //   //     maxZoom: 18,
-      //   //     attribution: 'Map data &copy; OpenStreetMap contributors'
-      //   // }).addTo(map);
-
-      //   $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
-      //     maxZoom: 30,
         
-      //   }).addTo(map);
-      $scope.start_today = function() {
-        $scope.startdate = new Date();
-      };
-      $scope.end_today = function() {
-        $scope.enddate = new Date();
-      };
-      $scope.start_today();
-      $scope.end_today();
 
-      $scope.popup_startdate = {
-        opened: false
-      };
-      $scope.popup_enddate = {
-        opened: false
-      };
+
+        $scope.start_today = function() {
+          $scope.startdate = new Date();
+        };
+        $scope.end_today = function() {
+          $scope.enddate = new Date();
+        };
+        $scope.start_today();
+        $scope.end_today();
+
+        $scope.popup_startdate = {
+          opened: false
+        };
+        $scope.popup_enddate = {
+          opened: false
+        };
 
         $scope.dateOptions = {
           
@@ -72,48 +62,90 @@ angular.module('uGisFrontApp')
         });
         map.addControl(sidebar);
         sidebar.show();
+
+        // Initialise the FeatureGroup to store editable layers
+        var drawnItems = new $window.L.FeatureGroup();
+        map.addLayer(drawnItems);
+
+        // Initialise the draw control and pass it the FeatureGroup of editable layers
+        var drawControl = new $window.L.Control.Draw({
+            draw: {
+              polyline: false,
+              marker: false,
+              rectangle: false,
+              circle: false
+            },
+            edit: {
+                featureGroup: drawnItems
+            }
+        });
+        map.addControl(drawControl);
+
+        map.on('draw:created', function (e) {
+            var type = e.layerType,
+            layer = e.layer;
+            drawnItems.addLayer(layer);
+            $scope.projectShape = layer.toGeoJSON()
+            $scope.projectAreaPoly= JSON.stringify($scope.projectShape);
+
+        });
         
 
-        var marker = $window.L.marker([51.2, 7]).addTo(map).on('click', function () {
-            sidebar.toggle();
-        });
-
-        // map.on('click', function () {
-        //     sidebar.hide();
-        // })
-
-        // sidebar.on('show', function () {
-        //     console.log('Sidebar will be visible.');
-        // });
-
-        // sidebar.on('shown', function () {
-        //     console.log('Sidebar is visible.');
-        // });
-
-        // sidebar.on('hide', function () {
-        //     console.log('Sidebar will be hidden.');
-        // });
-
-        // sidebar.on('hidden', function () {
-        //     console.log('Sidebar is hidden.');
-        // });
-
-        // $window.L.DomEvent.on(sidebar.getCloseButton(), 'click', function () {
-        //     console.log('Close button clicked.');
-        // });
         $(window).on("resize", function() {
           $("#mapid").height($(window).height())
                 .width($(window).width());
           
           map.invalidateSize();
-      }).trigger("resize");
+        }).trigger("resize");
 
-        $scope.drawArea = function() {
-          //TODO
+        var polygonCenter  = function(poly){
+          var lowx,
+              highx,
+              lowy,
+              highy,
+              lats = [],
+              lngs = [],
+              vertices = poly.geometry.coordinates[0];
+
+          for(var i=0; i<vertices.length; i++) {
+            lngs.push(vertices[i][0]);
+            lats.push(vertices[i][1]);
+          }
+
+          lats.sort();
+          lngs.sort();
+          lowx = lats[0];
+          highx = lats[vertices.length - 1];
+          lowy = lngs[0];
+          highy = lngs[vertices.length - 1];
+          var center_x = lowx + ((highx-lowx) / 2);
+          var center_y = lowy + ((highy - lowy) / 2);
+          return {center_x, center_y};
         };
 
         $scope.createProject = function() {
-          //TODO
+          
+          var center = polygonCenter($scope.projectShape);
+          
+          MapListService.post(
+             {
+              name: $scope.projectName,
+              description: $scope.projectDesc,
+              zoom: 9 ,
+              start_date: $scope.startdate.getFullYear()+ '-'+ $scope.startdate.getMonth() + '-' + $scope.startdate.getDate(),
+              end_date: $scope.enddate.getFullYear()+ '-'+ $scope.enddate.getMonth() + '-' + $scope.enddate.getDate(),
+              center_x: center.center_x,
+              center_y: center.center_y,
+              area: $scope.projectAreaPoly,
+              // project_category: 1
+            }, 
+            function success(response){
+               $location.path('/project');
+        
+            },
+            function error(errorResponse){
+                console.log('Error:' + JSON.stringify(errorResponse));
+            });
         };
 
 

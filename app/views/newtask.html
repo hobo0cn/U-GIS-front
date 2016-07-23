@@ -34,19 +34,38 @@
     <div id="sidebar">
         <form class="form-horizontal" role="form">
       <div class="form-group">
-        <label for="projectName" class="col-sm-2 control-label">任务</label>
+        <label for="taskName" class="col-sm-2 control-label">任务</label>
         <div class="col-sm-4">
-          <input class="form-control" id="projectName" placeholder="任务名称" ng-model="project_name" required>
+          <input class="form-control" id="taskName" placeholder="任务名称" ng-model="taskName" required>
         </div>
       </div>
       
       <div class="form-group">
-        <label for="projectDesc" class="col-sm-2 control-label">描述</label>
+        <label for="tasktDesc" class="col-sm-2 control-label">描述</label>
         <div class="col-sm-10">
           <!-- <input class="form-control" id="projectDesc" placeholder="描述" ng-model="project_desc"> -->
-          <textarea id="textareaEdit" id="projectDesc" placeholder="描述" ng-model="textareaValue"></textarea>
+          <textarea placeholder="描述" ng-model="taskDesc"></textarea>
         </div>
       </div>
+
+      <div class="form-group">
+        <label for="pilotSelect" class="col-sm-2 control-label">飞手</label>
+        <div class="col-sm-10">
+          <select name="pilotSelect" id="repeatSelect" ng-model="selectedPilot">
+            <option ng-repeat="pilot in pilotUsers" value="{{pilot.id}}">{{pilot.username}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="serviceSelect" class="col-sm-2 control-label">数据处理</label>
+        <div class="col-sm-4">
+          <select name="pilotSelect" id="repeatSelect" ng-model="selectedService">
+            <option ng-repeat="service in serviceUsers" value="{{service.id}}">{{service.username}}</option>
+          </select>
+        </div>
+      </div>
+
 
         <div class="form-group">
             <label for="startDate" class="col-sm-2 control-label">开始</label>
@@ -74,16 +93,17 @@
               </div>
         </div>
 
-         <div class="form-group">
+         <!-- <div class="form-group">
             <label for="projectArea" class=" col-sm-4 control-label">任务范围</label>
             <div class="col-xs-3 ">
                 <button class="btn btn-info" ng-click="drawArea()">绘制</button>
             </div> 
-        </div>
+        </div> -->
+      
 
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-4">
-          <button class="btn btn-primary" ng-click="createProject()">创建任务</button>
+          <button class="btn btn-primary" ng-click="createTask()">创建任务</button>
         </div>
       </div>
     </form>

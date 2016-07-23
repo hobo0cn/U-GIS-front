@@ -31,13 +31,7 @@ angular.module('uGisFrontApp')
    	$scope.username = "";
    	$scope.password = "";
     //TODO test login
-       $scope.popup2 = {
-        opened: false
-      };
-
-      $scope.open2 = function() {
-        $scope.popup2.opened = true;
-      };
+      
     $scope.login = function(){
         
         TokenAuthService.post({username: $scope.username, password: $scope.password},

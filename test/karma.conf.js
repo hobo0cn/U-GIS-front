@@ -45,6 +45,7 @@ module.exports = function(config) {
       'bower_components/ng-popup/dist/ngPopup.min.js',
       'bower_components/angular-ui-tree/dist/angular-ui-tree.js',
       'bower_components/leaflet-sidebar/src/L.Control.Sidebar.js',
+      'bower_components/leaflet-draw/dist/leaflet.draw-src.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
