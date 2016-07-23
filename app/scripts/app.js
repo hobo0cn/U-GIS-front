@@ -30,8 +30,10 @@ angular
     'ngTouch',
     'uGisServices',
     'uGisAuthServices',
+    'uGisProfileServices',
     'ngDialog',
-    'flow'
+    'flow',
+    'ui.bootstrap'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -51,6 +53,20 @@ angular
         templateUrl: 'views/register.html',
         controller: 'RegisterCtrl'
       })
+      .when('/project', {
+        templateUrl: 'views/projectlist.html',
+        controller: 'ProjectListCtrl'
+      })
+      .when('/newproject', {
+        templateUrl: 'views/newproject.html',
+         controller: 'NewProjectCtrl'
+      })
+      .when('/project/:projectid/newtask', {
+        templateUrl: 'views/newtask.html',
+         controller: 'NewTaskCtrl'
+      })
+
+      //以下routing设置为旧程序，不再使用
       .when('/map', {
         templateUrl: 'views/maplist.html',
         controller: 'MapListCtrl'

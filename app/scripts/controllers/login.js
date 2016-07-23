@@ -31,7 +31,7 @@ angular.module('uGisFrontApp')
    	$scope.username = "";
    	$scope.password = "";
     //TODO test login
-    
+      
     $scope.login = function(){
         
         TokenAuthService.post({username: $scope.username, password: $scope.password},
@@ -39,6 +39,7 @@ angular.module('uGisFrontApp')
             	console.log('Success:' + JSON.stringify(response));  
                 $cookies.put('EDM_username', $scope.username);
                 $cookies.put('EDM_usertoken', response.token);
+                //TODO 判断用户类型，跳转到不同的页面
                 $location.path('/dashboard');
                      
             },

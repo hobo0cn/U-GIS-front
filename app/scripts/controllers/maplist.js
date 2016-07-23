@@ -12,7 +12,8 @@ angular.module('uGisFrontApp')
     'MapService', 'ProfileServices',
   	function ($scope, $location, $cookies, MapListService, MapService, ProfileServices) {
      
-      $scope.maps = MapListService.query({owner__username: $cookies.get('EDM_username')});
+      $scope.maps = MapListService.get({owner__username: $cookies.get('EDM_username')});
+      //$scope.maps = MapListService.query();
 
       $scope.newMap = function(){
         MapListService.post({name: "New Map",

@@ -20,6 +20,7 @@
 	  </tr>
 	  <tr ng-repeat="map in maps">
 	    <td>{{map.name}}</td>
+	    
 	    <td>
 	      <a class="btn btn-primary" href="#/map/{{map.id}}">View</a>
 	      <a class="btn btn-danger"  ng-click="deleteMap(map.id)">Delete</a>

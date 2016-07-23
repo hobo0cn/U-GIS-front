@@ -3,8 +3,8 @@
 /* Services */
 var uGisServices = 
 	angular.module('uGisServices', ['ngResource']);
-//var API_SERVER_PATH = 'http://localhost:8000';
-var API_SERVER_PATH = 'http://112.74.189.43:9000';
+var API_SERVER_PATH = 'http://localhost:8000';
+//var API_SERVER_PATH = 'http://112.74.189.43:9000';
 uGisServices
 	.factory('MapListService', ['$resource', '$cookies', 'ProfileServices',
 		function($resource, $cookies, ProfileServices) {
@@ -16,7 +16,11 @@ uGisServices
 			                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
 			                }
               },
-			  // update: {method: 'PUT', cache: false, isArray: false},
+			  get: {method: 'GET', cache: false, isArray: true, 
+						headers: {
+			                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
+			                }
+				},
 			  // delete: {method: 'DELETE', cache: false, isArray: false}
 			  },
 			  {
@@ -27,15 +31,24 @@ uGisServices
 	]);
 
 uGisServices
-	.factory('MapService', ['$resource',
-		function($resource) {
+	.factory('MapService', ['$resource', '$cookies',
+		function($resource, $cookies) {
 			//TODO Just for test address
 			return $resource(API_SERVER_PATH+'/map/:id/', {}, {
-			   get: {method: 'GET'},
+			   get: {
+			   			method: 'GET',
+				   		headers: {
+				                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
+				                }
+					},
 			  //post: {method: 'POST', cache: false, isArray: false},
 			  // update: {method: 'PUT', cache: false, isArray: false},
-			   delete: {method: 'DELETE', cache: false, isArray: false}
-			  },
+			   delete: {method: 'DELETE', cache: false, isArray: false,
+						headers: {
+					                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
+					                }
+			            }
+			  			},
 			  {
 			  	stripTrailingSlashes: false
 			  });
@@ -61,7 +74,7 @@ uGisServices
 	.factory('LayerService', ['$resource',
 		function($resource) {
 			//TODO Just for test address
-			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid', {}, {
+			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/', {mapid: '@mapid', layerid:'@layerid'}, {
 				  get: {method: 'GET', cache: false, isArray: false},
 				  update: {method: 'PUT', cache: false, isArray: false},
 				  delete: {method: 'DELETE', cache: false, isArray: false}
