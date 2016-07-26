@@ -165,3 +165,22 @@ uGisServices
 		}
 	]);
 
+uGisServices
+	.factory('TaskService', ['$resource','$cookies', 
+		function($resource, $cookies) {
+			
+			return $resource(API_SERVER_PATH+'/UGIS/tasks/', {}, 
+				  {
+				  	get: {method: 'GET', cache: false, isArray: false, 
+				  			headers: {
+			                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
+			                }
+				  		 },
+				  },
+				  {
+				  	stripTrailingSlashes: false
+				  });
+
+		}
+	]);
+

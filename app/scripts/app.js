@@ -65,6 +65,14 @@ angular
         templateUrl: 'views/newtask.html',
          controller: 'NewTaskCtrl'
       })
+      .when('/task', {
+        templateUrl: 'views/tasklist.html',
+         controller: 'TaskListCtrl'
+      })
+      .when('/task/:projectid/:taskid', {
+        templateUrl: 'views/task.html',
+         controller: 'TaskCtrl'
+      })
 
       //以下routing设置为旧程序，不再使用
       .when('/map', {
@@ -75,7 +83,7 @@ angular
         templateUrl: 'views/map.html',
         controller: 'MapViewCtrl'
       })
-      .when('/upload/:mapid', {
+      .when('/upload/:mapid/:layerid', {
         templateUrl: 'views/upload.html',
         controller: 'UploadController'
       })

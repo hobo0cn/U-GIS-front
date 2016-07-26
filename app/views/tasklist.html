@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html ng-app="uGisFrontApp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+    rel="stylesheet" type="text/css">
+    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
+    rel="stylesheet" type="text/css">
+  </head>
+  
+<body ng-controller="TaskListCtrl">
+    <div class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><span>易云图</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active">
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#">Contacts</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+            <h4>新任务</h4>
+
+            <div class="list-group" ng-repeat="task in tasks['N']">
+           
+              <div class="col-md-12">
+                <div class="section">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <i class="fa fa-3x fa-building-o pull-left"></i>
+                          <h4 class="list-group-item-heading">{{task.map_name}}</h4>
+                          <p class="list-group-item-text">{{task.name}}</p>
+                      </div>
+                      <div class="col-md-3 text-center">
+                        <p class="list-group-item-text text-center">开始时间: {{task.start_date}}</p>
+                        <p class="list-group-item-text text-center">结束时间: {{task.end_date}}</p>
+                      </div>
+                      <div class="col-md-3">
+                        <p class="list-group-item-text text-center">委托人：{{task.owner_username}}</p>
+                        <p class="list-group-item-text text-center">类别：{{task.project_cat}}</p>
+                      </div>
+                      <div class="col-md-3 text-center">
+                        <a class="btn btn-primary btn-sm">详情</a>
+                        <a class="btn btn-sm btn-success" ng-click="acceptTask(task.map, task.id)">接受任务</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>  
+          </div>
+
+
+          <div class="col-md-12">
+            <h4>等待拍照</h4>
+            <div class="list-group" ng-repeat="task in tasks['FI']">
+           <div class="col-md-12">
+                <div class="section">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <i class="fa fa-3x fa-building-o pull-left"></i>
+                          <h4 class="list-group-item-heading">{{task.map_name}}</h4>
+                          <p class="list-group-item-text">{{task.name}}</p>
+                      </div>
+                      <div class="col-md-3 text-center">
+                        <p class="list-group-item-text text-center">开始时间: {{task.start_date}}</p>
+                        <p class="list-group-item-text text-center">结束时间: {{task.end_date}}</p>
+                      </div>
+                      <div class="col-md-3">
+                        <p class="list-group-item-text text-center">委托人：{{task.owner_username}}</p>
+                        <p class="list-group-item-text text-center">类别：{{task.project_cat}}</p>
+                      </div>
+                      <div class="col-md-3 text-center">
+                        <a class="btn btn-primary btn-sm" href="#/task/{{task.map}}/{{task.id}}">详情</a>
+                        <a class="btn btn-sm btn-success" ng-click="uploadPhoto(task.map, task.id)">上传照片</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>  
+          </div>
+
+          <div class="col-md-12">
+            <h4>飞行完成</h4>
+            <div class="list-group" ng-repeat="task in tasks['FD']">
+           
+             <div class="col-md-12">
+                <div class="section">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <i class="fa fa-3x fa-building-o pull-left"></i>
+                          <h4 class="list-group-item-heading">{{task.map_name}}</h4>
+                          <p class="list-group-item-text">{{task.name}}</p>
+                      </div>
+                      <div class="col-md-3 text-center">
+                        <p class="list-group-item-text text-center">开始时间: {{task.start_date}}</p>
+                        <p class="list-group-item-text text-center">结束时间: {{task.end_date}}</p>
+                      </div>
+                      <div class="col-md-3">
+                        <p class="list-group-item-text text-center">委托人：{{task.owner_username}}</p>
+                        <p class="list-group-item-text text-center">类别：{{task.project_cat}}</p>
+                      </div>
+                      <div class="col-md-3 text-center">
+                        <a class="btn btn-primary btn-sm"  href="#/task/{{task.map}}/{{task.id}}">详情</a>
+                        <a class="btn btn-sm btn-success" ng-click="acceptServiceTask(task.map, task.id)">接受处理任务</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>  
+          </div>
+
+          <div class="col-md-12">
+            <h4>数据处理中</h4>
+            <div class="list-group" ng-repeat="task in tasks['P']">
+           
+              <div class="col-md-12">
+                <div class="section">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <i class="fa fa-3x fa-building-o pull-left"></i>
+                          <h4 class="list-group-item-heading">{{task.map_name}}</h4>
+                          <p class="list-group-item-text">{{task.name}}</p>
+                      </div>
+                      <div class="col-md-3 text-center">
+                        <p class="list-group-item-text text-center">开始时间: {{task.start_date}}</p>
+                        <p class="list-group-item-text text-center">结束时间: {{task.end_date}}</p>
+                      </div>
+                      <div class="col-md-3">
+                        <p class="list-group-item-text text-center">委托人：{{task.owner_username}}</p>
+                        <p class="list-group-item-text text-center">类别：{{task.project_cat}}</p>
+                      </div>
+                      <div class="col-md-3 text-center">
+                        <a class="btn btn-primary btn-sm"  href="#/task/{{task.map}}/{{task.id}}">详情</a>
+                        <a class="btn btn-sm btn-success" ng-click="acceptServiceTask(task.map, task.id)">提交处理结果</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+              </div>
+            </div>  
+          </div>
+
+
+          <div class="col-md-12">
+            <h4>已完成</h4>
+            <div class="list-group" ng-repeat="task in tasks['D']">
+           
+              <div class="col-md-12">
+                <div class="section">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <i class="fa fa-3x fa-building-o pull-left"></i>
+                          <h4 class="list-group-item-heading">{{task.map_name}}</h4>
+                          <p class="list-group-item-text">{{task.name}}</p>
+                      </div>
+                      <div class="col-md-3 text-center">
+                        <p class="list-group-item-text text-center">开始时间: {{task.start_date}}</p>
+                        <p class="list-group-item-text text-center">结束时间: {{task.end_date}}</p>
+                      </div>
+                      <div class="col-md-3">
+                        <p class="list-group-item-text text-center">委托人：{{task.owner_username}}</p>
+                        <p class="list-group-item-text text-center">类别：{{task.project_cat}}</p>
+                      </div>
+                        <div class="col-md-3 text-center">
+                          <a class="btn btn-primary btn-sm"  href="#/task/{{task.map}}/{{task.id}}">详情</a>
+                          
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div> 
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
