@@ -73,7 +73,18 @@ angular
         templateUrl: 'views/task.html',
          controller: 'TaskCtrl'
       })
-
+      .when('/dashboard', {
+        templateUrl: 'views/ownerdashboard.html',
+        controller: 'OwnerDashboardCtrl'
+      })
+      .when('/project/:projectid', {
+        templateUrl: 'views/ownerproject.html',
+        controller: 'OwnerProjectCtrl'
+      })
+      .when('/upload/:mapid/:layerid', {
+        templateUrl: 'views/upload.html',
+        controller: 'UploadController'
+      })
       //以下routing设置为旧程序，不再使用
       .when('/map', {
         templateUrl: 'views/maplist.html',
@@ -83,14 +94,11 @@ angular
         templateUrl: 'views/map.html',
         controller: 'MapViewCtrl'
       })
-      .when('/upload/:mapid/:layerid', {
-        templateUrl: 'views/upload.html',
-        controller: 'UploadController'
-      })
-      .when('/dashboard', {
-        templateUrl: 'views/dashboard.html',
-        controller: 'DashboardCtrl'
-      })
+      
+      // .when('/dashboard', {
+      //   templateUrl: 'views/dashboard.html',
+      //   controller: 'DashboardCtrl'
+      // })
       // .when('/uploaddlg', {
       //   templateUrl: 'views/uploadDlg.html',
       //   controller: 'uploadDlgCtrl'

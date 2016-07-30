@@ -115,6 +115,21 @@ uGisServices
 
 		}
 	])
+	.factory('LayerUploadOrthphoto', ['$resource',
+		function($resource) {
+			//TODO Just for test address
+			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/upload-orthphoto/', 
+				{mapid: '@mapid', layerid: '@layerid'},
+				{
+				  post: {method: 'POST', cache: false, isArray: false}
+			  	},
+
+			  {
+			  	stripTrailingSlashes: false
+			  });
+
+		}
+	])
 	.factory('LayerStartProcess', ['$resource', '$cookies', 'ProfileServices',
 		function($resource, $cookies, ProfileServices) {
 			//TODO Just for test address

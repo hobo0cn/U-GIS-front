@@ -36,10 +36,10 @@ angular.module('uGisFrontApp')
 angular.module('uGisFrontApp')
 	.controller('TaskCtrl', ['$scope', '$window', '$location', '$routeParams', 
     'ngDialog', '$cookies', 'LayerService', 
-    'MapService', 'SelectFilesServices',
+    'MapService', 'SelectFilesServices', 'LayerUploadOrthphoto',
   	function ($scope, $window, $location, $routeParams, 
       ngDialog, $cookies, LayerService, 
-      MapService, SelectFilesServices) {
+      MapService, SelectFilesServices, LayerUploadOrthphoto) {
      
      var mapId = $routeParams.projectid;
      var layerId = $routeParams.taskid;
@@ -53,16 +53,15 @@ angular.module('uGisFrontApp')
           };
 
      $scope.imageNum = 0;
-     var _getProjectArea = function(){
+     var _getMapInfo = function(){
            MapService.get({id: mapId},
               function success(response){
                 $scope.map = response;
-                //map.setView([$scope.map.center_x, $scope.map.center_y], 15);
-                //$scope.area_geojson = JSON.stringify(eval("(" + response.area + ")"));
-                $scope.area_geojson  = JSON.parse(response.area );
+                map.panTo({lat: $scope.map.center_x, lng: $scope.map.center_y});
+                _loadWMSLayers();
                 console.log('Success:' + JSON.stringify(response));
 
-                $window.L.geoJson($scope.area_geojson).addTo(map);
+                
                 //_jugeMapStatus();
               },
               function error(errorResponse){
@@ -80,17 +79,48 @@ angular.module('uGisFrontApp')
             }, 
             function success(response){
                $scope.task = response;
+               //加载当前任务范围geojson
+               $scope.area_geojson  = JSON.parse(response.area);
+               $window.L.geoJson($scope.area_geojson).addTo(map);
                console.log('Success:' + JSON.stringify(response));
             },
             function error(errorResponse){
                 console.log('Error:' + JSON.stringify(errorResponse));
             });
         };
-        _getTask();
-     
+
+        var _loadWMSLayer  = function(layerName){
+          var wmsLayer = $window.L.tileLayer.wms('http://112.74.189.43:8080/geoserver/wsgeotiff/wms?', {
+                  layers: layerName,
+                  format: 'image/png',
+                  transparent: true,
+                  crs: $window.L.CRS.GCJ02,
+                  maxZoom: 30
+                  }).addTo(map);
+        };
+
+        //加载当前项目所有可用任务结果
+        var _loadWMSLayers  = function(){
+
+          for (var i = $scope.map.layer_set.length - 1; i >= 0; i--) {
+            var maplayerimages = $scope.map.layer_set[i].maplayerimages;
+            //加载任务结果栅格数据
+            if(maplayerimages.length > 0){
+              $scope.currentViewLayerWMSName = layer.maplayerimages[0].layer_wms_path;
+              _loadWMSLayer(maplayerimages.layer_wms_path);
+            }
+            //加载任务范围矢量数据？
+
+          }
+          
+        };
+        
+        
       
         var map = $window.L.map('mapid').setView([51.2, 7], 9);
-
+        _getMapInfo();
+        _getTask();
+        
 
         $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
           maxZoom: 30,
@@ -154,13 +184,12 @@ angular.module('uGisFrontApp')
       };
       
       $scope.uploadProcessImageComplete = function() {
-         //上传图片完成后，设置任务状态到D
-         LayerService.update({mapid: mapId, layerid: layerId, status: 'D', 
-                              map: mapId, stack_order: 1},
+         //上传处理的geotiff文件后，通知后台进行处理，由后台把任务状态修改为‘D’
+          LayerUploadOrthphoto.post({mapid: mapId, layerid: layerId, 
+                                    geotiff_file_name: str(layerId) + '.tif', 
+                              },
               function success(response){
                 console.log('Success:' + JSON.stringify(response));
-                _getTask();
-
               },
               function error(errorResponse){
                 console.log('Error:' + JSON.stringify(errorResponse));
