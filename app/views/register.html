@@ -1,62 +1,76 @@
-
-<!DOCTYPE html>
-<html id="ng-app" ng-app="uGisFrontApp">
-
-<head>
-    <!-- <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" /> -->
-    <!-- <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css"> -->
-   <!--  <script src="./scripts/controllers/register.js"></script> -->
-</head>
-
-<body ng-controller="RegisterCtrl" ng-app="uGisFrontApp">
- <div class="container">
-   <div id="signup">
-      <div class="signup-screen" ng-controller="RegisterCtrl">
-         <div class="space-bot text-center">
-            <h1>Sign up</h1>
-            <div class="divider"></div>
-         </div>
-           <form class="form-register" method="post" name="register" novalidate>
-	           <div class="input-field col s6">
-              <input id="first-name" type="text" class="validate" required>
-              <label for="first-name">First Name</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="last-name" type="text" class="validate" required>
-              <label for="last-name">Last Name</label>
-             </div>
-             <div class="input-field col s6">
-              <input id="email" type="email" name="email" ng-model="email" class="validate" required>
-              <label for="email">Email</label>
-             </div>
-             <p class="alert alert-danger" ng-show="form-register.email.$error.email">Your email is invalid.</p>
-             <div class="input-field col s6">
-               <input id="password" type="password" name="password" ng-model="password" ng-minlength='6' class="validate" required>
-               <label for="password">Password</label>
-              </div>
-              <p class="alert alert-danger" ng-show="form-register.password.$error.minlength || form.password.$invalid">Your password must be at least 6 characters.</p>
-
-              <div class="space-top text-center" ng-controller="RegisterCtrl">
-
-<!--                <button ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done" ng-click="register()">
-
-               <i class="material-icons left">done</i> Done
-               </button> -->
-
-               <button type="button" class="btn btn-primary btn-s" ng-click="register()" ng-disabled="form-register.$invalid">
-                  <span class="glyphicon glyphicon-time"></span> Done
-                </button>
-
-
-               <button type="button" class="waves-effect waves-light btn cancel">
-               <i class="material-icons left">clear</i>Cancel
-               </button>
-              </div>
-             
-             </form>
-           </div> 
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+    rel="stylesheet" type="text/css">
+    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
+    rel="stylesheet" type="text/css">
+  </head>
+  
+  <body>
+    <div class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><span>Brand</span></a>
         </div>
-    <!-- </div> -->
-</body>
+        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <!-- <li class="active">
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#">Contacts</a>
+            </li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="page-header text-left">
+              <h1>易云图
+                <small>用户注册</small>
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="text-center">注册申请</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-offset-3 col-md-6">
+            <form role="form">
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="输入您的email，我们将尽快联系您">
+                  <span class="input-group-btn">
+                    <a class="btn btn-success" type="submit">Go</a>
+                  </span>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 
 </html>

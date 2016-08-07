@@ -27,6 +27,7 @@ angular.module('uGisFrontApp')
                 console.log('Success:' + JSON.stringify(response));
 
                 $window.L.geoJson($scope.area_geojson).addTo(map);
+                map.panTo({lat: $scope.map.center_x, lng: $scope.map.center_y});
                 //_jugeMapStatus();
               },
               function error(errorResponse){
@@ -50,7 +51,7 @@ angular.module('uGisFrontApp')
       };
 
       var _getPilotUsers = function() {
-         ProfileService.get({user_cate: 'A'},
+         ProfileService.get({user_cate: 'P'},
             function success(response){
                 $scope.pilotUsers = response;
                 console.log('Success:' + JSON.stringify(response));
@@ -61,9 +62,7 @@ angular.module('uGisFrontApp')
           );
       };
 
-      _getProjectArea();
-      _getServiceUsers();
-      _getPilotUsers();
+
 
       $scope.start_today = function() {
         $scope.startdate = new Date();
@@ -107,6 +106,9 @@ angular.module('uGisFrontApp')
         
         }).addTo(map);
 
+        _getProjectArea();
+        _getServiceUsers();
+        _getPilotUsers();
 
 
         var sidebar = $window.L.control.sidebar('sidebar', {

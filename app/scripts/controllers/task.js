@@ -6,7 +6,7 @@ angular.module('uGisFrontApp')
   function (flowFactoryProvider) {
   flowFactoryProvider.defaults = {
     
-    target: 'http://192.168.66.145:3000/upload/',
+    target: 'http://192.168.66.146:3000/upload/',
     //target: 'http://112.74.189.43:3000/upload/',
     permanentErrors: [404, 500, 501],
     chunkRetryInterval: 5000,
@@ -43,6 +43,7 @@ angular.module('uGisFrontApp')
      
      var mapId = $routeParams.projectid;
      var layerId = $routeParams.taskid;
+     $scope.isSelectFile = false;
 
      $scope.config= {
             //TODO rerquest current map id
@@ -57,7 +58,10 @@ angular.module('uGisFrontApp')
            MapService.get({id: mapId},
               function success(response){
                 $scope.map = response;
-                map.panTo({lat: $scope.map.center_x, lng: $scope.map.center_y});
+                if (!$scope.isSelectFile) {
+                  map.panTo({lat: $scope.map.center_x, lng: $scope.map.center_y});
+                }
+                
                 _loadWMSLayers();
                 console.log('Success:' + JSON.stringify(response));
 
@@ -90,7 +94,7 @@ angular.module('uGisFrontApp')
         };
 
         var _loadWMSLayer  = function(layerName){
-          var wmsLayer = $window.L.tileLayer.wms('http://112.74.189.43:8080/geoserver/wsgeotiff/wms?', {
+          var wmsLayer = $window.L.tileLayer.wms('http://192.168.66.146:8080/geoserver/wsgeotiff/wms?', {
                   layers: layerName,
                   format: 'image/png',
                   transparent: true,
@@ -106,8 +110,8 @@ angular.module('uGisFrontApp')
             var maplayerimages = $scope.map.layer_set[i].maplayerimages;
             //加载任务结果栅格数据
             if(maplayerimages.length > 0){
-              $scope.currentViewLayerWMSName = layer.maplayerimages[0].layer_wms_path;
-              _loadWMSLayer(maplayerimages.layer_wms_path);
+              $scope.currentViewLayerWMSName = maplayerimages[0].layer_wms_path;
+              _loadWMSLayer(maplayerimages[0].layer_wms_path);
             }
             //加载任务范围矢量数据？
 
@@ -117,7 +121,7 @@ angular.module('uGisFrontApp')
         
         
       
-        var map = $window.L.map('mapid').setView([51.2, 7], 9);
+        var map = $window.L.map('mapid').setView([51.2, 7], 12);
         _getMapInfo();
         _getTask();
         
@@ -143,6 +147,7 @@ angular.module('uGisFrontApp')
             
             //Set map center
             map.panTo({lat: selFilesInfo[0].lat, lng: selFilesInfo[0].lon});
+            $scope.isSelectFile = true;
          }
          // else if(selFilesInfo.length==0){
          //    $scope.isUploadEnable = false;
@@ -186,7 +191,7 @@ angular.module('uGisFrontApp')
       $scope.uploadProcessImageComplete = function() {
          //上传处理的geotiff文件后，通知后台进行处理，由后台把任务状态修改为‘D’
           LayerUploadOrthphoto.post({mapid: mapId, layerid: layerId, 
-                                    geotiff_file_name: str(layerId) + '.tif', 
+                                    geotiff_file_name: 'odm_orthophoto.tif', 
                               },
               function success(response){
                 console.log('Success:' + JSON.stringify(response));

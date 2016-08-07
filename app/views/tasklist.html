@@ -38,6 +38,20 @@
     <div class="section">
       <div class="container">
         <div class="row">
+          <div class="col-md-12">
+            <div class="page-header text-left">
+              <h3>
+                任务管理
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <div class="row">
 
             <div class="col-md-12">
             <h4>新任务</h4>
@@ -62,7 +76,7 @@
                         <p class="list-group-item-text text-center">类别：{{task.project_cat}}</p>
                       </div>
                       <div class="col-md-3 text-center">
-                        <a class="btn btn-primary btn-sm">详情</a>
+                        <a class="btn btn-primary btn-sm" href="#/task/{{task.map}}/{{task.id}}">详情</a>
                         <a class="btn btn-sm btn-success" ng-click="acceptTask(task.map, task.id)">接受任务</a>
                       </div>
                     </div>
@@ -77,7 +91,7 @@
           <div class="col-md-12">
             <h4>等待拍照</h4>
             <div class="list-group" ng-repeat="task in tasks['FI']">
-           <div class="col-md-12">
+            <div class="col-md-12">
                 <div class="section">
                   <div class="container">
                     <div class="row">
@@ -104,7 +118,7 @@
               </div>
               </div>
             </div>  
-          </div>
+          <!-- </div> -->
 
           <div class="col-md-12">
             <h4>飞行完成</h4>

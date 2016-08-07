@@ -26,7 +26,7 @@ uGisAuthServices
 	.factory('TokenAuthService', ['$resource',
 		function($resource) {
 			//TODO Just for test address
-			return $resource( API_SERVER_PATH+'/people/token-auth/', {}, {
+			return $resource( API_SERVER_PATH+'/people/signin/', {}, {
 			  // get: {method: 'GET'},
 			  post: {method: 'POST',  cache: false, isArray: false},
 			  // update: {method: 'PUT', cache: false, isArray: false},

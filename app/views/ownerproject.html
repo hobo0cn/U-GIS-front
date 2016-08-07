@@ -11,7 +11,7 @@
     rel="stylesheet" type="text/css">
   </head>
   
-  <body>
+  <body ng-app="uGisFrontApp" ng-controller="OwnerProjectCtrl">
     <div class="navbar navbar-default navbar-static-top">
       <div class="container">
         <div class="navbar-header">
@@ -22,6 +22,8 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#"><span>易云图</span></a>
+          <a class="navbar-brand"><span>我的项目
+              <small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{map.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{map.end_date}}</small></span></a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -38,61 +40,48 @@
         </div>
       </div>
     </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <h3 class="text-left">我的项目
-              <small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{project.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{project.end_date}}</small>
-            </h3>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <table class="table">
+
+    <div id="sidebar">
+
+      <div class="section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <table class="table">
               <tbody>
                 <tr>
                   <td>
-                    <img src="https://unsplash.imgix.net/reserve/vof4H8A1S02iWcK6mSAd_sarahmachtsachen.com_TheBeach.jpg?w=1024&amp;q=50&amp;fm=jpg&amp;s=992e28f0751267625026c5a18b66953c"
-                    class="img-responsive img-thumbnail">
+                    <a class="btn btn-lg btn-link">影像图</a>
                   </td>
                   <td>
-                    <img src="https://unsplash.imgix.net/photo-1417128281290-30a42da46277?w=1024&amp;q=50&amp;fm=jpg&amp;s=2edb796eb5e657f2c82704a1e6573938"
-                    class="img-responsive img-thumbnail">
+                    <a class="btn btn-lg btn-link">高程图</a>
                   </td>
                 </tr>
-                <tr>
-                  <td>影像图</td>
-                  <td>高程图</td>
-                </tr>
+                
               </tbody>
             </table>
-            <hr>
+            
             <table class="table">
               <tbody>
+                
                 <tr>
                   <td>
-                    <img src="https://ununsplash.imgix.net/photo-1422479516648-9b1f0b6e8da8?w=1024&amp;q=50&amp;fm=jpg&amp;s=c5f2b3df2a4c71532b3b354b8766503c"
-                    class="img-responsive">
+                    <a class="btn btn-lg btn-link">报告</a>
                   </td>
-                </tr>
-                <tr>
-                  <td>报告</td>
                   <td>
                     <div class="col-md-11"></div>
                   </td>
                 </tr>
               </tbody>
             </table>
+            </div>
           </div>
-          <div class="col-md-8"></div>
+
         </div>
       </div>
     </div>
+
+    <div id="mapid"></div>
   </body>
 
 </html>

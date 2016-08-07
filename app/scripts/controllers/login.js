@@ -32,6 +32,18 @@ angular.module('uGisFrontApp')
    	$scope.password = "";
     //TODO test login
       
+    var _routeByUserCategory = function(usercat){
+      if (usercat == 'A') {
+        $location.path('/project');
+      }
+      else if (usercat == 'P' || usercat == 'S') {
+        $location.path('/task');
+      }
+      else if (usercat == 'O') {
+        $location.path('/dashboard');
+      }
+    };
+
     $scope.login = function(){
         
         TokenAuthService.post({username: $scope.username, password: $scope.password},
@@ -39,15 +51,23 @@ angular.module('uGisFrontApp')
             	console.log('Success:' + JSON.stringify(response));  
                 $cookies.put('EDM_username', $scope.username);
                 $cookies.put('EDM_usertoken', response.token);
-                //TODO 判断用户类型，跳转到不同的页面
-                $location.path('/dashboard');
+                $cookies.put('EDM_usercat',   response.user_cat);
+                //判断用户类型，跳转到不同的页面
+                _routeByUserCategory(response.user_cat)
                      
             },
             function error(errorResponse){
                 console.log('Error:' + JSON.stringify(errorResponse));
             });
         
-    }
+    };
+
+    $scope.newuser = function(){
+        $location.path('/register');
+    };
+
+   
+
 
 
   }]);
