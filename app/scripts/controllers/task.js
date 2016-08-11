@@ -86,6 +86,9 @@ angular.module('uGisFrontApp')
                //加载当前任务范围geojson
                $scope.area_geojson  = JSON.parse(response.area);
                $window.L.geoJson($scope.area_geojson).addTo(map);
+
+               //获取上传的图片文件列表
+               $scope.upload_images = $scope.task.upload_image_set;
                console.log('Success:' + JSON.stringify(response));
             },
             function error(errorResponse){

@@ -74,6 +74,14 @@
             </tr>
             </tbody>
           </table>
+     
+              <div ng-repeat="image in upload_images" class="gallery-box">
+              <!-- class="gallery-box" -->
+                <span class="title">{{image.projection}}</span>
+                <div class="thumbnail" ng-show="upload_images.length">
+                  <img src={{image.thumbnail_url}} height="200" width="200"/>
+                </div> 
+              </div>
 
           </div>
     </div>
