@@ -3,8 +3,8 @@
 /* Services */
 var uGisAuthServices = 
 	angular.module('uGisProfileServices', ['ngResource']);
-var API_SERVER_PATH = 'http://localhost:8000';
-//var API_SERVER_PATH = 'http://112.74.189.43:9000';
+// var API_SERVER_PATH = 'http://localhost:8000';
+var API_SERVER_PATH = 'http://112.74.189.43:9000';
 uGisAuthServices
 	.factory('ProfileService', ['$resource', '$cookies',
 		function($resource, $cookies) {
