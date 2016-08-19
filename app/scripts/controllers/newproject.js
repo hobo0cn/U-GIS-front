@@ -85,10 +85,20 @@ angular.module('uGisFrontApp')
             var type = e.layerType,
             layer = e.layer;
             drawnItems.addLayer(layer);
-            $scope.projectShape = layer.toGeoJSON()
+            $scope.projectShape = layer.toGeoJSON();
             $scope.projectAreaPoly= JSON.stringify($scope.projectShape);
-
+            $scope.mes_control.addLayer(layer);
         });
+
+        //测量面积工具
+        // setting options 
+       var mes_options = {geodesic: true};
+
+       //input parameter is Array of layers
+       var mes_layers = [];
+
+       // initialize control
+       $scope.mes_control = $window.L.Control.measureAreaControl(mes_options, mes_layers).addTo(map);
         
 
         $(window).on("resize", function() {
