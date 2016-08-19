@@ -33,7 +33,8 @@ angular
     'uGisProfileServices',
     'ngDialog',
     'flow',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ui.tree'
   ])
   .config(function ($routeProvider) {
     $routeProvider

@@ -12,6 +12,12 @@ angular.module('uGisFrontApp')
     'MapService', 'LayerService', 'ProfileServices',
   	function ($scope, $location, $cookies, MapListService, MapService, LayerService, ProfileServices) {
      
+      $scope.username = $cookies.get('EDM_username');
+
+      $scope.toggle = function (scope) {
+        scope.toggle();
+      };
+
       $scope.refresh = function(){
           MapListService.get({owner__username: $cookies.get('EDM_username')},
             function success(response){
