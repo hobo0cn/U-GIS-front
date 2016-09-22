@@ -5,7 +5,7 @@ angular.module('uGisFrontApp')
     ['$scope', '$location', '$cookies', '$window', '$routeParams', 'MapService', 
    function ($scope, $location, $cookies, $window, $routeParams, MapService) {
       var mapId = $routeParams.projectid;
-
+      $scope.username = $cookies.get('EDM_username');
       var _getOwneProject = function(){
           
            MapService.get({id: mapId},

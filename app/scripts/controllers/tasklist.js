@@ -4,6 +4,7 @@ angular.module('uGisFrontApp')
   .controller('TaskListCtrl', ['$scope', '$location', '$cookies', 'TaskService', 'LayerService',
    function ($scope, $location, $cookies, TaskService, LayerService) {
   
+      $scope.username = $cookies.get('EDM_username');
       var _getTasks = function(){
            TaskService.get(
               function success(response){
