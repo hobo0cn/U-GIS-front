@@ -5,6 +5,8 @@ angular.module('uGisFrontApp')
     ['$scope', '$location', '$cookies', 'MapListService', 
    function ($scope, $location, $cookies, MapListService) {
       $scope.username = $cookies.get('EDM_username');
+      $scope.usercat =  $cookies.get('EDM_usercat');
+
       var _getOwneProjects = function(){
            MapListService.query({owner__username: $cookies.get('EDM_username'), 
                                   status: 'D'},
