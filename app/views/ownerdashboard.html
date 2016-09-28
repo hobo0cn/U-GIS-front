@@ -3,12 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   <!--  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
-    rel="stylesheet" type="text/css">
-    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
-    rel="stylesheet" type="text/css"> -->
+
   </head>
   
   <body ng-controller="OwnerDashboardCtrl">
@@ -16,7 +11,6 @@
     <div dashboard-header>
     </div>
 
-    <!-- <div class="section"> -->
       <div class="container">
         <div class="row">
           <div class="col-md-12"> 
@@ -30,72 +24,93 @@
           </div>
         </div>
       </div>
-    <!-- </div>  -->
 
-    <!-- <div class="dashboard-tabs">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h4>已经完成</h4>
-            <div class="list-group" ng-repeat="project in projects">
-              <div class="col-md-12">
-                <div class="section">
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-md-3">
-                        <i class="fa fa-3x fa-building-o pull-left"></i>
-                        <h4 class="list-group-item-heading">{{project.name}}</h4>
-                      </div>
-                      <div class="col-md-3 text-center">
-                        <p class="list-group-item-text text-center">开始时间: {{project.start_date}}</p>
-                        <p class="list-group-item-text text-center">结束时间: {{project.end_date}}</p>
-                      </div>
-                      <div class="col-md-3">
-                        <p class="list-group-item-text text-center">类别：{{project.project_cat}}</p>
-                      </div>
-                      <div class="col-md-3 text-center">
-                        <a class="btn btn-primary btn-sm" href="#/project/{{project.id}}">详情</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
+
+  
     <div class="dashboard-tabs">
       <div class="container">
         <div class="row">
           <div class="col-md-12"> 
-            <ul class="nav nav-pills"></ul>
-              <div class="panel" >
+            
+                  <!-- Tabs  -->
+              <section ng-controller="TabController as tab">
+                <ul class="nav nav-tabs">
+                  <li ng-class="{ active:tab.isSet(1) }">
+                    <a href ng-click="tab.setTab(1)">已完成的项目</a>
+                  </li>
+                  <!-- <li ng-class="{ active:tab.isSet(2) }">
+                    <a href ng-click="tab.setTab(2)">Specs</a>
+                  </li>
+                  <li ng-class="{ active:tab.isSet(3) }">
+                    <a href ng-click="tab.setTab(3)">Reviews</a>
+                  </li> -->
+                </ul>
+
+                <!--  已经完成项目列表  -->
+                <div ng-show="tab.isSet(1)">
                   <div class="list-group" ng-repeat="project in projects">
-                    <div class="col-md-12">
-                      <div class="section">
-                        <div class="container">
-                          <div class="row">
-                            <div class="col-md-3">
-                              <i class="fa fa-3x fa-building-o pull-left"></i>
-                              <h4 class="list-group-item-heading">{{project.name}}</h4>
-                            </div>
-                            <div class="col-md-3 text-center">
-                              <p class="list-group-item-text text-center">开始时间: {{project.start_date}}</p>
-                              <p class="list-group-item-text text-center">结束时间: {{project.end_date}}</p>
-                            </div>
-                            <div class="col-md-3">
-                              <p class="list-group-item-text text-center">类别：{{project.project_cat}}</p>
-                            </div>
-                            <div class="col-md-3 text-center">
-                              <a class="btn btn-primary btn-sm" href="#/project/{{project.id}}">详情</a>
+                          <div class="col-md-12">
+                            <div class="section">
+                              <div class="container">
+                                <div class="row">
+                                  <div class="col-md-3">
+                                    <i class="fa fa-3x fa-building-o pull-left"></i>
+                                    <h4 class="list-group-item-heading">{{project.name}}</h4>
+                                  </div>
+                                  <div class="col-md-3 text-center">
+                                    <p class="list-group-item-text text-center">开始时间: {{project.start_date}}</p>
+                                    <p class="list-group-item-text text-center">结束时间: {{project.end_date}}</p>
+                                  </div>
+                                  <div class="col-md-3">
+                                    <p class="list-group-item-text text-center">类别：{{project.project_cat}}</p>
+                                  </div>
+                                  <div class="col-md-3 text-center">
+                                    <a class="btn btn-primary btn-sm" href="#/project/{{project.id}}">详情</a>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-              </div>
+                </div>
+
+                <!--  Spec Tab's Content  -->
+                <!-- <div ng-show="tab.isSet(2)">
+                  <h4>Specs</h4>
+                  <ul class="list-unstyled">
+                    <li>
+                      <strong>Shine</strong>
+                      : {{product.shine}}</li>
+                    <li>
+                      <strong>Faces</strong>
+                      : {{product.faces}}</li>
+                    <li>
+                      <strong>Rarity</strong>
+                      : {{product.rarity}}</li>
+                    <li>
+                      <strong>Color</strong>
+                      : {{product.color}}</li>
+                  </ul>
+                </div>
+                -->
+                <!--  Review Tab's Content  
+                <div ng-show="tab.isSet(3)"> 
+                   Product Reviews List
+                  <ul>
+                    <h4>Reviews</h4>
+                    <li ng-repeat="review in product.reviews">
+                      <blockquote>
+                        <strong>{{review.stars}} Stars</strong>
+                        {{review.body}}
+                        <cite class="clearfix">—{{review.author}}</cite>
+                      </blockquote>
+                    </li>  
+                  </ul>
+
+                </div> 
+                 -->
+
+              </section>
             
           </div>
         </div>
