@@ -4386,8 +4386,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background-color: #67b3e2;
-  border-color: #4ba5dd;
+  background-color: #1BBEE4;
+  border-color: #1BBEE4;
 }
 .navbar-default .navbar-brand {
   color: #ffffff;
@@ -6787,4 +6787,16 @@ body {
 .user-avatar {
   display: block;
   padding: 25px 11px 11px 11;
+}
+.dashboard-tabs {
+    display: block;
+    min-height: 400px;
+    max-height: 600px;
+}
+
+.custom-page-header {
+  font-size: 18px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  margin: 0px 20px 0px;
 }

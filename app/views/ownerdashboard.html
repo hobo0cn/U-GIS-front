@@ -12,47 +12,27 @@
   </head>
   
   <body ng-controller="OwnerDashboardCtrl">
-    <!-- <div class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"><span>易云图</span></a>
-        </div>
-        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active">
-              <a href="#">{{username}}</a>
-            </li>
-            <li>
-              <a href="#/login">退出</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div> -->
+
     <div dashboard-header>
     </div>
 
-    <div class="section">
+    <!-- <div class="section"> -->
       <div class="container">
         <div class="row">
-          <div class="col-md-12">
-            <div class="page-header text-left">
-              <h3>
+          <div class="col-md-12"> 
+            
+            <div class="custom-page-header text-left">
+              <p>
                 我的项目
-              </h3>
+              </p> 
             </div>
+
           </div>
         </div>
       </div>
-    </div>
+    <!-- </div>  -->
 
-    <div class="section">
+    <!-- <div class="dashboard-tabs">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
@@ -84,7 +64,44 @@
           </div>
         </div>
       </div>
+    </div> -->
+    <div class="dashboard-tabs">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12"> 
+            <ul class="nav nav-pills"></ul>
+              <div class="panel" >
+                  <div class="list-group" ng-repeat="project in projects">
+                    <div class="col-md-12">
+                      <div class="section">
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-md-3">
+                              <i class="fa fa-3x fa-building-o pull-left"></i>
+                              <h4 class="list-group-item-heading">{{project.name}}</h4>
+                            </div>
+                            <div class="col-md-3 text-center">
+                              <p class="list-group-item-text text-center">开始时间: {{project.start_date}}</p>
+                              <p class="list-group-item-text text-center">结束时间: {{project.end_date}}</p>
+                            </div>
+                            <div class="col-md-3">
+                              <p class="list-group-item-text text-center">类别：{{project.project_cat}}</p>
+                            </div>
+                            <div class="col-md-3 text-center">
+                              <a class="btn btn-primary btn-sm" href="#/project/{{project.id}}">详情</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            
+          </div>
+        </div>
+      </div>
     </div>
+
   </body>
 
 </html>
