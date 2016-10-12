@@ -44,7 +44,7 @@
     </div> -->
     <div dashboard-header>
     </div>
-
+<!-- 
     <div id="sidebar">
 
       <div class="section">
@@ -83,9 +83,78 @@
 
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <div id="mapid"></div>
+    <!-- <div id="mapid"></div> -->
+
+    <div class=" dashboard-tabs">
+      <!-- <div class="container"> -->
+        
+          <div class="col-md-3">
+            <!-- <div id="sidebar"></div> -->
+<!--             <div class="section">
+              <div class="sidebar-row">
+                <p>成果</p>
+                <div class="col-md-4">
+                  
+                  <img alt="Avatar" src="./images/yeoman.png">
+                </div>
+                <div class="col-md-4">
+                  <img alt="Avatar" src="./images/yeoman.png">
+                </div>
+                <div class="col-md-4">
+                  <img alt="Avatar" src="./images/yeoman.png">
+                </div>
+              </div>
+            </div> -->
+            <div class="section">
+              <div class="sidebar-row">
+                <p>报告</p>
+               <!-- <div class="list-group" ng-repeat="report in reports">
+                          <div class="col-md-12">
+                            <div class="section">
+                              <div class="container">
+                                <div class="row">
+                                  <div class="col-md-1">
+                                    <img alt="report_pdf" src="./images/pdf.png">
+                                    
+                                  </div>
+                                  <div class="col-md-1">
+                                    
+                                    <p class="list-group-item-heading">{{report.name}}</p>
+                                  </div>
+                                  
+                                  <div class="col-md-1 text-center">
+                                    <a class="btn btn-primary btn-sm" href="#/report/{{report.name}}">详情</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div> -->
+
+                   <table class="table" ng-repeat="report in reports">
+                    
+                    <tbody>
+                      <tr>
+                        <td> <img alt="report_pdf" src="./images/pdf.png"></td>
+                        <td>{{report.name}}</td>
+                        <td><a class="btn btn-primary btn-sm" href={{report.report_file_url}}>下载</a></td>
+                      </tr>
+                     
+                    </tbody>
+                  </table>
+
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-9">
+             <div id="mapid"></div>
+          </div>
+        </div>
+      <!-- </div> -->
+    </div>
   </body>
 
 </html>

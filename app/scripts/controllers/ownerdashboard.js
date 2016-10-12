@@ -36,3 +36,5 @@ angular.module('uGisFrontApp')
       this.tab = setTab;
     };
   });
+
+  

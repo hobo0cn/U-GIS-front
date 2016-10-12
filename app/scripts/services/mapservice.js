@@ -199,3 +199,25 @@ uGisServices
 		}
 	]);
 
+uGisServices
+	.factory('MapReportService', ['$resource','$cookies', 
+		function($resource, $cookies) {
+			
+			return $resource(API_SERVER_PATH+'/map/:mapid/report/:reportid/', 
+				{mapid: '@mapid', reportid: '@reportid'}, 
+				  {
+				  	get: {method: 'GET', cache: false, isArray: false, 
+				  			headers: {
+			                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
+			                }
+				  		 },
+				  },
+				  {
+				  	stripTrailingSlashes: false
+				  });
+
+		}
+	]);
+
+
+

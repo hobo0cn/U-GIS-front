@@ -6800,3 +6800,13 @@ body {
   padding-bottom: 20px;
   margin: 0px 20px 0px;
 }
+
+.sidebar-row {
+  margin-left: 20px;
+  margin-right: -15px;
+}
+
+.herf-forget-password {
+  font-size: 13px;
+  padding-top:10px;
+}

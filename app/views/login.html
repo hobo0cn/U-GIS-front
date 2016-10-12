@@ -34,7 +34,7 @@
   </body>
 </html>  -->
 
-<html>
+<!-- <html>
   
   <head>
     <meta charset="utf-8">
@@ -61,12 +61,7 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
           <ul class="nav navbar-nav navbar-right">
-            <!-- <li class="active">
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#">Contacts</a>
-            </li> -->
+            
           </ul>
         </div>
       </div>
@@ -156,3 +151,69 @@
 </html>
 
 
+ -->
+
+ <html>
+  
+  <head>
+
+  </head>
+  
+  <body ng-controller="LoginCtrl">
+    <div class="cover">
+      <div class="cover-image"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <img alt="report_pdf" src="images/LOGO-Login.png">
+            <h3 class="text-info">让数据变得更简单</h3>
+            <br>
+            <br>
+            <p>登录</p>
+            <hr>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                  <form role="form">
+                    <div class="form-group">
+                      <input class="form-control" id="exampleInputEmail1" placeholder="用户名 / 邮箱"
+                     ng-model="username" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                      <input class="form-control" id="exampleInputPassword1" placeholder="密码"
+                      type="password" ng-model="password" required>
+                    </div>
+                    <div class="col-sm-6 text-left">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox">下次自动登录</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 text-right herf-forget-password">
+                      <a href="url">忘记密码？</a>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="col-sm-12">
+                      <button type="submit" class="btn btn-block btn-info" ng-click="login()">登录</button>
+                      <div class="container">
+                        <hr>
+                      </div>
+                      <div class="container">没有账号？
+                        <a href="url">立即注册</a>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

@@ -6,11 +6,16 @@ angular.module('uGisFrontApp')
    function ($scope, $location, $cookies, $window, $routeParams, MapService) {
       var mapId = $routeParams.projectid;
       $scope.username = $cookies.get('EDM_username');
+
+      //TEST DATA
+      $scope.reports = [];
+      
       var _getOwneProject = function(){
           
            MapService.get({id: mapId},
               function success(response){
                 $scope.map = response;
+                $scope.reports = response.report_set;
                 map.panTo({lat: $scope.map.center_x, lng: $scope.map.center_y});
                 _loadResultLayers();
                 console.log('Success:' + JSON.stringify(response));
@@ -61,20 +66,26 @@ angular.module('uGisFrontApp')
 
 
 
-        var sidebar = $window.L.control.sidebar('sidebar', {
-            closeButton: false,
-            position: 'left',
-            autoPan: true
-        });
-        map.addControl(sidebar);
-        sidebar.show();
+        // var sidebar = $window.L.control.sidebar('sidebar', {
+        //     closeButton: false,
+        //     position: 'left',
+        //     autoPan: true
+        // });
+        // map.addControl(sidebar);
+        // sidebar.show();
 
-         $(window).on("resize", function() {
-          $("#mapid").height($(window).height())
-                .width($(window).width());
+      //    $(window).on("resize", function() {
+      //     $("#mapid").height($(window).height())
+      //           .width($(window).width());
+          
+      //     map.invalidateSize();
+      // }).trigger("resize");
+      
+   $(window).on("resize", function() {
+          $("#mapid").height($(window).height()-70)
+                .width($(window).width()*83.33333333/100);
           
           map.invalidateSize();
       }).trigger("resize");
-
 
   }]);
