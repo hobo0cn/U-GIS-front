@@ -6810,3 +6810,24 @@ body {
   font-size: 13px;
   padding-top:10px;
 }
+
+.cover {
+    padding: 30px 15px;
+    margin-bottom: 30px;
+    color: inherit;
+    
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    min-height: 100%;
+}
+
+.ng-invalid.ng-dirty {
+  border-color: #FA787E;
+}
+
+.ng-valid.ng-dirty {
+  border-color: #F6F6F6;
+}

@@ -23,6 +23,36 @@ uGisAuthServices
 	]);
 
 uGisAuthServices
+	.factory('RegisterRequestService', ['$resource',
+		function($resource) {
+			return $resource( API_SERVER_PATH+'/people/register_request/', {}, {
+			  
+			  post: {method: 'POST',  cache: false, isArray: false},
+			 
+			  },
+			  {
+			  	stripTrailingSlashes: false
+			  });
+
+		}
+	]);
+	
+uGisAuthServices
+	.factory('ResetPasswordService', ['$resource',
+		function($resource) {
+			return $resource( API_SERVER_PATH+'/people/reset_password/', {}, {
+			  
+			  post: {method: 'POST',  cache: false, isArray: false},
+			 
+			  },
+			  {
+			  	stripTrailingSlashes: false
+			  });
+
+		}
+	]);
+
+uGisAuthServices
 	.factory('TokenAuthService', ['$resource',
 		function($resource) {
 			//TODO Just for test address
@@ -38,3 +68,5 @@ uGisAuthServices
 
 		}
 	]);
+
+

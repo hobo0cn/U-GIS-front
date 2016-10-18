@@ -54,6 +54,10 @@ angular
         templateUrl: 'views/register.html',
         controller: 'RegisterCtrl'
       })
+      .when('/forgetpassword', {
+        templateUrl: 'views/forgetpassword.html',
+        controller: 'ForgetPasswordCtrl'
+      })
       .when('/project', {
         templateUrl: 'views/projectlist.html',
         controller: 'ProjectListCtrl'
