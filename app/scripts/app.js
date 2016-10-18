@@ -58,6 +58,10 @@ angular
         templateUrl: 'views/forgetpassword.html',
         controller: 'ForgetPasswordCtrl'
       })
+      .when('/resetpassword/:token', {
+        templateUrl: 'views/resetpassword.html',
+        controller: 'ResetPasswordCtrl'
+      })
       .when('/project', {
         templateUrl: 'views/projectlist.html',
         controller: 'ProjectListCtrl'

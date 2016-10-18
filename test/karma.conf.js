@@ -46,6 +46,7 @@ module.exports = function(config) {
       'bower_components/angular-ui-tree/dist/angular-ui-tree.js',
       'bower_components/leaflet-sidebar/src/L.Control.Sidebar.js',
       'bower_components/leaflet-draw/dist/leaflet.draw-src.js',
+      'bower_components/angular-recaptcha/release/angular-recaptcha.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

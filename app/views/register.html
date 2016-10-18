@@ -23,12 +23,12 @@
                   <form name="registerForm" ng-submit="registerForm.$valid && register()" novalidate>
                     <div class="form-group">
                       <input class="form-control ng-dirty ng-invalid" id="InputEmail" placeholder="邮箱" type="email" ng-model="email" required>
-                      <span ng-show="error_used_email">邮箱已经被使用</span>
+                      <span ng-show="error_used_email" style="color:red;">邮箱已经被使用</span>
                     </div>
                     <br>
                     <div class="form-group">
                       <input class="form-control ng-dirty ng-invalid" id="InputUserName" placeholder="用户名" ng-model="username" required>
-                      <span ng-show="error_used_username">用户名已经被使用</span>
+                      <span ng-show="error_used_username" style="color:red;">用户名已经被使用</span>
                     </div>
                     <br>
                     <div class="form-group">

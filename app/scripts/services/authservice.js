@@ -53,6 +53,21 @@ uGisAuthServices
 	]);
 
 uGisAuthServices
+	.factory('ResetPasswordConfirmService', ['$resource',
+		function($resource) {
+			return $resource( API_SERVER_PATH+'/people/reset_password_confirm/', {}, {
+			  
+			  post: {method: 'POST',  cache: false, isArray: false},
+			 
+			  },
+			  {
+			  	stripTrailingSlashes: false
+			  });
+
+		}
+	]);
+
+uGisAuthServices
 	.factory('TokenAuthService', ['$resource',
 		function($resource) {
 			//TODO Just for test address

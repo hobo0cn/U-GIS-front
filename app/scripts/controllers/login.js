@@ -30,7 +30,7 @@ angular.module('uGisFrontApp')
    function ($scope, $location, $cookies, TokenAuthService, ProfileServices) {
    	$scope.username = "";
    	$scope.password = "";
-    //TODO test login
+    $scope.error_username_or_pwd = 0;
       
     var _routeByUserCategory = function(usercat){
       if (usercat == 'A') {
@@ -48,7 +48,8 @@ angular.module('uGisFrontApp')
         
         TokenAuthService.post({username: $scope.username, password: $scope.password},
             function success(response){
-            	console.log('Success:' + JSON.stringify(response));  
+            	console.log('Success:' + JSON.stringify(response));
+                $scope.error_username_or_pwd = 0;  
                 $cookies.put('EDM_username', $scope.username);
                 $cookies.put('EDM_usertoken', response.token);
                 $cookies.put('EDM_usercat',   response.user_cat);
@@ -58,6 +59,10 @@ angular.module('uGisFrontApp')
             },
             function error(errorResponse){
                 console.log('Error:' + JSON.stringify(errorResponse));
+                if (errorResponse.status == 400) {
+                  //错误的用户名或密码
+                   $scope.error_username_or_pwd = 1;
+                }
             });
         
     };
