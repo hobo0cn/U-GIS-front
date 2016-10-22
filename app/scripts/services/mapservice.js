@@ -22,7 +22,12 @@ uGisServices
 			                }
 				},
 			  // delete: {method: 'DELETE', cache: false, isArray: false}
+			  query: {method: 'GET', cache: false, isArray: true, 
+						headers: {
+			                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
+			                }}
 			  },
+
 			  {
 			  	stripTrailingSlashes: false
 			  });

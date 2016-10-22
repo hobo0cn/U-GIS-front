@@ -7,7 +7,12 @@ angular.module('uGisFrontApp')
       $scope.username = $cookies.get('EDM_username');
       $scope.usercat =  $cookies.get('EDM_usercat');
 
+      if ($scope.username == null) {
+        $location.path("#/login")
+      }
+
       var _getOwneProjects = function(){
+
            MapListService.query({owner__username: $cookies.get('EDM_username'), 
                                   status: 'D'},
 

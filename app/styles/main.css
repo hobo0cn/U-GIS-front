@@ -6782,12 +6782,14 @@ body {
 .navbar-brand1 {
   color: #ffffff;
   font-size: 24px;
-  padding: 10px;
+  padding: 18px;
+  width: 100px;
 }
 .user-avatar {
   display: block;
-  padding: 25px 11px 11px 11;
+  /*padding: 25px 11px 11px 11;*/
 }
+
 .dashboard-tabs {
     display: block;
     min-height: 400px;
