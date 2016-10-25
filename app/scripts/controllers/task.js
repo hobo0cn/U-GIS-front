@@ -97,7 +97,7 @@ angular.module('uGisFrontApp')
         };
 
         var _loadWMSLayer  = function(layerName){
-          var wmsLayer = $window.L.tileLayer.wms('http://192.168.66.146:8080/geoserver/wsgeotiff/wms?', {
+          var wmsLayer = $window.L.tileLayer.wms('http://112.74.189.43:8080/geoserver/wsgeotiff/wms?', {
                   layers: layerName,
                   format: 'image/png',
                   transparent: true,
