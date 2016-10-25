@@ -153,8 +153,7 @@ uGisServices
 			  });
 
 		}
-	]);
-
+	])
 	.factory('LayerUploadImageDone', ['$resource', '$cookies', 'ProfileServices',
 		function($resource, $cookies, ProfileServices) {
 			//TODO Just for test address
@@ -171,7 +170,6 @@ uGisServices
 			  {
 			  	stripTrailingSlashes: false
 			  });
-
 		}
 	]);
 
