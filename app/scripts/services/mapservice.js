@@ -155,6 +155,26 @@ uGisServices
 		}
 	]);
 
+	.factory('LayerUploadImageDone', ['$resource', '$cookies', 'ProfileServices',
+		function($resource, $cookies, ProfileServices) {
+			//TODO Just for test address
+			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/upload-images-done/', 
+				{mapid: '@mapid', layerid: '@layerid'},
+				{
+				  post: {method: 'POST', cache: false, isArray: false,
+						headers: {
+			                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
+			                }
+			            }
+			  	},
+
+			  {
+			  	stripTrailingSlashes: false
+			  });
+
+		}
+	]);
+
 uGisServices
 	.factory('LayerImageListService', ['$resource',
 		function($resource) {

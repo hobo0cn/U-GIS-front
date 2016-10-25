@@ -36,10 +36,10 @@ angular.module('uGisFrontApp')
 angular.module('uGisFrontApp')
 	.controller('TaskCtrl', ['$scope', '$window', '$location', '$routeParams', 
     'ngDialog', '$cookies', 'LayerService', 
-    'MapService', 'SelectFilesServices', 'LayerUploadOrthphoto',
+    'MapService', 'SelectFilesServices', 'LayerUploadOrthphoto', 'LayerUploadImageDone',
   	function ($scope, $window, $location, $routeParams, 
       ngDialog, $cookies, LayerService, 
-      MapService, SelectFilesServices, LayerUploadOrthphoto) {
+      MapService, SelectFilesServices, LayerUploadOrthphoto, LayerUploadImageDone) {
      
      var mapId = $routeParams.projectid;
      var layerId = $routeParams.taskid;
@@ -177,6 +177,16 @@ angular.module('uGisFrontApp')
 
         
       $scope.uploadComplete = function() {
+
+          LayerUploadImageDone.post({mapid: mapId, layerid: layerId},
+              function success(response){
+                console.log('Success:' + JSON.stringify(response));
+              },
+              function error(errorResponse){
+                console.log('Error:' + JSON.stringify(errorResponse));
+              }
+            );
+
          //上传图片完成后，设置任务状态到FD
          LayerService.update({mapid: mapId, layerid: layerId, status: 'FD', 
                               map: mapId, stack_order: 1},
