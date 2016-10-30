@@ -14,6 +14,7 @@ angular.module('uGisFrontApp')
 
 	    $scope.resetPwd = function(){
           $scope.error_diff_confirm_pwd = 0;
+          
 	        ResetPasswordConfirmService.post({new_password: $scope.new_password,
                                             confirm_password: $scope.confirm_password,
                                             token: $routeParams.token},

@@ -12,7 +12,7 @@ angular.module('uGisFrontApp')
 		'MapListService', 'MapService', 'ProfileServices',
   	function ($scope, $location, $window, $cookies, MapListService, MapService, ProfileServices) {
     
-      $scope.maps = MapListService.query({owner__username: $cookies.get('EDM_username')},
+      $scope.maps = MapListService.query({owner: $cookies.get('EDM_username')},
 
               function success(response){
                 $scope.maps = response;
@@ -51,7 +51,7 @@ angular.module('uGisFrontApp')
 				                console.log('Error:' + JSON.stringify(errorResponse));
 				            });
 
-        $scope.maps = MapListService.query({owner__username: ProfileServices.getUserName()});
+        $scope.maps = MapListService.query({owner: ProfileServices.getUserName()});
     };
 
     $scope.deleteMap = function(mapId){

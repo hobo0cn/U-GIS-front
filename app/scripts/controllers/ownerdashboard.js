@@ -14,7 +14,7 @@ angular.module('uGisFrontApp')
 
       var _getOwneProjects = function(){
 
-           MapListService.query({owner__username: $cookies.get('EDM_username'), 
+           MapListService.query({owner: $cookies.get('EDM_username'), 
                                   status: 'D'},
 
               function success(response){
@@ -30,9 +30,9 @@ angular.module('uGisFrontApp')
               _getOwneProjects();
             }
             else {
-              MapListService.query({owner__username: $cookies.get('EDM_username'), 
+              MapListService.query({owner: $cookies.get('EDM_username'), 
                                     status: 'D',
-                                    search: $scope.search_txt},
+                                    name: $scope.search_txt},
 
                 function success(response){
                   $scope.projects = response;     

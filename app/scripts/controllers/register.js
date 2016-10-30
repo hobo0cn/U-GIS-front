@@ -15,7 +15,7 @@ angular.module('uGisFrontApp')
    		$scope.password = "";
       $scope.error_used_email = 0;
       $scope.error_used_username = 0;
-	    //TODO test register
+	    
 	    $scope.register = function(){
 	        
 	        RegisterRequestService.post({name: $scope.username, 
