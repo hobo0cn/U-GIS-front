@@ -13,13 +13,22 @@
 
       <div class="container">
         <div class="row">
-          <div class="col-md-12"> 
+          <div class="col-md-6"> 
             
             <div class="custom-page-header text-left">
               <p>
                 我的项目
               </p> 
             </div>
+
+          </div>
+          <div class="col-md-6"> 
+            <form id="custom-search-form" class="form-search form-horizontal pull-right" ng-submit="searchProject()">
+                <div class="input-append span12">
+                    <input type="text" class="search-query" placeholder="项目名称" ng-model="search_txt">
+                    <button type="submit" class="btn"><i class="icon-search"></i></button>
+                </div>
+            </form>
 
           </div>
         </div>

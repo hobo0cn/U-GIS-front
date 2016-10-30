@@ -6,6 +6,7 @@ angular.module('uGisFrontApp')
    function ($scope, $location, $cookies, MapListService) {
       $scope.username = $cookies.get('EDM_username');
       $scope.usercat =  $cookies.get('EDM_usercat');
+      $scope.search_txt = "";
 
       if ($scope.username == null) {
         $location.path("#/login")
@@ -22,6 +23,24 @@ angular.module('uGisFrontApp')
               function error(errorResponse){
                 console.log('Error:' + JSON.stringify(errorResponse));
               });
+        };
+        $scope.searchProject = function(){
+
+            if ($scope.search_txt=="") {
+              _getOwneProjects();
+            }
+            else {
+              MapListService.query({owner__username: $cookies.get('EDM_username'), 
+                                    status: 'D',
+                                    search: $scope.search_txt},
+
+                function success(response){
+                  $scope.projects = response;     
+                },
+                function error(errorResponse){
+                  console.log('Error:' + JSON.stringify(errorResponse));
+                });
+            }
         };
 
       _getOwneProjects();
