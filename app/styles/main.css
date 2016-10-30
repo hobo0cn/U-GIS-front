@@ -6897,7 +6897,7 @@ body {
 }
 .dashboard-tabs {
   display: block;
-  min-height: 400px;
+  /*min-height: 400px;*/
   max-height: 600px;
 }
 .custom-page-header {
@@ -6931,45 +6931,58 @@ body {
 .ng-valid.ng-dirty {
   border-color: #F6F6F6;
 }
-
 #custom-search-form {
-        margin:0;
-        margin-top: 15px;
-        padding: 0;
-    }
- 
-    #custom-search-form .search-query {
-        padding-right: 3px;
-        padding-right: 4px \9;
-        padding-left: 3px;
-        padding-left: 4px \9;
-        /* IE7-8 doesn't have border-radius, so don't indent the padding */
- 
-        margin-bottom: 0;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
-    }
- 
-    #custom-search-form button {
-        border: 0;
-        background: none;
-        /** belows styles are working good */
-        padding: 2px 5px;
-        margin-top: 2px;
-        position: relative;
-        left: -28px;
-        /* IE7-8 doesn't have border-radius, so don't indent the padding */
-        margin-bottom: 0;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
-    }
- 
-    .search-query:focus + button {
-        z-index: 3;   
-    }
+  margin: 0;
+  margin-top: 15px;
+  padding: 0;
+}
+#custom-search-form .search-query {
+  padding-right: 3px;
+  padding-right: 4px \9;
+  padding-left: 3px;
+  padding-left: 4px \9;
+  /* IE7-8 doesn't have border-radius, so don't indent the padding */
+  margin-bottom: 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+#custom-search-form button {
+  border: 0;
+  background: none;
+  /** belows styles are working good */
+  padding: 2px 5px;
+  margin-top: 2px;
+  position: relative;
+  left: -28px;
+  /* IE7-8 doesn't have border-radius, so don't indent the padding */
+  margin-bottom: 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.search-query:focus + button {
+  z-index: 3;
+}
 
+/******page start******/
+
+.page-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.page-content-wrapper {
+  position: absolute;
+  top: 0px;
+  bottom: 30px;
+  width: 100%;
+}
+
+/******page end******/
+
+
+/******header start******/
 
 .header {}
 .header > .container-fluid {
@@ -7015,4 +7028,46 @@ body {
   margin: -1px 5px 0px 0px;
 }
 
+/******header end******/
 
+.main-content-wrapper {
+  position: absolute;
+  top: 66px;
+  bottom: 0px;
+  width: 100%;
+  margin: 0px;
+}
+.main-content-wrapper {
+  border: 1px solid #96a2a5;
+}
+.main-content-wrapper .col-md-3,
+.main-content-wrapper .col-md-9 {
+  height: 100%;
+  padding: 0px;
+}
+.main-content-wrapper .side-left {
+  border-right: 1px solid #96a2a5;
+}
+.map {
+  width: 100%;
+  height: 100%;
+}
+.leaflet-control-attribution {
+  display: none;
+}
+
+/******footer start******/
+
+.footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px;
+}
+.footer p {
+  margin: 0px;
+}
+
+/******footer end******/

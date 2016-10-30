@@ -81,11 +81,11 @@ angular.module('uGisFrontApp')
       //     map.invalidateSize();
       // }).trigger("resize");
       
-   $(window).on("resize", function() {
-          $("#mapid").height($(window).height()-70)
-                .width($(window).width()*83.33333333/100);
+   // $(window).on("resize", function() {
+   //        $("#mapid").height($(window).height()-70)
+   //              .width($(window).width()*83.33333333/100);
           
-          map.invalidateSize();
-      }).trigger("resize");
+   //        map.invalidateSize();
+   //    }).trigger("resize");
 
   }]);
