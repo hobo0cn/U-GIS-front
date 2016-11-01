@@ -6974,11 +6974,12 @@ body {
 /******header start******/
 
 .header {}
-.header > .container-fluid {
+.header > .container {
+  position: relative;
   padding: 0px;
 }
 .header .navbar-logo {
-  margin-left: 40px;
+  /*margin-left: 40px;*/
   display: inline-block;
   width: 65px;
   height: 65px;
@@ -6992,11 +6993,12 @@ body {
   font-size: 24px;
   margin: 18px 0px 0px 11px;
 }
-.header .shortcut {}
 .header .shortcut {
-  float: right;
   font-size: 12px;
-  margin: 5px 40px 0px 0px;
+  margin: 8px 0px 0px 0px;
+}
+.header .shortcut .navbar-right {
+  margin: 0px;
 }
 .header .shortcut li {
   margin: 0px 11px 0px 0px;
@@ -7026,16 +7028,28 @@ body {
   width: 100%;
   margin: 0px;
 }
-.main-content-wrapper {
-  border: 1px solid #96a2a5;
+.main-content-wrapper > .container,
+.main-content-wrapper > .container > .row,
+.main-content-wrapper > .container > .row > .col-md-3,
+.main-content-wrapper > .container > .row > .col-md-9 {
+  height: 100%;
+  max-height: auto;
+}
+.main-content-wrapper > .container {
+  padding: 0px;
+}
+.main-content-wrapper > .container > .row {
+  marign: 0px;
 }
 .main-content-wrapper .col-md-3,
 .main-content-wrapper .col-md-9 {
-  height: 100%;
   padding: 0px;
 }
-.main-content-wrapper .side-left {
-  border-right: 1px solid #96a2a5;
+.side-left {
+  height: 100%;
+  margin: 0px;
+  border-left: 1px solid #E2E2E2;
+  border-bottom: 1px solid #E2E2E2;
 }
 .map {
   width: 100%;
