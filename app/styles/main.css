@@ -115,13 +115,6 @@ hr {
 pre {
   overflow: auto;
 }
-code,
-kbd,
-pre,
-samp {
-  font-family: monospace, monospace;
-  font-size: 1em;
-}
 button,
 input,
 optgroup,
@@ -1094,17 +1087,19 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: Lato;
+  font-family: "微软雅黑", microsoft yahei ui, microsoft yahei, arial, sans-serif !important;
   font-size: 14px;
   line-height: 1.42857143;
   color: #000000;
   background-color: #ffffff;
 }
+*:focus {
+  outline: none;
+}
 input,
 button,
 select,
 textarea {
-  font-family: inherit;
   font-size: inherit;
   line-height: inherit;
 }
@@ -1196,7 +1191,6 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: Lato;
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
@@ -1529,12 +1523,6 @@ address {
   margin-bottom: 20px;
   font-style: normal;
   line-height: 1.42857143;
-}
-code,
-kbd,
-pre,
-samp {
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 code {
   padding: 2px 4px;
@@ -5924,7 +5912,6 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: Lato;
   font-size: 12px;
   font-weight: normal;
   line-height: 1.4;
@@ -6031,7 +6018,6 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: Lato;
   font-size: 14px;
   font-weight: normal;
   line-height: 1.42857143;
@@ -6289,7 +6275,6 @@ button.close {
   height: 20px;
   margin-top: -10px;
   line-height: 1;
-  font-family: serif;
 }
 .carousel-control .icon-prev:before {
   content: '\2039';
@@ -6936,7 +6921,7 @@ body {
   margin-top: 15px;
   padding: 0;
 }
-#custom-search-form > .custom-search-wrapper{
+#custom-search-form > .custom-search-wrapper {
   position: relative;
   height: 30px;
   line-height: 30px;
@@ -6945,11 +6930,11 @@ body {
   border-radius: 20px;
 }
 #custom-search-form .search-query {
-	position: relative;
-	height: 23px;
-	width: 150px;
-	top: -1px;
-	border: 0px;
+  position: relative;
+  height: 23px;
+  width: 150px;
+  top: -1px;
+  border: 0px;
 }
 #custom-search-form button {
   color: #C4CACC;
@@ -7011,7 +6996,7 @@ body {
 .header .shortcut {
   float: right;
   font-size: 12px;
-  margin: 10px 40px 0px 0px;
+  margin: 5px 40px 0px 0px;
 }
 .header .shortcut li {
   margin: 0px 11px 0px 0px;
