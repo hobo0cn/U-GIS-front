@@ -10,6 +10,10 @@ angular.module('uGisFrontApp')
       //TEST DATA
       $scope.reports = [];
       
+      if ($scope.username == null) {
+        $location.path("#/login")
+      }
+
       var _getOwneProject = function(){
           
            MapService.get({id: mapId},
