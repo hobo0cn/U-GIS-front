@@ -18,7 +18,14 @@
     "exifreader": "^1.1.1",
     "leaflet-search": "^1.9.7",
     "leaflet-dialog": "Leaflet.Dialog#^1.0.2",
-    "ng-popup": "^0.5.0"
+    "ng-popup": "^0.5.0",
+    "angular-ui-tree": "^2.17.0",
+    "leaflet-sidebar": "^0.1.9",
+    "ui-bootstrap": "^1.3.3",
+    "leaflet-draw": "^0.3.0",
+    "angular-recaptcha": "^3.0.4",
+    "leaflet-gcj02": "https://github.com/hobo0cn/leaflet-gcj02.git",
+    "Leaflet.MeasureAreaControl": "https://github.com/zvaraondrej/Leaflet.MeasureAreaControl.git"
   },
   "devDependencies": {
     "angular-mocks": "^1.3.0"

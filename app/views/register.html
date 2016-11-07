@@ -1,62 +1,53 @@
-
-<!DOCTYPE html>
-<html id="ng-app" ng-app="uGisFrontApp">
-
-<head>
-    <!-- <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" /> -->
-    <!-- <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css"> -->
-   <!--  <script src="./scripts/controllers/register.js"></script> -->
-</head>
-
-<body ng-controller="RegisterCtrl" ng-app="uGisFrontApp">
- <div class="container">
-   <div id="signup">
-      <div class="signup-screen" ng-controller="RegisterCtrl">
-         <div class="space-bot text-center">
-            <h1>Sign up</h1>
-            <div class="divider"></div>
-         </div>
-           <form class="form-register" method="post" name="register" novalidate>
-	           <div class="input-field col s6">
-              <input id="first-name" type="text" class="validate" required>
-              <label for="first-name">First Name</label>
+<html>
+  
+  <head>
+    
+  </head>
+  
+  <body ng-controller="RegisterCtrl">
+    <div class="cover">
+      <div class="cover-image"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <img alt="report_pdf" src="images/LOGO-Login.png">
+            <h3 class="text-info">让数据变得更简单</h3>
+            <br>
+            <br>
+            <p>注册</p>
+            <hr>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                  <form name="registerForm" ng-submit="registerForm.$valid && register()" novalidate>
+                    <div class="form-group">
+                      <input class="form-control ng-dirty ng-invalid" id="InputEmail" placeholder="邮箱" type="email" ng-model="email" required>
+                      <span ng-show="error_used_email" style="color:red;">邮箱已经被使用</span>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                      <input class="form-control ng-dirty ng-invalid" id="InputUserName" placeholder="用户名" ng-model="username" required>
+                      <span ng-show="error_used_username" style="color:red;">用户名已经被使用</span>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                      <input class="form-control ng-dirty ng-invalid" id="InputPassword" placeholder="密码"
+                      type="password" ng-model="password" required>
+                    </div>
+                    <br>
+                    <div class="col-sm-12">
+                      <button type="submit" class="btn btn-block btn-info">注册</button>
+                    </div>
+                  </form>
+                </div>
+                <div class="col-md-4"></div>
+              </div>
             </div>
-            <div class="input-field col s6">
-              <input id="last-name" type="text" class="validate" required>
-              <label for="last-name">Last Name</label>
-             </div>
-             <div class="input-field col s6">
-              <input id="email" type="email" name="email" ng-model="email" class="validate" required>
-              <label for="email">Email</label>
-             </div>
-             <p class="alert alert-danger" ng-show="form-register.email.$error.email">Your email is invalid.</p>
-             <div class="input-field col s6">
-               <input id="password" type="password" name="password" ng-model="password" ng-minlength='6' class="validate" required>
-               <label for="password">Password</label>
-              </div>
-              <p class="alert alert-danger" ng-show="form-register.password.$error.minlength || form.password.$invalid">Your password must be at least 6 characters.</p>
-
-              <div class="space-top text-center" ng-controller="RegisterCtrl">
-
-<!--                <button ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done" ng-click="register()">
-
-               <i class="material-icons left">done</i> Done
-               </button> -->
-
-               <button type="button" class="btn btn-primary btn-s" ng-click="register()" ng-disabled="form-register.$invalid">
-                  <span class="glyphicon glyphicon-time"></span> Done
-                </button>
-
-
-               <button type="button" class="waves-effect waves-light btn cancel">
-               <i class="material-icons left">clear</i>Cancel
-               </button>
-              </div>
-             
-             </form>
-           </div> 
+          </div>
         </div>
-    <!-- </div> -->
-</body>
+      </div>
+    </div>
+  </body>
 
 </html>

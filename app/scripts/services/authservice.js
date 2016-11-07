@@ -23,10 +23,55 @@ uGisAuthServices
 	]);
 
 uGisAuthServices
+	.factory('RegisterRequestService', ['$resource',
+		function($resource) {
+			return $resource( API_SERVER_PATH+'/people/register_request/', {}, {
+			  
+			  post: {method: 'POST',  cache: false, isArray: false},
+			 
+			  },
+			  {
+			  	stripTrailingSlashes: false
+			  });
+
+		}
+	]);
+	
+uGisAuthServices
+	.factory('ResetPasswordService', ['$resource',
+		function($resource) {
+			return $resource( API_SERVER_PATH+'/people/reset_password/', {}, {
+			  
+			  post: {method: 'POST',  cache: false, isArray: false},
+			 
+			  },
+			  {
+			  	stripTrailingSlashes: false
+			  });
+
+		}
+	]);
+
+uGisAuthServices
+	.factory('ResetPasswordConfirmService', ['$resource',
+		function($resource) {
+			return $resource( API_SERVER_PATH+'/people/reset_password_confirm/', {}, {
+			  
+			  post: {method: 'POST',  cache: false, isArray: false},
+			 
+			  },
+			  {
+			  	stripTrailingSlashes: false
+			  });
+
+		}
+	]);
+
+uGisAuthServices
 	.factory('TokenAuthService', ['$resource',
 		function($resource) {
 			//TODO Just for test address
-			return $resource( API_SERVER_PATH+'/people/token-auth/', {}, {
+			return $resource( API_SERVER_PATH+'/people/signin/', {}, {
 			  // get: {method: 'GET'},
 			  post: {method: 'POST',  cache: false, isArray: false},
 			  // update: {method: 'PUT', cache: false, isArray: false},
@@ -38,3 +83,5 @@ uGisAuthServices
 
 		}
 	]);
+
+

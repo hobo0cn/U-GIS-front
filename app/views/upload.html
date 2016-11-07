@@ -24,7 +24,7 @@
      flow-complete="SelectFilesServices.uploadComplete()" -->
 <div ng-controller="UploadController"
      flow-init="config"
-     flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+     flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1,tif:1}[$file.getExtension()]"
      flow-files-submitted="filesAdded($flow.files, $flow)"
      flowobj=$flow
      >
@@ -40,11 +40,12 @@
 
   <div>
 
-    <div ng-repeat="file in $flow.files" class="gallery-box">
+    <div ng-repeat="file in $flow.files" >
+    <!-- class="gallery-box" -->
       <span class="title">{{file.name}}</span>
-      <div class="thumbnail" ng-show="$flow.files.length">
+<!--       <div class="thumbnail" ng-show="$flow.files.length">
         <img flow-img="file" />
-      </div>
+      </div> -->
       <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
         <div class="progress-bar" role="progressbar"
              aria-valuenow="{{file.progress() * 100}}"

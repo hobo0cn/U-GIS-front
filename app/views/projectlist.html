@@ -1,0 +1,107 @@
+<!-- <p>This is the projectlist view.</p>
+ -->
+
+<!DOCTYPE html>
+<html ng-app="uGisFrontApp">
+<head>
+<link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css">
+</head>
+
+  
+  <body  ng-controller="ProjectListCtrl">
+    <div class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><span>易云图</span></a>
+          <a class="navbar-brand"><span>－项目管理
+             </a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active">
+              <a href="#">管理员：{{username}}</a>
+            </li>
+            <li>
+              <a href="#/login">退出</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+           <form role="form">
+              <div class="form-group">
+                <a class="btn btn-primary" ng-click="newProject()">创建新项目</a>
+              </div>
+              <div class="form-group" >
+
+        <div ui-tree>
+          <ol ui-tree-nodes="" ng-model="maps">
+            <li ng-repeat="map in maps" ui-tree-node data-nodrag>
+              <div ui-tree-handle class="tree-node tree-node-content">
+                  <a class="btn btn-success btn-xs"  
+                  ng-if="map.layer_set && map.layer_set.length > 0"
+                  data-nodrag ng-click="toggle(this)">
+                    <span
+                  class="glyphicon"
+                  ng-class="{
+                    'glyphicon-chevron-right': collapsed,
+                    'glyphicon-chevron-down': !collapsed
+                  }"></span>
+                 </a>
+                 {{map.name}}
+
+              <a class="btn btn-primary btn-xs" data-nodrag ng-click="newTask(this)" style="margin-left: 78px;">
+                <span class="glyphicon glyphicon-plus"></span>
+              </a>
+            <!-- <a class="btn btn-info btn-xs" data-nodrag ng-click="remove(this)" style="margin-left: 8px;">
+                <span class="glyphicon glyphicon-edit"> </span>
+                </a> -->
+                <a class="btn btn-info btn-xs" style="margin-left: 8px;" 
+                href="#/map/{{map.id}}">
+                <span class="glyphicon glyphicon-edit"> </span>
+                </a>
+                <a class="btn btn-danger btn-xs" data-nodrag ng-click="deleteProject(map.id)" style="margin-left: 8px;">
+                <span class="glyphicon glyphicon-remove"> </span>
+                </a>
+
+              </div>
+              <ol ui-tree-nodes="" ng-model="map.layer_set" ng-class="{hidden: collapsed}">
+                <li ng-repeat="layer in map.layer_set" ui-tree-node>
+                  <div ui-tree-handle>
+                    {{layer.name}}
+                    <!-- <a class="btn btn-primary" href="#/map/{{map.id}}">编辑</a>
+                  <a class="btn btn-danger"  ng-click="deleteMap(map.id)">删除</a> -->
+                  <!-- <a class="btn btn-info btn-xs" data-nodrag ng-click="editTask(this)" style="margin-left: 78px;">
+                    <span class="glyphicon glyphicon-edit"> </span>
+                  </a> -->
+
+                  <a class="btn btn-danger btn-xs" data-nodrag ng-click="deleteTask(map.id, layer.id)" style="margin-left: 8px;">
+                     <span class="glyphicon glyphicon-remove"> </span>
+                  </a>
+
+                  </div>
+                </li>
+              </ol>
+            </li>
+          </ol>
+        </div>
+
+        </div>
+      </form>
+
+          
+      </div>
+    </div>
+  </body>
+
+
+</html>

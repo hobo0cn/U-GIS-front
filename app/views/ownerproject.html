@@ -1,0 +1,160 @@
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+    rel="stylesheet" type="text/css">
+    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
+    rel="stylesheet" type="text/css"> -->
+  </head>
+  
+  <body ng-app="uGisFrontApp" ng-controller="OwnerProjectCtrl">
+<!--     <div class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><span>易云图</span></a>
+          <a class="navbar-brand"><span>我的项目
+              <small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{map.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{map.end_date}}</small></span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active">
+              <a href="#">{{username}}</a>
+            </li>
+
+            
+            <li>
+              <a href="#/help">帮助</a>
+            </li>
+            <li>
+              <a href="#/login">退出</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div> -->
+    <div dashboard-header>
+    </div>
+<!-- 
+    <div id="sidebar">
+
+      <div class="section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <table class="table">
+              <tbody>
+                <tr>
+                  <td>
+                    <a class="btn btn-lg btn-link">影像图</a>
+                  </td>
+                  <td>
+                    <a class="btn btn-lg btn-link">高程图</a>
+                  </td>
+                </tr>
+                
+              </tbody>
+            </table>
+            
+            <table class="table">
+              <tbody>
+                
+                <tr>
+                  <td>
+                    <a class="btn btn-lg btn-link">报告</a>
+                  </td>
+                  <td>
+                    <div class="col-md-11"></div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div> -->
+
+    <!-- <div id="mapid"></div> -->
+    <div class="main-content-wrapper">
+    <div class="container">
+    <div class="row dashboard-tabs">
+      <!-- <div class="container"> -->
+        
+          <div class="col-md-3">
+            <!-- <div id="sidebar"></div> -->
+<!--             <div class="section">
+              <div class="sidebar-row">
+                <p>成果</p>
+                <div class="col-md-4">
+                  
+                  <img alt="Avatar" src="./images/yeoman.png">
+                </div>
+                <div class="col-md-4">
+                  <img alt="Avatar" src="./images/yeoman.png">
+                </div>
+                <div class="col-md-4">
+                  <img alt="Avatar" src="./images/yeoman.png">
+                </div>
+              </div>
+            </div> --> 
+              <div class="sidebar-row side-left">
+                <p>报告</p>
+               <!-- <div class="list-group" ng-repeat="report in reports">
+                          <div class="col-md-12">
+                            <div class="section">
+                              <div class="container">
+                                <div class="row">
+                                  <div class="col-md-1">
+                                    <img alt="report_pdf" src="./images/pdf.png">
+                                    
+                                  </div>
+                                  <div class="col-md-1">
+                                    
+                                    <p class="list-group-item-heading">{{report.name}}</p>
+                                  </div>
+                                  
+                                  <div class="col-md-1 text-center">
+                                    <a class="btn btn-primary btn-sm" href="#/report/{{report.name}}">详情</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div> -->
+
+                   <table class="table" ng-repeat="report in reports">
+                    
+                    <tbody>
+                      <tr>
+                        <td> <img alt="report_pdf" src="./images/pdf.png"></td>
+                        <td>{{report.name}}</td>
+                        <td><a class="btn btn-primary btn-sm" href={{report.report_file_url}}>下载</a></td>
+                      </tr>
+                     
+                    </tbody>
+                  </table>
+
+              </div>
+            </div>
+          
+          <div class="col-md-9">
+             <div id="mapid" class="map"></div>
+          </div>
+        </div>
+        </div>
+        </div>
+      <!-- </div> -->
+  </body>
+
+</html>

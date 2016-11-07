@@ -1,4 +1,4 @@
-<html lang="en" ng-app="uGisFrontApp">
+<!-- <html lang="en" ng-app="uGisFrontApp">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,6 +32,189 @@
     </form>
 
   </body>
-</html> 
+</html>  -->
+
+<!-- <html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+    rel="stylesheet" type="text/css">
+    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
+    rel="stylesheet" type="text/css">
+  </head>
+  
+  <body ng-controller="LoginCtrl">
+    <div class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><span>Brand</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="page-header text-left">
+              <h1>Brand
+                <small>用户登录</small>
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section text-left">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div id="fullcarousel-example" data-interval="false" class="carousel slide"
+            data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="item active">
+                  <img src="https://unsplash.imgix.net/photo-1423683249427-8ca22bd873e0?w=1024&amp;q=50&amp;fm=jpg&amp;s=5e57c661d0f772ce269188a6f5325708">
+                  <div class="carousel-caption">
+                    <h2>Title</h2>
+                    <p>Description</p>
+                  </div>
+                </div>
+                <div class="item">
+                  <img src="https://ununsplash.imgix.net/uploads/1411115362846f0257a48/3f4eb74a?w=1024&amp;q=50&amp;fm=jpg&amp;s=15087518f9f4fccf7b7f6f1e73330099">
+                  <div class="carousel-caption">
+                    <h2>Title</h2>
+                    <p>Description</p>
+                  </div>
+                </div>
+              </div>
+              <a class="left carousel-control" href="#fullcarousel-example" data-slide="prev"><i class="icon-prev fa fa-angle-left"></i></a>
+              <a class="right carousel-control" href="#fullcarousel-example" data-slide="next"><i class="icon-next fa fa-angle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <form class="form-horizontal" role="form">
+              <div class="form-group">
+                <div class="col-sm-3">
+                  <label for="inputEmail3" class="control-label">用户名</label>
+                </div>
+                <div class="col-sm-9">
+                  <input class="form-control" id="inputEmail3" placeholder="用户名" ng-model="username" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-3">
+                  <label for="inputPassword3" class="control-label">密码</label>
+                </div>
+                <div class="col-sm-9">
+                  <input type="password" class="form-control" id="inputPassword3" placeholder="密码" ng-model="password" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox">Remember me</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                  <button type="submit" class="btn btn-block btn-primary" ng-click="login()">登录</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                  <button class="btn btn-block btn-success" ng-click="newuser()">新用户注册</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>
 
 
+ -->
+
+ <html>
+  
+  <head>
+
+  </head>
+  
+  <body ng-app="uGisFrontApp" ng-controller="LoginCtrl">
+    <div class="cover">
+      <div class="cover-image"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <img alt="report_pdf" src="images/LOGO-Login.png">
+            <h3 class="text-info">让数据变得更简单</h3>
+            <br>
+            <br>
+            <p>登录</p>
+            <hr>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                  <form name="loginForm"  ng-submit="loginForm.$valid && login()" novalidate>
+                    <div class="form-group">
+                      <input class="form-control  ng-dirty ng-invalid" id="InputEmail" placeholder="用户名"
+                     ng-model="username" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                      <input class="form-control" id="InputPassword" placeholder="密码"
+                      type="password" ng-model="password" required>
+                      <span ng-show="error_username_or_pwd" style="color:red;">用户名或密码错误</span>
+                    </div>
+                    <div class="col-sm-6 text-left">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox">下次自动登录</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 text-right herf-forget-password">
+                      <a href="#/forgetpassword">忘记密码？</a>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="col-sm-12">
+                      <button type="submit" class="btn btn-block btn-info" ng-click="login()">登录</button>
+                      <div class="container">
+                        <hr>
+                      </div>
+                      <div class="container">没有账号？
+                        <a href="#/register">立即注册</a>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

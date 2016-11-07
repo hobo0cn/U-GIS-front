@@ -5,7 +5,7 @@ angular.module('uGisFrontApp')
   function (flowFactoryProvider) {
   flowFactoryProvider.defaults = {
     
-    //target: 'http://192.168.66.137:3000/upload/',
+    //target: 'http://192.168.66.145:3000/upload/',
     target: 'http://112.74.189.43:3000/upload/',
     permanentErrors: [404, 500, 501],
     chunkRetryInterval: 5000,
@@ -40,6 +40,7 @@ angular
             //TODO rerquest current map id
             query: {
                       project_id: mapId, 
+                      task_id: layerId
                    }
           };
         var flowObj;
@@ -109,7 +110,7 @@ angular
 
                 console.log('Success:' + JSON.stringify(response));
                 //route to upload image page.
-                var mappath = '/map/' + $scope.mapid;
+                var mappath = '/task/' + $scope.mapid + '/' + $scope.layerid;
                 $location.path(mappath);
             
               },

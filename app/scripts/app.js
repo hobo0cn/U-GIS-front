@@ -30,8 +30,11 @@ angular
     'ngTouch',
     'uGisServices',
     'uGisAuthServices',
+    'uGisProfileServices',
     'ngDialog',
-    'flow'
+    'flow',
+    'ui.bootstrap',
+    'ui.tree'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -51,6 +54,47 @@ angular
         templateUrl: 'views/register.html',
         controller: 'RegisterCtrl'
       })
+      .when('/forgetpassword', {
+        templateUrl: 'views/forgetpassword.html',
+        controller: 'ForgetPasswordCtrl'
+      })
+      .when('/resetpassword/:token', {
+        templateUrl: 'views/resetpassword.html',
+        controller: 'ResetPasswordCtrl'
+      })
+      .when('/project', {
+        templateUrl: 'views/projectlist.html',
+        controller: 'ProjectListCtrl'
+      })
+      .when('/newproject', {
+        templateUrl: 'views/newproject.html',
+         controller: 'NewProjectCtrl'
+      })
+      .when('/project/:projectid/newtask', {
+        templateUrl: 'views/newtask.html',
+         controller: 'NewTaskCtrl'
+      })
+      .when('/task', {
+        templateUrl: 'views/tasklist.html',
+         controller: 'TaskListCtrl'
+      })
+      .when('/task/:projectid/:taskid', {
+        templateUrl: 'views/task.html',
+         controller: 'TaskCtrl'
+      })
+      .when('/dashboard', {
+        templateUrl: 'views/ownerdashboard.html',
+        controller: 'OwnerDashboardCtrl'
+      })
+      .when('/project/:projectid', {
+        templateUrl: 'views/ownerproject.html',
+        controller: 'OwnerProjectCtrl'
+      })
+      .when('/upload/:mapid/:layerid', {
+        templateUrl: 'views/upload.html',
+        controller: 'UploadController'
+      })
+      //以下routing设置为旧程序，不再使用
       .when('/map', {
         templateUrl: 'views/maplist.html',
         controller: 'MapListCtrl'
@@ -59,14 +103,11 @@ angular
         templateUrl: 'views/map.html',
         controller: 'MapViewCtrl'
       })
-      .when('/upload/:mapid', {
-        templateUrl: 'views/upload.html',
-        controller: 'UploadController'
-      })
-      .when('/dashboard', {
-        templateUrl: 'views/dashboard.html',
-        controller: 'DashboardCtrl'
-      })
+      
+      // .when('/dashboard', {
+      //   templateUrl: 'views/dashboard.html',
+      //   controller: 'DashboardCtrl'
+      // })
       // .when('/uploaddlg', {
       //   templateUrl: 'views/uploadDlg.html',
       //   controller: 'uploadDlgCtrl'
