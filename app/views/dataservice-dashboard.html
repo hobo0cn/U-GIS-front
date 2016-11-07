@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html ng-app="uGisFrontApp">
+<head>
+    
+  </head>
+  
+<body ng-controller="TaskListCtrl">
+   
+    <div dashboard-header>
+    </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6"> 
+            
+            <div class="custom-page-header text-left">
+              <p>
+                数据任务管理
+              </p> 
+            </div>
+
+          </div>
+          <div class="col-md-6"> 
+            <form id="custom-search-form" class="form-search form-horizontal pull-right" ng-submit="searchProject()">
+                <div class="custom-search-wrapper">
+                    <button type="submit" class="glyphicon glyphicon-search btn-search"></button>
+                    <input type="text" class="search-query" placeholder="项目名称" ng-model="search_txt">
+                </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+
+  
+    <div class="dashboard-tabs">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12"> 
+            
+                  <!-- Tabs  -->
+              <section ng-controller="TabController as tab">
+                <ul class="nav nav-tabs">
+                  <li ng-class="{ active:tab.isSet(1) }">
+                    <a href ng-click="tab.setTab(1)">待处理任务</a>
+                  </li>
+                  <li ng-class="{ active:tab.isSet(2) }">
+                    <a href ng-click="tab.setTab(2)">完成的任务</a>
+                  </li>
+                  
+                </ul>
+
+                <!--  已经完成项目列表  -->
+                <div ng-show="tab.isSet(1)">
+                  <div class="list-group" ng-repeat="project in projects">
+                          <div class="col-md-12">
+                            <div class="section">
+                              <div class="container">
+                                <div class="row">
+                                  <div class="col-md-3">
+                                    <i class="fa fa-3x fa-building-o pull-left"></i>
+                                    <h4 class="list-group-item-heading">{{project.name}}</h4>
+                                  </div>
+                                  <div class="col-md-3 text-center">
+                                    <p class="list-group-item-text text-center">开始时间: {{project.start_date}}</p>
+                                    <p class="list-group-item-text text-center">结束时间: {{project.end_date}}</p>
+                                  </div>
+                                  <div class="col-md-3">
+                                    <p class="list-group-item-text text-center">类别：{{project.project_cat}}</p>
+                                  </div>
+                                  <div class="col-md-3 text-center">
+                                    <a class="btn btn-primary btn-sm" href="#/project/{{project.id}}">详情</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                </div>
+
+                <!--  Spec Tab's Content  -->
+                <div ng-show="tab.isSet(2)">
+                  <h4>Specs</h4>
+                  <ul class="list-unstyled">
+                    <li>
+                      <strong>Shine</strong>
+                      : {{product.shine}}</li>
+                    <li>
+                      <strong>Faces</strong>
+                      : {{product.faces}}</li>
+                    <li>
+                      <strong>Rarity</strong>
+                      : {{product.rarity}}</li>
+                    <li>
+                      <strong>Color</strong>
+                      : {{product.color}}</li>
+                  </ul>
+                </div>
+                 
+
+              </section>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -94,6 +94,11 @@ angular
         templateUrl: 'views/upload.html',
         controller: 'UploadController'
       })
+      .when('/datadashboard', {
+        templateUrl: 'views/dataservice-dashboard.html',
+        controller: 'DataServiceDashboardCtrl'
+      })
+
       //以下routing设置为旧程序，不再使用
       .when('/map', {
         templateUrl: 'views/maplist.html',
