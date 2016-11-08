@@ -36,8 +36,11 @@ angular.module('uGisFrontApp')
       if (usercat == 'A') {
         $location.path('/project');
       }
-      else if (usercat == 'P' || usercat == 'S') {
+      else if (usercat == 'P' ) {
         $location.path('/task');
+      }
+      else if(usercat == 'S'){
+        $location.path('/datadashboard');
       }
       else if (usercat == 'O') {
         $location.path('/dashboard');
