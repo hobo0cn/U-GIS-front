@@ -201,10 +201,11 @@ angular.module('uGisFrontApp')
             );
       };
       
-      $scope.uploadProcessImageComplete = function() {
+      $scope.uploadProcessImageComplete = function(map_format) {
          //上传处理的geotiff文件后，通知后台进行处理，由后台把任务状态修改为‘D’
           LayerUploadOrthphoto.post({mapid: mapId, layerid: layerId, 
                                     geotiff_file_name: 'odm_orthophoto.tif', 
+                                    format: map_format
                               },
               function success(response){
                 console.log('Success:' + JSON.stringify(response));

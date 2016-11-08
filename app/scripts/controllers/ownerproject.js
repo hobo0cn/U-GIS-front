@@ -13,6 +13,7 @@ angular.module('uGisFrontApp')
       if ($scope.username == null) {
         $location.path("#/login")
       }
+      var loadedLayerGroup = [];
 
       var _getOwneProject = function(){
           
@@ -21,7 +22,7 @@ angular.module('uGisFrontApp')
                 $scope.map = response;
                 $scope.reports = response.report_set;
                 map.panTo({lat: $scope.map.center_x, lng: $scope.map.center_y});
-                _loadResultLayers();
+                _loadResultLayers("Orthphoto");
                 console.log('Success:' + JSON.stringify(response));
 
               },
@@ -32,6 +33,8 @@ angular.module('uGisFrontApp')
         
         };
 
+
+
         var _loadWMSLayer  = function(layerName){
           var wmsLayer = $window.L.tileLayer.wms('http://112.74.189.43:8080/geoserver/wsgeotiff/wms?', {
                   layers: layerName,
@@ -40,22 +43,34 @@ angular.module('uGisFrontApp')
                   crs: $window.L.CRS.GCJ02,
                   maxZoom: 30
                   }).addTo(map);
+
+          loadedLayerGroup.push(wmsLayer);
         };
 
         //加载当前项目所有可用任务结果
-        var _loadResultLayers  = function(){
+        var _loadResultLayers  = function(layer_format){
 
           for (var i = $scope.map.layer_set.length - 1; i >= 0; i--) {
             var maplayerimages = $scope.map.layer_set[i].maplayerimages;
             //加载任务结果栅格数据
-            if(maplayerimages.length > 0){
-              $scope.currentViewLayerWMSName = maplayerimages[0].layer_wms_path;
-              _loadWMSLayer(maplayerimages[0].layer_wms_path);
+            for (var i = maplayerimages.length - 1; i >= 0; i--) {
+              if(maplayerimages[i].format == layer_format){
+                _loadWMSLayer(maplayerimages[i].layer_wms_path);
+              }
             }
             //加载任务范围矢量数据？
 
           }
           
+        };
+        //切换地图数据类型
+        $scope.swtichLoadMap  = function(layer_format){
+          //清除已经加载的层
+          for (var i = loadedLayerGroup.length - 1; i >= 0; i--) {
+            map.removeLayer(loadedLayerGroup[i]);
+          }
+          loadedLayerGroup = [];
+          _loadResultLayers(layer_format);
         };
 
 
