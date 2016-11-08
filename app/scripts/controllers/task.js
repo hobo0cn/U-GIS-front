@@ -43,6 +43,10 @@ angular.module('uGisFrontApp')
      
      var mapId = $routeParams.projectid;
      var layerId = $routeParams.taskid;
+
+     $scope.projectid = mapId;
+     $scope.taskid = layerId;
+
      $scope.isSelectFile = false;
 
      $scope.config= {
@@ -137,7 +141,7 @@ angular.module('uGisFrontApp')
 
 
         var sidebar = $window.L.control.sidebar('sidebar', {
-            // closeButton: true,
+            closeButton: false,
             position: 'left'
         });
         map.addControl(sidebar);
@@ -177,7 +181,9 @@ angular.module('uGisFrontApp')
 
         
       $scope.uploadComplete = function() {
-
+          //等待上传图片计数清零
+          $scope.imageNum = 0;
+          //启动后台图片处理任务
           LayerUploadImageDone.post({mapid: mapId, layerid: layerId},
               function success(response){
                 console.log('Success:' + JSON.stringify(response));
@@ -201,21 +207,24 @@ angular.module('uGisFrontApp')
             );
       };
       
-      $scope.uploadProcessImageComplete = function(map_format) {
-         //上传处理的geotiff文件后，通知后台进行处理，由后台把任务状态修改为‘D’
-          LayerUploadOrthphoto.post({mapid: mapId, layerid: layerId, 
-                                    geotiff_file_name: 'odm_orthophoto.tif', 
-                                    format: map_format
-                              },
-              function success(response){
-                console.log('Success:' + JSON.stringify(response));
-              },
-              function error(errorResponse){
-                console.log('Error:' + JSON.stringify(errorResponse));
-              }
-            );
-      };
+      // $scope.uploadProcessImageComplete = function(map_format) {
+      //    //上传处理的geotiff文件后，通知后台进行处理，由后台把任务状态修改为‘D’
+      //     LayerUploadOrthphoto.post({mapid: mapId, layerid: layerId, 
+      //                               geotiff_file_name: 'odm_orthophoto.tif', 
+      //                               format: map_format
+      //                         },
+      //         function success(response){
+      //           console.log('Success:' + JSON.stringify(response));
+      //         },
+      //         function error(errorResponse){
+      //           console.log('Error:' + JSON.stringify(errorResponse));
+      //         }
+      //       );
+      // };
       $scope.uploadOnClick = function(){
+                if ($scope.imageNum == 0){
+                  return;
+                }
                 //打开进度条对话框,并开始上传
                 ngDialog.open({
                 template: '../views/uploadDlg.html',
@@ -232,7 +241,12 @@ angular.module('uGisFrontApp')
             });
         };
 
-      $scope.isShowUploadProcessImage = function() {
+      $scope.uploadPhoto = function (projectid, taskid) {
+         var uploadpath = '/upload/' + projectid + '/' + taskid;
+         $location.path(uploadpath); 
+      };
+
+      $scope.isShowUploadProcessImage = function() {  
           if ($scope.task==null) return false;
           if ($scope.task.status == 'P') {
             return true;

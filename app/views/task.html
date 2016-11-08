@@ -42,7 +42,10 @@
               <label for="projectName" class="control-label">计划结束日期: {{task.end_date}}</label>
             </ol>
             <hr ng-show="isShowUploadPhoto()">
-            <a class="btn btn-info" ng-click="uploadOnClick()" ng-show="isShowUploadPhoto()">上传照片<span class="badge">{{imageNum}}</span></a>
+            <span class="btn btn-success"  ng-click="uploadPhoto(projectid, taskid)"><i class="icon icon-file"></i>选择上传照片</span>
+
+            <a class="btn btn-info" ng-click="uploadOnClick()">提交处理<span class="badge">{{imageNum}}</span></a>
+
             <hr ng-show="isShowUploadProcessImage()">
             <span class="btn btn-success" flow-btn ng-show="isShowUploadProcessImage()"><i class="icon icon-file"></i>选择处理结果</span>
             <a class="btn btn-small btn-success" ng-click="$flow.resume()" ng-show="$flow.files.length>0">提交</a>
@@ -74,7 +77,7 @@
             </tr>
             </tbody>
           </table>
-     
+              
               <div ng-repeat="image in upload_images" class="gallery-box">
               <!-- class="gallery-box" -->
                 <span class="title">{{image.name}}</span>
