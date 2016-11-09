@@ -140,12 +140,12 @@ angular.module('uGisFrontApp')
 
 
 
-        var sidebar = $window.L.control.sidebar('sidebar', {
-            closeButton: false,
-            position: 'left'
-        });
-        map.addControl(sidebar);
-        sidebar.show();
+        // var sidebar = $window.L.control.sidebar('sidebar', {
+        //     closeButton: false,
+        //     position: 'left'
+        // });
+        // map.addControl(sidebar);
+        // sidebar.show();
         
          var selFilesInfo = SelectFilesServices.getFilesInfo();
          if(selFilesInfo.length>0){
@@ -172,12 +172,12 @@ angular.module('uGisFrontApp')
          }
 
 
-        $(window).on("resize", function() {
-          $("#mapid").height($(window).height())
-                .width($(window).width());
+      //   $(window).on("resize", function() {
+      //     $("#mapid").height($(window).height())
+      //           .width($(window).width());
           
-          map.invalidateSize();
-      }).trigger("resize");
+      //     map.invalidateSize();
+      // }).trigger("resize");
 
         
       $scope.uploadComplete = function() {

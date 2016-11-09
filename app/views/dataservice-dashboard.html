@@ -4,7 +4,7 @@
     
   </head>
   
-<body ng-controller="TaskListCtrl">
+<body ng-controller="DataServiceDashboardCtrl">
    
     <div dashboard-header>
     </div>
@@ -20,15 +20,7 @@
             </div>
 
           </div>
-          <div class="col-md-6"> 
-            <form id="custom-search-form" class="form-search form-horizontal pull-right" ng-submit="searchProject()">
-                <div class="custom-search-wrapper">
-                    <button type="submit" class="glyphicon glyphicon-search btn-search"></button>
-                    <input type="text" class="search-query" placeholder="项目名称" ng-model="search_txt">
-                </div>
-            </form>
-
-          </div>
+         
         </div>
       </div>
 
@@ -53,24 +45,37 @@
 
                 <!--  已经完成项目列表  -->
                 <div ng-show="tab.isSet(1)">
-                  <div class="list-group" ng-repeat="project in projects">
+                  <div class="list-group" ng-repeat="task in tasks['FD']">
                           <div class="col-md-12">
                             <div class="section">
                               <div class="container">
                                 <div class="row">
                                   <div class="col-md-3">
-                                    <i class="fa fa-3x fa-building-o pull-left"></i>
-                                    <h4 class="list-group-item-heading">{{project.name}}</h4>
+                                   <!--  <i class="fa fa-3x fa-building-o pull-left"></i> -->
+                                    <h4 class="list-group-item-heading">{{task.map_name}}</h4>
+                                    <p class="list-group-item-text">任务名称: {{task.name}}</p>
                                   </div>
                                   <div class="col-md-3 text-center">
-                                    <p class="list-group-item-text text-center">开始时间: {{project.start_date}}</p>
-                                    <p class="list-group-item-text text-center">结束时间: {{project.end_date}}</p>
+                                    <p class="list-group-item-text text-center">计划开始时间: {{task.start_date}}</p>
+                                    <p class="list-group-item-text text-center">计划结束时间: {{task.end_date}}</p>
                                   </div>
                                   <div class="col-md-3">
-                                    <p class="list-group-item-text text-center">类别：{{project.project_cat}}</p>
+                                    <p class="list-group-item-text text-center">类别：{{task.project_cat}}</p>
                                   </div>
                                   <div class="col-md-3 text-center">
-                                    <a class="btn btn-primary btn-sm" href="#/project/{{project.id}}">详情</a>
+                                  
+                                    <div class="col-md-12">
+                                     <a class="btn btn-primary btn-sm" >上传正射影像图</a>
+                                    </div>
+                                    <div class="col-md-12">
+                                      <a class="btn btn-primary btn-sm">上传高程图</a>
+                                    </div>
+                                    <div class="col-md-12">
+                                     <a class="btn btn-primary btn-sm">上传NVDI图</a>
+                                    </div>
+                                     <div class="col-md-12">
+                                        <a class="btn btn-primary btn-sm" href="#/task/{{project.id}}">完成</a>
+                                   </div>
                                   </div>
                                 </div>
                               </div>
