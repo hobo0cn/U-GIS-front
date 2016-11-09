@@ -32,10 +32,10 @@ angular.module('uGisFrontApp')
             );
       };
 
-      $scope.uploadPhoto = function (projectid, taskid) {
-         var uploadpath = '/upload/' + projectid + '/' + taskid;
-         $location.path(uploadpath); 
-      };
+      // $scope.uploadPhoto = function (projectid, taskid) {
+      //    var uploadpath = '/upload/' + projectid + '/' + taskid;
+      //    $location.path(uploadpath); 
+      // };
 
       $scope.acceptServiceTask = function (projectid, taskid) {
           LayerService.update({mapid: projectid, layerid: taskid, status: 'P', 
@@ -50,6 +50,17 @@ angular.module('uGisFrontApp')
             );
       };
 
-
-
+      $scope.getTaskResultType = function(task) {
+          var rtn = ""
+          if (task.check_Orth) {
+            rtn = rtn + " 正射影像";
+          }
+          if (task.check_Ele){
+            rtn = rtn + " 高程图";
+          }
+          if (task.check_NVDI){
+            rtn = rtn + " NVDI";
+          }
+          return rtn;
+      };
   }]);

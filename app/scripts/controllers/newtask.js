@@ -112,7 +112,7 @@ angular.module('uGisFrontApp')
 
 
         var sidebar = $window.L.control.sidebar('sidebar', {
-            // closeButton: true,
+            closeButton: false,
             position: 'left'
         });
         map.addControl(sidebar);
@@ -169,7 +169,11 @@ angular.module('uGisFrontApp')
               stack_order: 1, 
               //指派的飞行员、数据处理工程师
               service: $scope.selectedService,
-              pilot: $scope.selectedPilot
+              pilot: $scope.selectedPilot,
+              //选择是否处理正射、高程、NVDI数据
+              check_Orth: $scope.check_Orth,
+              check_Ele: $scope.check_Ele,
+              check_NVDI: $scope.check_NVDI
               // project_category: 1
             }, 
             function success(response){

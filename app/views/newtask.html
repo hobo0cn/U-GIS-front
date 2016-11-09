@@ -41,7 +41,7 @@
       </div>
       
       <div class="form-group">
-        <label for="tasktDesc" class="col-sm-2 control-label">描述</label>
+        <label for="taskDesc" class="col-sm-2 control-label">描述</label>
         <div class="col-sm-10">
           <!-- <input class="form-control" id="projectDesc" placeholder="描述" ng-model="project_desc"> -->
           <textarea placeholder="描述" ng-model="taskDesc"></textarea>
@@ -91,6 +91,16 @@
                   </span>
                 </p>
               </div>
+        </div>
+
+        <div class="checkbox">
+          <label><input type="checkbox" value="" ng-model="check_Orth">处理正射影像</label>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" value="" ng-model="check_Ele">处理高程数据</label>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" value="" ng-model="check_NVDI">处理NVDI</label>
         </div>
 
          <!-- <div class="form-group">

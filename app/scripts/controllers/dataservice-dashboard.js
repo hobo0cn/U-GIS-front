@@ -50,6 +50,20 @@ angular.module('uGisFrontApp')
             );
       };
 
+      $scope.getTaskResultType = function(task) {
+          var rtn = ""
+          if (task.check_Orth) {
+            rtn = rtn + " 正射影像";
+          }
+          if (task.check_Ele){
+            rtn = rtn + " 高程图";
+          }
+          if (task.check_NVDI){
+            rtn = rtn + " NVDI";
+          }
+          return rtn;
+      };
+
 
 
   }]);

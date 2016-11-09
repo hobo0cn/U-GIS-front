@@ -54,53 +54,78 @@
                                    <!--  <i class="fa fa-3x fa-building-o pull-left"></i> -->
                                     <h4 class="list-group-item-heading">{{task.map_name}}</h4>
                                     <p class="list-group-item-text">任务名称: {{task.name}}</p>
+                                    <p class="list-group-item-text ">计划开始时间: {{task.start_date}}</p>
+                                    <p class="list-group-item-text ">计划结束时间: {{task.end_date}}</p>
                                   </div>
-                                  <div class="col-md-3 text-center">
-                                    <p class="list-group-item-text text-center">计划开始时间: {{task.start_date}}</p>
-                                    <p class="list-group-item-text text-center">计划结束时间: {{task.end_date}}</p>
-                                  </div>
+                                 
                                   <div class="col-md-3">
                                     <p class="list-group-item-text text-center">类别：{{task.project_cat}}</p>
+                                    <p class="list-group-item-text text-center">业主：{{task.owner_username}}</p>
                                   </div>
                                   <div class="col-md-3 text-center">
                                   
                                     <div class="col-md-12">
-                                     <a class="btn btn-primary btn-sm" >上传正射影像图</a>
+                                     <a class="btn btn-block btn-sm" ng-show="task.check_Orth">上传正射影像图</a>
                                     </div>
                                     <div class="col-md-12">
-                                      <a class="btn btn-primary btn-sm">上传高程图</a>
+                                      <a class="btn btn-block btn-sm" ng-show="task.check_Ele">上传高程图</a>
                                     </div>
                                     <div class="col-md-12">
-                                     <a class="btn btn-primary btn-sm">上传NVDI图</a>
+                                     <a class="btn btn-block btn-sm" ng-show="task.check_NVDI">上传NVDI图</a>
+                                    </div>
+                                    <div class="col-md-12">
+                                     <a class="btn btn-block btn-sm">上传报告</a>
                                     </div>
                                      <div class="col-md-12">
-                                        <a class="btn btn-primary btn-sm" href="#/task/{{project.id}}">完成</a>
+                                        <a class="btn btn-block btn-sm">完成</a>
                                    </div>
                                   </div>
-                                </div>
+
+                                  <div class="col-md-3">
+                                    <div class="col-md-12">
+                                        <a class="btn btn-primary btn-sm" href="#/project/{{task.map}}">详情</a>
+                                    </div>
+                                 </div>
+
                               </div>
                             </div>
                           </div>
-                        </div>
+                   </div>
+                  </div>
                 </div>
 
                 <!--  Spec Tab's Content  -->
                 <div ng-show="tab.isSet(2)">
-                  <h4>Specs</h4>
-                  <ul class="list-unstyled">
-                    <li>
-                      <strong>Shine</strong>
-                      : {{product.shine}}</li>
-                    <li>
-                      <strong>Faces</strong>
-                      : {{product.faces}}</li>
-                    <li>
-                      <strong>Rarity</strong>
-                      : {{product.rarity}}</li>
-                    <li>
-                      <strong>Color</strong>
-                      : {{product.color}}</li>
-                  </ul>
+                  <div class="list-group" ng-repeat="task in tasks['FD']">
+                          <div class="col-md-12">
+                            <div class="section">
+                              <div class="container">
+                                <div class="row">
+                                  <div class="col-md-4">
+                                   <!--  <i class="fa fa-3x fa-building-o pull-left"></i> -->
+                                    <h4 class="list-group-item-heading">{{task.map_name}}</h4>
+                                    <p class="list-group-item-text">任务名称: {{task.name}}</p>
+                                    <p class="list-group-item-text ">计划开始时间: {{task.start_date}}</p>
+                                    <p class="list-group-item-text ">计划结束时间: {{task.end_date}}</p>
+                                  </div>
+                                 
+                                  <div class="col-md-4">
+                                    <p class="list-group-item-text text-center">类别：{{task.project_cat}}</p>
+                                    <p class="list-group-item-text text-center">业主：{{task.owner_username}}</p>
+                                  </div>
+                                  
+
+                                  <div class="col-md-4">
+                                    <div class="col-md-12">
+                                        <a class="btn btn-primary btn-sm" href="#/project/{{task.map}}">详情</a>
+                                    </div>
+                                 </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
                 </div>
                  
 
