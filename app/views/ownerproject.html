@@ -114,9 +114,14 @@
               </div>
             </div> --> 
               <div class="sidebar-row side-left">
-              <button class="btn btn-block btn-info" ng-click="swtichLoadMap('Orthphoto')">正射影像</button>
+              <ul class="mapswitch-wrapper">
+              <li class="active" ng-click="swtichLoadMap('Orthphoto')"><a class="sate" alt="影像图" class="img-thumbnail"></a><span>影像图</span></li>
+              <li ng-click="swtichLoadMap('NDVI')"><a class="ndvi" alt="3D模型" class="img-thumbnail"></a><span>3D模型</span></li>
+              <li ng-click="swtichLoadMap('Elevation')"><a class="elevation" alt="高程图" class="img-thumbnail"></a><span>高程图</span></li>
+              </ul>
+<!--               <button class="btn btn-block btn-info" ng-click="swtichLoadMap('Orthphoto')">正射影像</button>
               <button class="btn btn-block btn-info" ng-click="swtichLoadMap('Elevation')">高程图</button>
-              <button class="btn btn-block btn-info" ng-click="swtichLoadMap('NDVI')">NDVI</button>
+              <button class="btn btn-block btn-info" ng-click="swtichLoadMap('NDVI')">NDVI</button> -->
                 <p>报告</p>
                <!-- <div class="list-group" ng-repeat="report in reports">
                           <div class="col-md-12">
