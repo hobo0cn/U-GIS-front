@@ -91,7 +91,7 @@
                                                 }"
                                     flow-files-submitted="filesAdded($flow.files, $flow, 0)"
                                     flow-complete="uploadProcessImageComplete(task.map, task.id)">
-                                      <span class="btn btn-default btn-sm"   ng-show="task.check_Ele" ng-click="setUploadConfig(task.map, task.id, 'Elevation')">上传高程图</span>
+                                      <span class="btn btn-default btn-sm" flow-btn  ng-show="task.check_Ele" ng-click="setUploadConfig(task.map, task.id, 'Elevation')">上传高程图</span>
                                     </div>
 
                                     <div class="col-md-12"
@@ -104,7 +104,7 @@
                                                 }"
                                     flow-files-submitted="filesAdded($flow.files, $flow, 0)"
                                     flow-complete="uploadProcessImageComplete(task.map, task.id)">
-                                     <span class="btn btn-default btn-sm"   ng-show="task.check_NVDI" ng-click="setUploadConfig(task.map, task.id, 'NDVI')">上传NVDI图</span>
+                                     <span class="btn btn-default btn-sm" flow-btn  ng-show="task.check_NVDI" ng-click="setUploadConfig(task.map, task.id, 'NDVI')">上传NVDI图</span>
                                     </div>
 
                                     <div class="col-md-12"
@@ -120,12 +120,6 @@
                                     
                                     flow-files-submitted="filesAdded($flow.files, $flow, 1)" 
                                     >
-                                    <!-- flow-files-submitted="$flow.upload()" -->
-                                    
-                                     <!-- <label class="btn btn-default btn-file btn-sm"
-                                     l> -->
-                                      <!-- 上传报告 -->
-                                      <!--  <input type="file" ng-model="report_file" style="display: none;"> -->
                                       <span class="btn btn-default btn-sm"  flow-btn ng-click="setUploadConfig(task.map, task.id, 'report')">上传报告</span>
                                      </label>
                                     
