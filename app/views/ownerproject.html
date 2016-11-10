@@ -1,6 +1,6 @@
 <html>
-  
-  <head>
+
+<head>
     <meta charset="utf-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -9,164 +9,53 @@
     rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
     rel="stylesheet" type="text/css"> -->
-  </head>
-  
-  <body ng-app="uGisFrontApp" ng-controller="OwnerProjectCtrl">
-<!--     <div class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"><span>易云图</span></a>
-          <a class="navbar-brand"><span>我的项目
-              <small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{map.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{map.end_date}}</small></span></a>
-        </div>
-        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active">
-              <a href="#">{{username}}</a>
-            </li>
+</head>
 
-            
-            <li>
-              <a href="#/help">帮助</a>
-            </li>
-            <li>
-              <a href="#/login">退出</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div> -->
+<body ng-app="uGisFrontApp" ng-controller="OwnerProjectCtrl">
     <div dashboard-header>
     </div>
-<!-- 
-    <div id="sidebar">
-
-      <div class="section">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4">
-              <table class="table">
-              <tbody>
-                <tr>
-                  <td>
-                    <a class="btn btn-lg btn-link">影像图</a>
-                  </td>
-                  <td>
-                    <a class="btn btn-lg btn-link">高程图</a>
-                  </td>
-                </tr>
-                
-              </tbody>
-            </table>
-            
-            <table class="table">
-              <tbody>
-                
-                <tr>
-                  <td>
-                    <a class="btn btn-lg btn-link">报告</a>
-                  </td>
-                  <td>
-                    <div class="col-md-11"></div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+    <div class="page-main">
+        <div class="breadcrumb-wrapper">
+            <ol>
+                <li class="btn-wrapper"><a href="#/dashboard" class="btn btn-default">返回</a></li>
+                <li><a href="#/dashboard">易云图</a></li>
+                <li><a href="#/dashboard">已完成项目</a></li>
+                <li><a href="#/project/{{projectId}}">详情</a></li>
+            </ol>
+        </div>
+        <div class="sidebar-row side-left">
+            <div class="module">
+                <div class="module-title">成果</div>
+                <div class="module-content">
+                    <ul class="mapswitch-wrapper">
+                        <li class="active" ng-click="swtichLoadMap('Orthphoto')">
+                            <a class="sate" alt="影像图" class="img-thumbnail"></a><span>影像图</span></li>
+                        <li ng-click="swtichLoadMap('NDVI')">
+                            <a class="ndvi" alt="3D模型" class="img-thumbnail"></a><span>3D模型</span></li>
+                        <li ng-click="swtichLoadMap('Elevation')">
+                            <a class="elevation" alt="高程图" class="img-thumbnail"></a><span>高程图</span></li>
+                    </ul>
+                </div>
             </div>
-          </div>
-
+            <div class="module report">
+                <div class="module-title">报告</div>
+                <div class="module-content">
+                    <table class="table" ng-repeat="report in reports">
+                        <tbody>
+                            <tr>
+                                <td> <img alt="report_pdf" src="./images/pdf.png"></td>
+                                <td>{{report.name}}</td>
+                                <td><a class="btn btn-primary btn-sm" href={{report.report_file_url}}>下载</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
-    </div> -->
-
-    <!-- <div id="mapid"></div> -->
-    <div class="main-content-wrapper">
-      <div class="breadcrumb-wrapper">
-        <ol>
-          <li class="btn-wrapper"><a href="#/dashboard" class="btn btn-default">返回</a></li>
-          <li><a href="#/dashboard">易云图</a></li>
-          <li><a href="#/dashboard">已完成项目</a></li>
-          <li><a href="#/project/{{projectId}}">详情</a></li>
-        </ol>
-      </div> 
-      <!-- <div class="container"> -->
-        
-            <!-- <div id="sidebar"></div> -->
-<!--             <div class="section">
-              <div class="sidebar-row">
-                <p>成果</p>
-                <div class="col-md-4">
-                  
-                  <img alt="Avatar" src="./images/yeoman.png">
-                </div>
-                <div class="col-md-4">
-                  <img alt="Avatar" src="./images/yeoman.png">
-                </div>
-                <div class="col-md-4">
-                  <img alt="Avatar" src="./images/yeoman.png">
-                </div>
-              </div>
-            </div> --> 
-              <div class="sidebar-row side-left">
-              <ul class="mapswitch-wrapper">
-              <li class="active" ng-click="swtichLoadMap('Orthphoto')"><a class="sate" alt="影像图" class="img-thumbnail"></a><span>影像图</span></li>
-              <li ng-click="swtichLoadMap('NDVI')"><a class="ndvi" alt="3D模型" class="img-thumbnail"></a><span>3D模型</span></li>
-              <li ng-click="swtichLoadMap('Elevation')"><a class="elevation" alt="高程图" class="img-thumbnail"></a><span>高程图</span></li>
-              </ul>
-<!--               <button class="btn btn-block btn-info" ng-click="swtichLoadMap('Orthphoto')">正射影像</button>
-              <button class="btn btn-block btn-info" ng-click="swtichLoadMap('Elevation')">高程图</button>
-              <button class="btn btn-block btn-info" ng-click="swtichLoadMap('NDVI')">NDVI</button> -->
-                <p>报告</p>
-               <!-- <div class="list-group" ng-repeat="report in reports">
-                          <div class="col-md-12">
-                            <div class="section">
-                              <div class="container">
-                                <div class="row">
-                                  <div class="col-md-1">
-                                    <img alt="report_pdf" src="./images/pdf.png">
-                                    
-                                  </div>
-                                  <div class="col-md-1">
-                                    
-                                    <p class="list-group-item-heading">{{report.name}}</p>
-                                  </div>
-                                  
-                                  <div class="col-md-1 text-center">
-                                    <a class="btn btn-primary btn-sm" href="#/report/{{report.name}}">详情</a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> -->
-
-
-                   <table class="table" ng-repeat="report in reports">
-                    
-                    <tbody>
-                      <tr>
-                        <td> <img alt="report_pdf" src="./images/pdf.png"></td>
-                        <td>{{report.name}}</td>
-                        <td><a class="btn btn-primary btn-sm" href={{report.report_file_url}}>下载</a></td>
-                      </tr>
-                     
-                    </tbody>
-                  </table>
-
-              </div>
-          
-          <div class="main-content">
-             <div id="mapid" class="map"></div>
-          </div>
- 
+        <div class="main-content">
+            <div id="mapid" class="map"></div>
         </div>
-      <!-- </div> -->
-  </body>
+    </div>
+</body>
 
 </html>

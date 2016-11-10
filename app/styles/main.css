@@ -7021,16 +7021,16 @@ body {
 
 /******header end******/
 
-.main-content-wrapper {
+.page-main {
   position: absolute;
   top: 66px;
   bottom: 0px;
   width: 100%;
   margin: 0px;
 }
-.main-content-wrapper .row,
-.main-content-wrapper .row .col-md-3,
-.main-content-wrapper .row .col-md-9 {
+.page-main .row,
+.page-main .row .col-md-3,
+.page-main .row .col-md-9 {
   margin: 0px;
   padding: 0px;
   height: 100%;
@@ -7040,41 +7040,42 @@ body {
   left: 273px;
   right: 0px;
 }
-.main-content-wrapper .breadcrumb-wrapper {
-  margin: 10px 0px;
-  line-height: 20px;
+.page-main>.breadcrumb-wrapper {
+  padding: 10px 0px 0px 15px
 }
-.main-content-wrapper .breadcrumb-wrapper ol {
+.page-main>.breadcrumb-wrapper ol {
   list-style: none;
+  margin: 0px;
+  padding: 0px;
 }
-.main-content-wrapper .breadcrumb-wrapper ol>li {
+.page-main>.breadcrumb-wrapper ol>li {
   display: inline-block;
 }
-.main-content-wrapper .breadcrumb-wrapper ol>li+li:before {
+.page-main>.breadcrumb-wrapper ol>li+li:before {
   padding: 0 5px;
   color: #ccc;
   content: "\003E";
 }
-.main-content-wrapper .breadcrumb-wrapper ol>.btn-wrapper+li:before {
+.page-main>.breadcrumb-wrapper ol>.btn-wrapper+li:before {
   content: none;
 }
-.main-content-wrapper .breadcrumb-wrapper ol>li a {
+.page-main>.breadcrumb-wrapper ol>li a {
   color: #96a2a5;
 }
-.main-content-wrapper .breadcrumb-wrapper ol>li a:hover {
+.page-main>.breadcrumb-wrapper ol>li a:hover {
   text-decoration: none;
 }
-.main-content-wrapper .breadcrumb-wrapper .btn {
-  padding: 1px 8px;
+.page-main>.breadcrumb-wrapper .btn {
+  padding: 0px 8px;
   border-radius: 2px;
   margin: 0px;
 }
-.main-content-wrapper .breadcrumb-wrapper ol>.btn-wrapper:after {
+.page-main>.breadcrumb-wrapper ol>.btn-wrapper:after {
   content: "";
-  margin-right: 18px;
+  margin-right: 15px;
 }
-.main-content-wrapper .side-left,
-.main-content-wrapper .main-content {
+.page-main .side-left,
+.page-main .main-content {
   position: absolute;
   top: 40px;
   bottom: 0px;
@@ -7085,6 +7086,14 @@ body {
   margin: 0px;
   border-right: 1px solid #E2E2E2;
 }
+.side-left .module {
+  position: relative;
+}
+.side-left .module .module-title {
+  font-weight: bold;
+  padding: 10px 0px 10px 15px;
+}
+.side-left .module .module-content {}
 .mapswitch-wrapper {
   list-style: none;
   margin: 0px;
@@ -7117,6 +7126,20 @@ body {
 }
 .mapswitch-wrapper .elevation {
   background: url("../images/map/map-elevation.png") no-repeat;
+}
+.module.report {
+  position: absolute;
+  top: 130px;
+  bottom: 0px;
+  width: 100%;
+}
+.module.report .module-content {
+  position: absolute;
+  top: 40px;
+  bottom: 0px;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 
 /******map start******/
