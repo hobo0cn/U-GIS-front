@@ -5,6 +5,29 @@ var uGisServices =
 	angular.module('uGisServices', ['ngResource']);
 //var API_SERVER_PATH = 'http://localhost:8000';
 var API_SERVER_PATH = 'http://112.74.189.43:9000';
+
+uGisServices
+	.factory('ProjectCatListService', ['$resource', '$cookies',
+		function($resource, $cookies) {
+			
+			return $resource( API_SERVER_PATH+'/projectcat/', {}, {
+			  // get: {method: 'GET'},
+			  
+			  get: {method: 'GET', cache: false, isArray: true, 
+					
+				},
+			  // delete: {method: 'DELETE', cache: false, isArray: false}
+			  query: {method: 'GET', cache: false, isArray: true
+				}
+			  },
+
+			  {
+			  	stripTrailingSlashes: false
+			  });
+
+		}
+	]);
+
 uGisServices
 	.factory('MapListService', ['$resource', '$cookies', 'ProfileServices',
 		function($resource, $cookies, ProfileServices) {

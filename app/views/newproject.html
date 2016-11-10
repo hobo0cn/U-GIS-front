@@ -48,6 +48,24 @@
         </div>
       </div>
 
+       <div class="form-group">
+        <label for="ownerSelect" class="col-sm-2 control-label">业主</label>
+        <div class="col-sm-4">
+          <select name="ownerSelect" id="ownerSelect" ng-model="selectedOwner">
+            <option ng-repeat="owner in ownerUsers" value="{{owner.id}}">{{owner.username}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="projectCatSelect" class="col-sm-2 control-label">项目类型</label>
+        <div class="col-sm-4">
+          <select name="projectCatSelect" id="projectCatSelect" ng-model="selectedProjectCat">
+            <option ng-repeat="cat in projectcats" value="{{cat.id}}">{{cat.name}}</option>
+          </select>
+        </div>
+      </div>
+
         <div class="form-group">
             <label for="startDate" class="col-sm-2 control-label">开始</label>
 

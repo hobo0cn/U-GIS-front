@@ -9,8 +9,9 @@
  */
 angular.module('uGisFrontApp')
 	.controller('NewProjectCtrl', ['$scope', '$window', '$location', '$cookies', 'MapListService', 
-    'MapService', 'ProfileServices',
-  	function ($scope, $window, $location, $cookies, MapListService, MapService, ProfileServices) {
+    'MapService', 'ProfileService', 'ProjectCatListService',
+  	function ($scope, $window, $location, $cookies, MapListService, 
+      MapService, ProfileService, ProjectCatListService) {
         
 
 
@@ -46,7 +47,36 @@ angular.module('uGisFrontApp')
         $scope.open_enddate = function() {
           $scope.popup_enddate.opened = true;
         };
-      
+
+        var _getOwnerUsers = function() {
+        ProfileService.get({user_cate: 'O'},
+            function success(response){
+                $scope.ownerUsers = response;
+                
+                console.log('Success:' + JSON.stringify(response));
+
+              },
+              function error(errorResponse){
+                console.log('Error:' + JSON.stringify(errorResponse));
+              }
+          );
+        };
+
+        var _getProjectCat = function() {
+        ProjectCatListService.query(
+            function success(response){
+                $scope.projectcats = response;
+                console.log('Success:' + JSON.stringify(response));
+
+              },
+              function error(errorResponse){
+                console.log('Error:' + JSON.stringify(errorResponse));
+              }
+          );
+        };
+
+        _getOwnerUsers();
+        _getProjectCat();
 
         var map = $window.L.map('mapid').setView([51.2, 7], 9);
 
@@ -57,7 +87,7 @@ angular.module('uGisFrontApp')
         }).addTo(map);
 
         var sidebar = $window.L.control.sidebar('sidebar', {
-            // closeButton: true,
+            closeButton: false,
             position: 'left'
         });
         map.addControl(sidebar);
@@ -147,7 +177,8 @@ angular.module('uGisFrontApp')
               center_x: center.center_x,
               center_y: center.center_y,
               area: $scope.projectAreaPoly,
-              // project_category: 1
+              owner: $scope.selectedOwner,
+              pro_cat: $scope.selectedProjectCat
             }, 
             function success(response){
                $location.path('/project');
@@ -157,6 +188,8 @@ angular.module('uGisFrontApp')
                 console.log('Error:' + JSON.stringify(errorResponse));
             });
         };
+
+        
 
 
   }]);
