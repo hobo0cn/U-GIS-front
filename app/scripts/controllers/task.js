@@ -1,31 +1,31 @@
 'use strict';
 
 
-angular.module('uGisFrontApp')
-.config(['flowFactoryProvider', 
-  function (flowFactoryProvider) {
-  flowFactoryProvider.defaults = {
+// angular.module('uGisFrontApp')
+// .config(['flowFactoryProvider', 
+//   function (flowFactoryProvider) {
+//   flowFactoryProvider.defaults = {
     
-    //target: 'http://192.168.66.146:3000/upload/',
-    target: 'http://112.74.189.43:3000/upload/',
-    permanentErrors: [404, 500, 501],
-    chunkRetryInterval: 5000,
-    testChunks:false,
-    chunkSize: 9007199254740992,
-    maxChunkRetries: 1,
-    simultaneousUploads: 4,
-  };
-  flowFactoryProvider.on('catchAll', function (event) {
-    console.log('catchAll', arguments);
+//     //target: 'http://192.168.66.146:3000/upload/',
+//     target: 'http://112.74.189.43:3000/upload/',
+//     permanentErrors: [404, 500, 501],
+//     chunkRetryInterval: 5000,
+//     testChunks:false,
+//     chunkSize: 9007199254740992,
+//     maxChunkRetries: 1,
+//     simultaneousUploads: 4,
+//   };
+//   flowFactoryProvider.on('catchAll', function (event) {
+//     console.log('catchAll', arguments);
 
-  });
-  flowFactoryProvider.on('complete', function (event) {
-    // SelectFilesServices.uploadComplete();
-    console.log('test', arguments);
-  });
-  // Can be used with different implementations of Flow.js
-  // flowFactoryProvider.factory = fustyFlowFactory;
-}]);
+//   });
+//   flowFactoryProvider.on('complete', function (event) {
+//     // SelectFilesServices.uploadComplete();
+//     console.log('test', arguments);
+//   });
+//   // Can be used with different implementations of Flow.js
+//   // flowFactoryProvider.factory = fustyFlowFactory;
+// }]);
 /**
  * @ngdoc function
  * @name uGisFrontApp.controller:AboutCtrl
@@ -207,20 +207,7 @@ angular.module('uGisFrontApp')
             );
       };
       
-      // $scope.uploadProcessImageComplete = function(map_format) {
-      //    //上传处理的geotiff文件后，通知后台进行处理，由后台把任务状态修改为‘D’
-      //     LayerUploadOrthphoto.post({mapid: mapId, layerid: layerId, 
-      //                               geotiff_file_name: 'odm_orthophoto.tif', 
-      //                               format: map_format
-      //                         },
-      //         function success(response){
-      //           console.log('Success:' + JSON.stringify(response));
-      //         },
-      //         function error(errorResponse){
-      //           console.log('Error:' + JSON.stringify(errorResponse));
-      //         }
-      //       );
-      // };
+     
       $scope.uploadOnClick = function(){
                 if ($scope.imageNum == 0){
                   return;
