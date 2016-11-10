@@ -240,6 +240,23 @@ uGisServices
 				  });
 
 		}
+	])
+	.factory('MapReportListService', ['$resource','$cookies',
+		function($resource, $cookies) {
+			return $resource(API_SERVER_PATH+'/map/:mapid/report/', 
+				{mapid: '@mapid'}, 
+				  {
+				  	post: {method: 'POST',  cache: false, isArray: false, 
+						 headers: {
+			                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
+			                }
+              		  },
+              		},
+				  {
+				  	stripTrailingSlashes: false
+				  });
+
+		}
 	]);
 
 

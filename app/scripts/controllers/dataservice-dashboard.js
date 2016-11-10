@@ -17,9 +17,10 @@ angular.module('uGisFrontApp')
           };
 
       $scope.imageUploadTarget = 'http://112.74.189.43:3000/upload/';
-      $scope.reportUploadTarget = 'http://localhost:8000/map/';
+      //$scope.reportUploadTarget = 'http://localhost:8000/map/';
+      $scope.reportUploadTarget = 'http://112.74.189.43:9000/map/';
       var flowObj;
-      $scope.report_file = null;
+      
 
       var _getTasks = function(){
            TaskService.get(
@@ -37,9 +38,7 @@ angular.module('uGisFrontApp')
 
       //完成数据处理任务
       $scope.completeServiceTask = function (projectid, taskid) {
-        //test
-        var r = $scope.report_file;
-
+       
           LayerService.update({mapid: projectid, layerid: taskid, status: 'D', 
                               map: projectid, stack_order: 1},
               function success(response){
