@@ -48,11 +48,11 @@
                 <div ng-show="tab.isSet(1)"      
                 >
 
-                  <div class="list-group" ng-repeat="task in tasks['FD']">
+                  <div class="list-group projectlist" ng-repeat="task in tasks['FD']">
                           <div class="col-md-12">
                             <div class="section">
-                              <div class="container">
-                                <div class="row">
+                              <div class="container-fluid">
+                                <div class="row projectitem">
                                   <div class="col-md-3">
                                    <!--  <i class="fa fa-3x fa-building-o pull-left"></i> -->
                                     <h4 class="list-group-item-heading">{{task.map_name}}</h4>
@@ -65,7 +65,7 @@
                                     <p class="list-group-item-text text-center">类别：{{task.project_cat}}</p>
                                     <p class="list-group-item-text text-center">业主：{{task.owner_username}}</p>
                                   </div>
-                                  <div class="col-md-3 text-center"
+                                  <div class="col-md-3 text-center operation-list"
                                   >
                           
                                     <div class="col-md-12"
@@ -144,7 +144,7 @@
 
                 <!--  Spec Tab's Content  -->
                 <div ng-show="tab.isSet(2)">
-                  <div class="list-group" ng-repeat="task in tasks['D']">
+                  <div class="list-group projectlist" ng-repeat="task in tasks['D']">
                           <div class="col-md-12">
                             <div class="section">
                               <div class="container">
