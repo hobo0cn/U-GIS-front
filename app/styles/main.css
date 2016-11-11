@@ -6956,6 +6956,10 @@ body {
 
 /******default start******/
 
+ol,
+ul {
+  list-style: none;
+}
 
 /******default end******/
 
