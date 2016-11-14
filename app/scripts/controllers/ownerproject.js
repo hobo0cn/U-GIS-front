@@ -7,6 +7,7 @@ angular.module('uGisFrontApp')
       var mapId = $routeParams.projectid;
       $scope.projectId = mapId;
       $scope.username = $cookies.get('EDM_username');
+      $scope.usercat =  $cookies.get('EDM_usercat');
 
       //TEST DATA
       $scope.reports = [];
@@ -15,6 +16,25 @@ angular.module('uGisFrontApp')
         $location.path("#/login")
       }
       var loadedLayerGroup = [];
+
+      $scope.getSecondNviText = function () {
+            if ($scope.usercat == "O") {
+                return  "已完成项目";
+            } 
+            else if ($scope.usercat == 'S'){
+                return  "数据管理任务";
+            }
+        };
+
+        $scope.getSecondNviPath = function () {
+            if ($scope.usercat == "O") {
+                return  "#/dashboard";
+            } 
+            else if ($scope.usercat == 'S'){
+                return  "#/datadashboard";
+            }
+        };
+
 
       var _getOwneProject = function(){
           
