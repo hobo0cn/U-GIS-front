@@ -9,7 +9,7 @@ angular.module('uGisFrontApp')
       $scope.search_txt = "";
 
       if ($scope.username == null) {
-        $location.path("#/login")
+        $location.path("#/login");
       }
 
       var _getOwneProjects = function(){
@@ -22,8 +22,14 @@ angular.module('uGisFrontApp')
               },
               function error(errorResponse){
                 console.log('Error:' + JSON.stringify(errorResponse));
+                if (errorResponse.status == 401) {
+                 
+                  $location.path("#/login");
+                }
               });
         };
+
+        
         $scope.searchProject = function(){
 
             if ($scope.search_txt=="") {

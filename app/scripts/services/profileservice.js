@@ -24,3 +24,23 @@ uGisAuthServices
 
 		}
 	]);
+
+uGisAuthServices
+	.factory('ProfileInfoService', ['$resource', '$cookies',
+		function($resource, $cookies) {
+			//TODO Just for test address
+			return $resource( API_SERVER_PATH+'/profile/:userid/', {userid: '@userid'}, {
+			  
+			  get: {method: 'GET',  cache: false, isArray: false,
+					headers: {
+			                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
+			                }
+
+			     },
+			},
+			  {
+			  	stripTrailingSlashes: false
+			  });
+
+		}
+	]);

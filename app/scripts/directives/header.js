@@ -2,7 +2,7 @@
 
 
 angular.module('uGisFrontApp')
-	   .directive('dashboardHeader', ['$cookies', function($cookies) {
+	   .directive('dashboardHeader', ['$cookies',  '$location', function($cookies,  $location) {
 	   		return {
 	   			restrict: 'A',
 	   			templateUrl: './views/dashboard-header.html',
@@ -23,9 +23,21 @@ angular.module('uGisFrontApp')
 	   						this.roler = '数据大师';
 	   						break;
 	   				}
+
+	   				this.logout = function() {
+	   					$cookies.remove('EDM_username');
+	   					$cookies.remove('EDM_userid');
+                		$cookies.remove('EDM_usertoken');
+                		$cookies.remove('EDM_usercat');
+                		$cookies.remove('EDM_isAutoLogin');
+                		$location.path("#/login");
+
+
+	   				};
 	   					
 	   			},
 	   			controllerAs: 'header'
+	   				
 
 	   		};
 	   }]);

@@ -30,6 +30,10 @@ angular.module('uGisFrontApp')
               },
               function error(errorResponse){
                 console.log('Error:' + JSON.stringify(errorResponse));
+                 if (errorResponse.status == 401) {
+                 
+                  $location.path("#/login");
+                }
               }
             );
         };
