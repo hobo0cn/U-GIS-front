@@ -6933,7 +6933,7 @@ body {
   position: relative;
   height: 23px;
   width: 150px;
-  top: -1px;
+  /*top: -1px;*/
   border: 0px;
 }
 #custom-search-form button {
@@ -7037,6 +7037,8 @@ ul {
   bottom: 0px;
   width: 100%;
   margin: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .page-main .row,
 .page-main .row .col-md-3,
