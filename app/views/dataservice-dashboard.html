@@ -1,114 +1,85 @@
 <!DOCTYPE html>
 <html ng-app="uGisFrontApp">
+
 <head>
-    
-  </head>
-  
+</head>
+
 <body ng-controller="DataServiceDashboardCtrl">
-   
     <div dashboard-header>
     </div>
-
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6"> 
-            
-            <div class="custom-page-header text-left">
-              <p>
-                数据任务管理
-              </p> 
+    <div class="page-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="custom-page-header text-left">
+                        <p>
+                            数据任务管理
+                        </p>
+                    </div>
+                </div>
             </div>
-
-          </div>
-         
         </div>
-      </div>
-
-
-  
-    <div class="dashboard-tabs">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12"> 
-            
-                  <!-- Tabs  -->
-              <section ng-controller="TabController as tab" 
-              >
-                <ul class="nav nav-tabs">
-                  <li ng-class="{ active:tab.isSet(1) }">
-                    <a href ng-click="tab.setTab(1)">待处理任务</a>
-                  </li>
-                  <li ng-class="{ active:tab.isSet(2) }">
-                    <a href ng-click="tab.setTab(2)">完成的任务</a>
-                  </li>
-                  
-                </ul>
-
-                <!--  已经完成项目列表  -->
-                <div ng-show="tab.isSet(1)"      
-                >
-
-                  <div class="list-group projectlist" ng-repeat="task in tasks['FD']">
-                          <div class="col-md-12">
-                            <div class="section">
-                              <div class="container-fluid">
-                                <div class="row projectitem">
-                                  <div class="col-md-3">
-                                   <!--  <i class="fa fa-3x fa-building-o pull-left"></i> -->
-                                    <h4 class="list-group-item-heading">{{task.map_name}}</h4>
-                                    <p class="list-group-item-text">任务名称: {{task.name}}</p>
-                                    <p class="list-group-item-text ">计划开始时间: {{task.start_date}}</p>
-                                    <p class="list-group-item-text ">计划结束时间: {{task.end_date}}</p>
-                                  </div>
-                                 
-                                  <div class="col-md-3">
-                                    <p class="list-group-item-text text-center">类别：{{task.project_cat}}</p>
-                                    <p class="list-group-item-text text-center">业主：{{task.owner_username}}</p>
-                                  </div>
-                                  <div class="col-md-3 text-center operation-list"
-                                  >
-                          
-                                    <div class="col-md-12"
-                                    flow-init="{
+        <div class="dashboard-tabs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Tabs  -->
+                        <section ng-controller="TabController as tab">
+                            <ul class="nav nav-tabs">
+                                <li ng-class="{ active:tab.isSet(1) }">
+                                    <a href ng-click="tab.setTab(1)">待处理任务</a>
+                                </li>
+                                <li ng-class="{ active:tab.isSet(2) }">
+                                    <a href ng-click="tab.setTab(2)">完成的任务</a>
+                                </li>
+                            </ul>
+                            <!--  已经完成项目列表  -->
+                            <div ng-show="tab.isSet(1)">
+                                <div class="list-group projectlist" ng-repeat="task in tasks['FD']">
+                                    <div class="col-md-12">
+                                        <div class="section">
+                                            <div class="container-fluid">
+                                                <div class="row projectitem">
+                                                    <div class="col-md-3">
+                                                        <!--  <i class="fa fa-3x fa-building-o pull-left"></i> -->
+                                                        <h4 class="list-group-item-heading">{{task.map_name}}</h4>
+                                                        <p class="list-group-item-text">任务名称: {{task.name}}</p>
+                                                        <p class="list-group-item-text ">计划开始时间: {{task.start_date}}</p>
+                                                        <p class="list-group-item-text ">计划结束时间: {{task.end_date}}</p>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <p class="list-group-item-text text-center">类别：{{task.project_cat}}</p>
+                                                        <p class="list-group-item-text text-center">业主：{{task.owner_username}}</p>
+                                                    </div>
+                                                    <div class="col-md-3 text-center operation-list">
+                                                        <div class="col-md-12" flow-init="{
                                                   query: {
                                                             project_id: task.map, 
                                                             task_id: task.id
                                                          },
                                                   target: imageUploadTarget
-                                                }"
-                                    flow-files-submitted="filesAdded($flow.files, $flow, 0)"
-                                    flow-complete="uploadProcessImageComplete(task.map, task.id)">
-                                     <span class="btn  btn-default btn-sm"  flow-btn ng-show="task.check_Orth" ng-click="setUploadConfig(task.map, task.id, 'Orthphoto')">上传正射影像图</span>
-                                    </div>
-
-                                    <div class="col-md-12"
-                                    flow-init="{
+                                                }" flow-files-submitted="filesAdded($flow.files, $flow, 0)" flow-complete="uploadProcessImageComplete(task.map, task.id)">
+                                                            <span class="btn  btn-default btn-sm" flow-btn ng-show="task.check_Orth" ng-click="setUploadConfig(task.map, task.id, 'Orthphoto')">上传正射影像图</span>
+                                                        </div>
+                                                        <div class="col-md-12" flow-init="{
                                                   query: {
                                                             project_id: task.map, 
                                                             task_id: task.id
                                                          },
                                                   target: imageUploadTarget
-                                                }"
-                                    flow-files-submitted="filesAdded($flow.files, $flow, 0)"
-                                    flow-complete="uploadProcessImageComplete(task.map, task.id)">
-                                      <span class="btn btn-default btn-sm" flow-btn  ng-show="task.check_Ele" ng-click="setUploadConfig(task.map, task.id, 'Elevation')">上传高程图</span>
-                                    </div>
-
-                                    <div class="col-md-12"
-                                    flow-init="{
+                                                }" flow-files-submitted="filesAdded($flow.files, $flow, 0)" flow-complete="uploadProcessImageComplete(task.map, task.id)">
+                                                            <span class="btn btn-default btn-sm" flow-btn ng-show="task.check_Ele" ng-click="setUploadConfig(task.map, task.id, 'Elevation')">上传高程图</span>
+                                                        </div>
+                                                        <div class="col-md-12" flow-init="{
                                                   query: {
                                                             project_id: task.map, 
                                                             task_id: task.id
                                                          },
                                                   target: imageUploadTarget
-                                                }"
-                                    flow-files-submitted="filesAdded($flow.files, $flow, 0)"
-                                    flow-complete="uploadProcessImageComplete(task.map, task.id)">
-                                     <span class="btn btn-default btn-sm" flow-btn  ng-show="task.check_NVDI" ng-click="setUploadConfig(task.map, task.id, 'NDVI')">上传NVDI图</span>
-                                    </div>
-
-                                    <div class="col-md-12"
-                                    flow-init="{
+                                                }" flow-files-submitted="filesAdded($flow.files, $flow, 0)" flow-complete="uploadProcessImageComplete(task.map, task.id)">
+                                                            <span class="btn btn-default btn-sm" flow-btn ng-show="task.check_NVDI" ng-click="setUploadConfig(task.map, task.id, 'NDVI')">上传NVDI图</span>
+                                                        </div>
+                                                        <div class="col-md-12" flow-init="{
                                                   query: {
                                                             project_id: task.map, 
                                                             task_id: task.id,
@@ -116,73 +87,60 @@
                                                             map: task.map
                                                          },
                                                   target: reportUploadTarget + task.map +'/report/'
-                                                }"
-                                    
-                                    flow-files-submitted="filesAdded($flow.files, $flow, 1)" 
-                                    >
-                                      <span class="btn btn-default btn-sm"  flow-btn ng-click="setUploadConfig(task.map, task.id, 'report')">上传报告</span>
-                                     </label>
-                                    
+                                                }" flow-files-submitted="filesAdded($flow.files, $flow, 1)">
+                                                            <span class="btn btn-default btn-sm" flow-btn ng-click="setUploadConfig(task.map, task.id, 'report')">上传报告</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <a class="btn btn-default  btn-sm" ng-click="completeServiceTask(task.map, task.id)">完成</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="col-md-12">
+                                                            <a class="btn btn-primary btn-sm" href="#/project/{{task.map}}">详情</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                     <div class="col-md-12">
-                                        <a class="btn btn-default  btn-sm" ng-click="completeServiceTask(task.map, task.id)">完成</a>
-                                   </div>
-                                  </div>
-
-                                  <div class="col-md-3">
-                                    <div class="col-md-12">
-                                        <a class="btn btn-primary btn-sm" href="#/project/{{task.map}}">详情</a>
-                                    </div>
-                                 </div>
-
-                              </div>
+                                </div>
                             </div>
-                          </div>
-                   </div>
-                  </div>
-                </div>
-
-                <!--  Spec Tab's Content  -->
-                <div ng-show="tab.isSet(2)">
-                  <div class="list-group projectlist" ng-repeat="task in tasks['D']">
-                          <div class="col-md-12">
-                            <div class="section">
-                              <div class="container">
-                                <div class="row">
-                                  <div class="col-md-4">
-                                   <!--  <i class="fa fa-3x fa-building-o pull-left"></i> -->
-                                    <h4 class="list-group-item-heading">{{task.map_name}}</h4>
-                                    <p class="list-group-item-text">任务名称: {{task.name}}</p>
-                                    <p class="list-group-item-text ">计划开始时间: {{task.start_date}}</p>
-                                    <p class="list-group-item-text ">计划结束时间: {{task.end_date}}</p>
-                                  </div>
-                                 
-                                  <div class="col-md-4">
-                                    <p class="list-group-item-text text-center">类别：{{task.project_cat}}</p>
-                                    <p class="list-group-item-text text-center">业主：{{task.owner_username}}</p>
-                                  </div>
-                                  
-                                  <div class="col-md-4">
+                            <!--  Spec Tab's Content  -->
+                            <div ng-show="tab.isSet(2)">
+                                <div class="list-group projectlist" ng-repeat="task in tasks['D']">
                                     <div class="col-md-12">
-                                        <a class="btn btn-primary btn-sm" href="#/project/{{task.map}}">详情</a>
+                                        <div class="section">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <!--  <i class="fa fa-3x fa-building-o pull-left"></i> -->
+                                                        <h4 class="list-group-item-heading">{{task.map_name}}</h4>
+                                                        <p class="list-group-item-text">任务名称: {{task.name}}</p>
+                                                        <p class="list-group-item-text ">计划开始时间: {{task.start_date}}</p>
+                                                        <p class="list-group-item-text ">计划结束时间: {{task.end_date}}</p>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <p class="list-group-item-text text-center">类别：{{task.project_cat}}</p>
+                                                        <p class="list-group-item-text text-center">业主：{{task.owner_username}}</p>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="col-md-12">
+                                                            <a class="btn btn-primary btn-sm" href="#/project/{{task.map}}">详情</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                 </div>
-
-                              </div>
+                                </div>
                             </div>
-                          </div>
-                        </div>
-                        </div>
+                        </section>
+                    </div>
                 </div>
-                
-              </section>
-            
-          </div>
+            </div>
         </div>
-      </div>
     </div>
+</body>
 
-
-
-  </body>
 </html>
