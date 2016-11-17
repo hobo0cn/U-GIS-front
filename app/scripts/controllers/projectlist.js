@@ -19,7 +19,7 @@ angular.module('uGisFrontApp')
       };
 
       $scope.refresh = function(){
-          MapListService.get({owner: $cookies.get('EDM_username')},
+          MapListService.get(
             function success(response){
                $scope.maps = response;    
             },

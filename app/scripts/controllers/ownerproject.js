@@ -16,6 +16,19 @@ angular.module('uGisFrontApp')
         $location.path("#/login")
       }
       var loadedLayerGroup = [];
+      // var loadedLayerGroup_1 = $window.L.layerGroup();
+      var geojsonStyle = {
+          // "color": "#ff7800",
+          // "weight": 5,
+          // "opacity": 0.01
+
+    fillColor: "#ff7800",
+    color: "#ff7800",
+    weight: 3,
+    opacity: 1,
+    fillOpacity: 0.001
+      };
+
 
       $scope.getSecondNviText = function () {
             if ($scope.usercat == "O") {
@@ -40,12 +53,18 @@ angular.module('uGisFrontApp')
           
            MapService.get({id: mapId},
               function success(response){
-                $scope.map = response;
-                $scope.reports = response.report_set;
-                map.panTo({lat: $scope.map.center_x, lng: $scope.map.center_y});
-                _loadResultLayers("Orthphoto");
                 console.log('Success:' + JSON.stringify(response));
 
+                $scope.map = response;
+                //默认加载正射影像图
+                $scope.reports = response.report_set;
+                _loadResultLayers("Orthphoto");
+                //绘制项目范围geojson
+                $scope.area_geojson  = JSON.parse(response.area );
+                $window.L.geoJson($scope.area_geojson, {
+                  style: geojsonStyle
+                }).addTo(map);
+                map.panTo({lat: $scope.map.center_x, lng: $scope.map.center_y});
               },
               function error(errorResponse){
                 console.log('Error:' + JSON.stringify(errorResponse));
@@ -66,6 +85,9 @@ angular.module('uGisFrontApp')
                   }).addTo(map);
 
           loadedLayerGroup.push(wmsLayer);
+
+          // loadedLayerGroup_1.addLayer(wmsLayer).addTo(map);
+
         };
 
         //加载当前项目所有可用任务结果
@@ -92,17 +114,68 @@ angular.module('uGisFrontApp')
           }
           loadedLayerGroup = [];
           _loadResultLayers(layer_format);
+          map.panTo({lat: $scope.map.center_x, lng: $scope.map.center_y});
         };
 
 
+        
         _getOwneProject();
 
-        var map = $window.L.map('mapid').setView([51.2, 7], 15);
-
-        $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
+        var map = $window.L.map('mapid').setView([39.58, 116.38], 15);
+       $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
           maxZoom: 30,
         
         }).addTo(map);
+
+        // var hybird = $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
+        //   maxZoom: 30,
+        // });
+        // var streets = $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaMap/MapServer/tile/{z}/{y}/{x}', {
+        //   maxZoom: 30,
+        // });
+        // var terrain = $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaTerrainMap/MapServer/tile/{z}/{y}/{x}', {
+        //   maxZoom: 30,
+        // });
+
+         // var map = $window.L.map('mapid', {
+         //  center: [39.58, 116.38],
+         //   zoom: 15,
+         //   layers: [streets, hybird]
+         // });
+
+         // var baseMaps = {
+         //      "街道图": streets,
+         //      // "地形图": terrain,
+         //      "混合图": hybird
+         //  };
+
+
+        // $window.L.control.layers(baseMaps).addTo(map);
+
+        //鼠标位置经纬度显示
+        $window.L.control.coordinates({
+            position:"bottomleft", //optional default "bootomright"
+            decimals:5, //optional default 4
+            decimalSeperator:".", //optional default "."
+            labelTemplateLat:"纬度: {y}", //optional default "Lat: {y}"
+            labelTemplateLng:"经度: {x}", //optional default "Lng: {x}"
+            enableUserInput: false, //optional default true
+            useDMS:true, //optional default false
+            useLatLngOrder: true, //ordering of labels, default false-> lng-lat
+            markerType: L.marker, //optional default L.marker
+            markerProps: {}, //optional default {},
+            // labelFormatterLng : funtion(lng){return lng+" lng"}, //optional default none,
+            // labelFormatterLat : funtion(lat){return lat+" lat"}, //optional default none
+             customLabelFcn: function(latLonObj, opts) { "Geohash: " + encodeGeoHash(latLonObj.lat, latLonObj.lng)} //optional default none
+        }).addTo(map);
+
+
+       
+
+        // $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
+        //   maxZoom: 30,
+        
+        // }).addTo(map);
 
 
 

@@ -78,7 +78,7 @@ angular.module('uGisFrontApp')
         _getOwnerUsers();
         _getProjectCat();
 
-        var map = $window.L.map('mapid').setView([51.2, 7], 9);
+        var map = $window.L.map('mapid').setView([39.58, 116.38], 9);
 
 
         $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
@@ -92,6 +92,24 @@ angular.module('uGisFrontApp')
         });
         map.addControl(sidebar);
         sidebar.show();
+
+        //鼠标位置经纬度显示
+        $window.L.control.coordinates({
+            position:"bottomright", //optional default "bootomright"
+            decimals:5, //optional default 4
+            decimalSeperator:".", //optional default "."
+            labelTemplateLat:"纬度: {y}", //optional default "Lat: {y}"
+            labelTemplateLng:"经度: {x}", //optional default "Lng: {x}"
+            enableUserInput: false, //optional default true
+            useDMS:true, //optional default false
+            useLatLngOrder: true, //ordering of labels, default false-> lng-lat
+            markerType: L.marker, //optional default L.marker
+            markerProps: {}, //optional default {},
+            // labelFormatterLng : funtion(lng){return lng+" lng"}, //optional default none,
+            // labelFormatterLat : funtion(lat){return lat+" lat"}, //optional default none
+             customLabelFcn: function(latLonObj, opts) { "Geohash: " + encodeGeoHash(latLonObj.lat, latLonObj.lng)} //optional default none
+        }).addTo(map);
+
 
         // Initialise the FeatureGroup to store editable layers
         var drawnItems = new $window.L.FeatureGroup();

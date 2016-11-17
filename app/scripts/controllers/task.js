@@ -128,7 +128,7 @@ angular.module('uGisFrontApp')
         
         
       
-        var map = $window.L.map('mapid').setView([51.2, 7], 12);
+        var map = $window.L.map('mapid').setView([39.58, 116.38], 12);
         _getMapInfo();
         _getTask();
         

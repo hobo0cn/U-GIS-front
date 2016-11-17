@@ -98,7 +98,7 @@ angular.module('uGisFrontApp')
         };
       
 
-        var map = $window.L.map('mapid').setView([51.2, 7], 9);
+        var map = $window.L.map('mapid').setView([39.58, 116.38], 9);
 
 
         $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
