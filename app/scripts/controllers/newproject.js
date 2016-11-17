@@ -148,6 +148,14 @@ angular.module('uGisFrontApp')
        // initialize control
        $scope.mes_control = $window.L.Control.measureAreaControl(mes_options, mes_layers).addTo(map);
         
+       //地址查询工具
+       var search = new L.Control.GeoSearch({
+          provider:  new L.GeoSearch.Provider.OpenStreetMap(),
+          position: 'topleft',
+          showMarker: true,
+          retainZoomLevel: false,
+        });
+        map.addControl(search);
 
         $(window).on("resize", function() {
           $("#mapid").height($(window).height())
