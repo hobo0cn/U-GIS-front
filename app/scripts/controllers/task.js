@@ -128,7 +128,8 @@ angular.module('uGisFrontApp')
         
         
       
-        var map = $window.L.map('mapid').setView([39.58, 116.38], 12);
+        var map = $window.L.map('mapid',{zoomControl: false}).setView([39.58, 116.38], 12);
+        map.addControl(new $window.L.control.zoom({position: 'bottomright'}));
         _getMapInfo();
         _getTask();
         

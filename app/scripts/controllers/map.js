@@ -14,7 +14,8 @@ angular.module('uGisFrontApp')
       $scope.uploadBtnTxt = 'Select images for analysis';
       var mapId = $routeParams.id;
       //map.remove();
-      var map = $window.L.map('mapid').setView([40.1965679722222, 116.167953], 15);
+      var map = $window.L.map('mapid',{zoomControl: false}).setView([40.1965679722222, 116.167953], 15);
+      map.addControl(new $window.L.control.zoom({position: 'bottomright'}));
       $scope.MapModel = {
                 map: map,
                 // basemaps: basemaps,

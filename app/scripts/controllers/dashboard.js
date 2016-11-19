@@ -69,8 +69,8 @@ angular.module('uGisFrontApp')
 
 
 
-	var map = $window.L.map('mapid').setView([22.5393964800083, 113.895525099986], 5);
-
+	var map = $window.L.map('mapid',{zoomControl: false}).setView([22.5393964800083, 113.895525099986], 5);
+	map.addControl(new $window.L.control.zoom({position: 'bottomright'}));
 	// $window.L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaG9ibzBjbiIsImEiOiJjaW9zNXRjdmowMDZldWxtNXM1OThqazczIn0.UTfVL-F6P3n0xM1G0KCipA', {
  //        maxZoom: 30,
      

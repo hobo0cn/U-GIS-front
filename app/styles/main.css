@@ -1,5 +1,6 @@
 /*@import url('https://fonts.googleapis.com/css?family=Lato|Lato');*/
 
+
 /*!
  * Default theme for Pingendo 
  * Homepage: http://pingendo.com  
@@ -6960,8 +6961,71 @@ ol,
 ul {
   list-style: none;
 }
+.nav-tabs {
+  margin-bottom: 5px;
+  border-bottom: 2px solid #dddddd;
+}
+.nav-tabs > li {
+  margin-bottom: -2px;
+  margin-right: 15px;
+}
+.nav-tabs > li > a {
+  border: 0px;
+  border-radius: 0;
+  color: #252829;
+  font-weight: bold;
+  border-bottom: 2px solid #dddddd;
+}
+.nav > li > a:hover,
+.nav > li > a:focus {
+  background-color: transparent;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  border: 0px;
+  border-bottom: 2px solid #13bde7;
+  color: #13bde7;
+}
+.table {
+  color: #667276;
+}
+.table > thead > tr > th {
+  font-size: 12px;
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  border: 0px;
+}
 
 /******default end******/
+
+
+/******map start******/
+
+.leaflet-bar {
+  box-shadow: none;
+  border-radius: 0px;
+}
+.leaflet-bar a.leaflet-control-zoom-in,
+.leaflet-bar a.leaflet-control-zoom-out {
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  opacity: 0.5;
+  border-radius: 4px;
+  font-size: 25px;
+  font-weight: 100;
+}
+.leaflet-bar a.leaflet-control-zoom-in {
+  margin-bottom: 3px;
+}
+
+/******map end******/
 
 
 /******page start******/
@@ -7060,6 +7124,11 @@ ul {
   margin-bottom: 10px;
   padding: 0px;
 }
+.projectlist .btn {
+  height: 22px;
+  line-height: 20px;
+  border-radius: 5px;
+}
 .projectlist .operation-list .btn-default,
 .projectlist .operation-list .btn-default:hover,
 .projectlist .operation-list .btn-default:focus {
@@ -7068,17 +7137,15 @@ ul {
 }
 .projectlist .btn-primary {
   width: 60px;
-  height: 20px;
-  line-height: 20px;
   padding: 0px;
   position: relative;
   top: 50%;
+  background-color: #13bde7;
+  color: #FFFFFF;
 }
 .projectlist .btn-primary,
 .projectlist .btn-primary:hover,
 .projectlist .btn-primary:focus {
-  color: #FFFFFF;
-  background-color: #13bde7;
   border: none;
 }
 .projectitem {}
@@ -7110,6 +7177,9 @@ ul {
 }
 .page-main>.breadcrumb-wrapper ol>li a {
   color: #96a2a5;
+}
+.page-main>.breadcrumb-wrapper ol>li.active a {
+  color: #13bde7;
 }
 .page-main>.breadcrumb-wrapper ol>li a:hover {
   text-decoration: none;
