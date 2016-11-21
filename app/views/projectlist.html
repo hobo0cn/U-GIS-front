@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <a class="btn btn-primary" ng-click="newProject()">创建新项目</a>
                 </div>
-                <div class="form-group">
+                <div class="form-group projectlist-treegrid-wrapper">
                     <div class="treegrid-title container-fluid">
                         <div class="col-xs-4 col-md-4">项目列表</div>
                         <div class="col-xs-1 col-md-1">飞手</div>
@@ -54,8 +54,8 @@
                                 <div class="container-fluid">
                                     <div class="row" ui-tree-handle class="tree-node tree-node-content">
                                         <div class="col-xs-4 col-md-4">
-                                            <a class="btn btn-success btn-xs" ng-if="map.layer_set && map.layer_set.length > 0" data-nodrag ng-click="toggle(this)">
-                                                <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed,'glyphicon-chevron-down': !collapsed}"></span>
+                                            <a class="collapse-handle" ng-if="map.layer_set && map.layer_set.length > 0" data-nodrag ng-click="toggle(this)">
+                                                <span class="glyphicon" ng-class="{'glyphicon-play': collapsed,'glyphicon-play down': !collapsed}"></span>
                                             </a>
                                             {{map.name}}</div>
                                         <div class="col-xs-1 col-md-1"></div>
@@ -63,8 +63,8 @@
                                         <div class="col-xs-2 col-md-2"></div>
                                         <div class="col-xs-1 col-md-1"></div>
                                         <div class="col-xs-2 col-md-2">
-                                            <a class="btn btn-primary btn-xs" data-nodrag ng-click="newTask(this)">
-                                                <span class="glyphicon glyphicon-plus"></span>
+                                            <a class="btn btn-info btn-xs" data-nodrag ng-click="newTask(this)">
+                                                <span class="glyphicon glyphicon-plus"></span> 新建
                                             </a>
                                             <a class="btn btn-info btn-xs" href="#/map/{{map.id}}">
                                                 <span class="glyphicon glyphicon-edit"> </span>
@@ -85,6 +85,12 @@
                                                 <div class="col-xs-2 col-md-2"></div>
                                                 <div class="col-xs-1 col-md-1"></div>
                                                 <div class="col-xs-2 col-md-2">
+                                                    <a class="btn btn-info btn-xs unvisible" data-nodrag ng-click="newTask(this)">
+                                                        <span class="glyphicon glyphicon-plus"></span> 新建
+                                                    </a>
+                                                    <a class="btn btn-info btn-xs unvisible" href="#/map/{{map.id}}">
+                                                        <span class="glyphicon glyphicon-edit"> </span>
+                                                    </a>
                                                     <a class="btn btn-danger btn-xs" data-nodrag ng-click="deleteTask(map.id, layer.id)">
                                                         <span class="glyphicon glyphicon-remove"> </span>
                                                     </a>

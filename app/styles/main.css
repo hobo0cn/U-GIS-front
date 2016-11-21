@@ -6962,6 +6962,20 @@ ol,
 ul {
   list-style: none;
 }
+.down {
+  transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  /* IE 9 */
+  -moz-transform: rotate(90deg);
+  /* Firefox */
+  -webkit-transform: rotate(90deg);
+  /* Safari 和 Chrome */
+  -o-transform: rotate(90deg);
+  /* Opera */
+}
+.unvisible {
+  visibility: hidden;
+}
 .nav-tabs {
   margin-bottom: 5px;
   border-bottom: 2px solid #dddddd;
@@ -7165,6 +7179,28 @@ ul {
 }
 .projectitem .list-group-item-text label {
   color: #667276;
+}
+.projectlist-treegrid-wrapper {
+  font-size: 14px;
+  color: #252829;
+  border: 1px solid #E2E2E2;
+}
+.projectlist-treegrid-wrapper .treegrid-title {
+  line-height: 22px;
+  background: #E2E2E2;
+}
+.projectlist-treegrid-wrapper li {
+  padding: 3px 0px;
+}
+.projectlist-treegrid-wrapper .angular-ui-tree-handle {
+  font-weight: normal;
+}
+.projectlist-treegrid-wrapper .collapse-handle {
+  color: #9A9A9A;
+  cursor: pointer;
+}
+.projectlist-treegrid-wrapper li > ol {
+  background: #f7f7f7;
 }
 
 /******projectlist end******/
