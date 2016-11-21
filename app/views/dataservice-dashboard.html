@@ -37,19 +37,19 @@
                             <div ng-show="tab.isSet(1)">
                                 <div class="list-group projectlist" ng-repeat="task in tasks['FD']">
                                     <div class="col-md-12">
-                                        <div class="section">
+                                        <div class="section projectitem">
                                             <div class="container-fluid">
-                                                <div class="row projectitem">
+                                                <div class="row">
                                                     <div class="col-md-3">
                                                         <!--  <i class="fa fa-3x fa-building-o pull-left"></i> -->
                                                         <h4 class="list-group-item-heading">{{task.map_name}}</h4>
-                                                        <p class="list-group-item-text">任务名称: {{task.name}}</p>
-                                                        <p class="list-group-item-text ">计划开始时间: {{task.start_date}}</p>
-                                                        <p class="list-group-item-text ">计划结束时间: {{task.end_date}}</p>
+                                                        <p class="list-group-item-text"><label>任务名称:</label> {{task.name}}</p>
+                                                        <p class="list-group-item-text "><label>计划开始时间:</label> {{task.start_date}}</p>
+                                                        <p class="list-group-item-text "><label>计划结束时间:</label> {{task.end_date}}</p>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <p class="list-group-item-text text-center">类别：{{task.project_cat}}</p>
-                                                        <p class="list-group-item-text text-center">业主：{{task.owner_username}}</p>
+                                                        <p class="list-group-item-text"><label>类别：</label>{{task.project_cat}}</p>
+                                                        <p class="list-group-item-text"><label>业主：</label>{{task.owner_username}}</p>
                                                     </div>
                                                     <div class="col-md-3 text-center operation-list">
                                                         <div class="col-md-12" flow-init="{
@@ -110,19 +110,19 @@
                             <div ng-show="tab.isSet(2)">
                                 <div class="list-group projectlist" ng-repeat="task in tasks['D']">
                                     <div class="col-md-12">
-                                        <div class="section">
+                                        <div class="section projectitem">
                                             <div class="container">
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <!--  <i class="fa fa-3x fa-building-o pull-left"></i> -->
                                                         <h4 class="list-group-item-heading">{{task.map_name}}</h4>
-                                                        <p class="list-group-item-text">任务名称: {{task.name}}</p>
-                                                        <p class="list-group-item-text ">计划开始时间: {{task.start_date}}</p>
-                                                        <p class="list-group-item-text ">计划结束时间: {{task.end_date}}</p>
+                                                        <p class="list-group-item-text"><label>任务名称: </label>{{task.name}}</p>
+                                                        <p class="list-group-item-text "><label>计划开始时间: </label>{{task.start_date}}</p>
+                                                        <p class="list-group-item-text "><label>计划结束时间: </label>{{task.end_date}}</p>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <p class="list-group-item-text text-center">类别：{{task.project_cat}}</p>
-                                                        <p class="list-group-item-text text-center">业主：{{task.owner_username}}</p>
+                                                        <p class="list-group-item-text"><label>类别：</label>{{task.project_cat}}</p>
+                                                        <p class="list-group-item-text"><label>业主：</label>{{task.owner_username}}</p>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="col-md-12">
