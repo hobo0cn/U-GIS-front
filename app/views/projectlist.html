@@ -8,7 +8,7 @@
 </head>
 
 <body ng-controller="ProjectListCtrl">
-    <div class="navbar navbar-default navbar-static-top">
+    <!-- <div class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
@@ -32,6 +32,8 @@
                 </ul>
             </div>
         </div>
+    </div> -->
+    <div dashboard-header>
     </div>
     <div class="page-main">
         <div class="container">
@@ -66,7 +68,7 @@
                                             <a class="btn btn-info btn-xs" data-nodrag ng-click="newTask(this)">
                                                 <span class="glyphicon glyphicon-plus"></span> 新建
                                             </a>
-                                            <a class="btn btn-info btn-xs" href="#/map/{{map.id}}">
+                                            <a class="btn btn-info btn-xs" href="#/project/{{map.id}}">
                                                 <span class="glyphicon glyphicon-edit"> </span>
                                             </a>
                                             <a class="btn btn-danger btn-xs" data-nodrag ng-click="deleteProject(map.id)">
@@ -88,7 +90,7 @@
                                                     <a class="btn btn-info btn-xs unvisible" data-nodrag ng-click="newTask(this)">
                                                         <span class="glyphicon glyphicon-plus"></span> 新建
                                                     </a>
-                                                    <a class="btn btn-info btn-xs unvisible" href="#/map/{{map.id}}">
+                                                    <a class="btn btn-info btn-xs unvisible" href="#/project/{{map.id}}">
                                                         <span class="glyphicon glyphicon-edit"> </span>
                                                     </a>
                                                     <a class="btn btn-danger btn-xs" data-nodrag ng-click="deleteTask(map.id, layer.id)">
