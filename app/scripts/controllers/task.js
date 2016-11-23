@@ -46,6 +46,7 @@ angular.module('uGisFrontApp')
 
      $scope.projectid = mapId;
      $scope.taskid = layerId;
+     $scope.usercat =  $cookies.get('EDM_usercat');
 
      $scope.isSelectFile = false;
 
@@ -58,6 +59,20 @@ angular.module('uGisFrontApp')
           };
 
      $scope.imageNum = 0;
+     var loadedLayerGroup = [];
+     var geojsonStyle = {
+          // "color": "#ff7800",
+          // "weight": 5,
+          // "opacity": 0.01
+
+          fillColor: "#ff7800",
+          color: "#ff7800",
+          weight: 3,
+          opacity: 1,
+          fillOpacity: 0.001
+      };
+
+      
      var _getMapInfo = function(){
            MapService.get({id: mapId},
               function success(response){
@@ -65,8 +80,14 @@ angular.module('uGisFrontApp')
                 if (!$scope.isSelectFile) {
                   map.panTo({lat: $scope.map.center_x, lng: $scope.map.center_y});
                 }
-                
-                _loadWMSLayers();
+                //绘制项目范围geojson
+                $scope.area_geojson  = JSON.parse(response.area );
+                $window.L.geoJson($scope.area_geojson, {
+                  style: geojsonStyle
+                }).addTo(map);
+
+
+                _loadResultLayers("Orthphoto");
                 console.log('Success:' + JSON.stringify(response));
 
                 
@@ -108,24 +129,42 @@ angular.module('uGisFrontApp')
                   crs: $window.L.CRS.GCJ02,
                   maxZoom: 30
                   }).addTo(map);
+          
+          loadedLayerGroup.push(wmsLayer);
+
         };
 
+        // //加载当前项目所有可用任务结果
+        // var _loadWMSLayers  = function(){
+
+        //   for (var i = $scope.map.layer_set.length - 1; i >= 0; i--) {
+        //     var maplayerimages = $scope.map.layer_set[i].maplayerimages;
+        //     //加载任务结果栅格数据
+        //     if(maplayerimages.length > 0){
+        //       $scope.currentViewLayerWMSName = maplayerimages[0].layer_wms_path;
+        //       _loadWMSLayer(maplayerimages[0].layer_wms_path);
+        //     }
+        //     //加载任务范围矢量数据？
+
+        //   }
+          
+        // };
         //加载当前项目所有可用任务结果
-        var _loadWMSLayers  = function(){
+        var _loadResultLayers  = function(layer_format){
 
           for (var i = $scope.map.layer_set.length - 1; i >= 0; i--) {
             var maplayerimages = $scope.map.layer_set[i].maplayerimages;
             //加载任务结果栅格数据
-            if(maplayerimages.length > 0){
-              $scope.currentViewLayerWMSName = maplayerimages[0].layer_wms_path;
-              _loadWMSLayer(maplayerimages[0].layer_wms_path);
+            for (var i = maplayerimages.length - 1; i >= 0; i--) {
+              if(maplayerimages[i].format == layer_format){
+                _loadWMSLayer(maplayerimages[i].layer_wms_path);
+              }
             }
             //加载任务范围矢量数据？
 
           }
           
         };
-        
         
       
         var map = $window.L.map('mapid',{zoomControl: false}).setView([39.58, 116.38], 12);
@@ -249,5 +288,45 @@ angular.module('uGisFrontApp')
           }
           return false;
       };
+
+     
+       $scope.isDataServiceTask = function() {
+        if ($scope.usercat == "P") {
+                return  false;
+            } 
+        else if ($scope.usercat == 'S'){
+                return  true;
+            }
+        return false;
+      };
+
+      $scope.getSecondNviText = function () {
+            if ($scope.usercat == "P") {
+                return  "飞行任务管理";
+            } 
+            else if ($scope.usercat == 'S'){
+                return  "数据任务管理";
+            }
+        };
+
+        $scope.getSecondNviPath = function () {
+            if ($scope.usercat == "P") {
+                return  "#/task";
+            } 
+            else if ($scope.usercat == 'S'){
+                return  "#/datadashboard";
+            }
+        };
+
+        //切换地图数据类型
+        $scope.swtichLoadMap  = function(layer_format){
+          //清除已经加载的层
+          for (var i = loadedLayerGroup.length - 1; i >= 0; i--) {
+            map.removeLayer(loadedLayerGroup[i]);
+          }
+          loadedLayerGroup = [];
+          _loadResultLayers(layer_format);
+          map.panTo({lat: $scope.map.center_x, lng: $scope.map.center_y});
+        };
 
   }]);

@@ -37,6 +37,9 @@ angular.module('uGisFrontApp')
             else if ($scope.usercat == 'S'){
                 return  "数据管理任务";
             }
+            else if($scope.usercat == 'A'){
+              return "项目管理";
+            }
         };
 
         $scope.getSecondNviPath = function () {
@@ -45,6 +48,9 @@ angular.module('uGisFrontApp')
             } 
             else if ($scope.usercat == 'S'){
                 return  "#/datadashboard";
+            }
+            else if($scope.usercat == 'A'){
+              return  "#/project";
             }
         };
 

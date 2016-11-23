@@ -16,8 +16,9 @@
         <div class="breadcrumb-wrapper">
             <ol>
                 <!-- <li class="btn-wrapper"><a href="#/task" class="btn btn-default">返回</a></li> -->
-                <li><a href="#/task">易云图</a></li>
-                <li><a href="#/task">任务管理</a></li>
+
+                <li><a href={{getSecondNviPath()}}>易云图</a></li>
+                <li><a href={{getSecondNviPath()}}>{{getSecondNviText()}}</a></li>
                 <li class="active"><a href="javascript:void(0);">详情</a></li>
                 <!-- <li><a href="#/task/{{projectId}}/{{taskid}}">详情</a></li> -->
             </ol>
@@ -43,9 +44,22 @@
                     <label for="projectName" class="control-label">计划结束日期: {{task.end_date}}</label>
                 </li>
             </ol>
+            <div class="module" ng-show="isDataServiceTask()">
+                <div class="module-title">成果</div>
+                <div class="module-content">
+                    <ul class="mapswitch-wrapper">
+                        <li class="active" ng-click="swtichLoadMap('Orthphoto')">
+                            <a class="sate" alt="影像图" class="img-thumbnail"></a><span>影像图</span></li>
+                        <li ng-click="swtichLoadMap('Elevation')">
+                            <a class="elevation" alt="高程图" class="img-thumbnail"></a><span>高程图</span></li>
+                        <li ng-click="swtichLoadMap('NDVI')">
+                            <a class="ndvi" alt="NDVI" class="img-thumbnail"></a><span>NDVI图</span></li>
+                    </ul>
+                </div>
+            </div>
             <hr ng-show="isShowUploadPhoto()">
-            <span class="btn btn-success" ng-click="uploadPhoto(projectid, taskid)"><i class="icon icon-file"></i>选择上传照片</span>
-            <a class="btn btn-info" ng-click="uploadOnClick()">提交处理<span class="badge">{{imageNum}}</span></a>
+            <span class="btn btn-success" ng-show="!isDataServiceTask()" ng-click="uploadPhoto(projectid, taskid)"><i class="icon icon-file"></i>选择上传照片</span>
+            <a class="btn btn-info" ng-show="!isDataServiceTask()" ng-click="uploadOnClick()">提交处理<span class="badge">{{imageNum}}</span></a>
             <!--  <hr ng-show="isShowUploadProcessImage()">
               <span class="btn btn-success" flow-btn ng-show="isShowUploadProcessImage()"><i class="icon icon-file"></i>选择处理结果</span>
               <a class="btn btn-small btn-success" ng-click="$flow.resume()" ng-show="$flow.files.length>0">提交</a>

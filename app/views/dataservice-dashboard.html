@@ -33,7 +33,7 @@
                                     <a href ng-click="tab.setTab(2)">完成的任务</a>
                                 </li>
                             </ul>
-                            <!--  已经完成项目列表  -->
+                            <!--  待处理任务列表  -->
                             <div ng-show="tab.isSet(1)">
                                 <div class="list-group projectlist" ng-repeat="task in tasks['FD']">
                                     <div class="col-md-12">
@@ -97,7 +97,7 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="col-md-12">
-                                                            <a class="btn btn-primary btn-sm" href="#/project/{{task.map}}">详情</a>
+                                                            <a class="btn btn-primary btn-sm" href="#/task/{{task.map}}/{{task.id}}">详情</a>
                                                         </div>
                                                     </div>
                                                 </div>
