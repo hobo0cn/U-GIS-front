@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('uGisFrontApp')
-.config(['flowFactoryProvider', 
+.config(['flowFactoryProvider',
   function (flowFactoryProvider) {
   flowFactoryProvider.defaults = {
-    
+
     //target: 'http://192.168.66.145:3000/upload/',
-    //target: 'http://112.74.189.43:3000/upload/',
+    target: 'http://112.74.189.43:3000/upload/',
     permanentErrors: [404, 500, 501],
     chunkRetryInterval: 5000,
     testChunks:false,
@@ -29,7 +29,7 @@ angular.module('uGisFrontApp')
 
 angular
     .module('uGisFrontApp')
-    .controller('UploadController', ['$scope',  '$location', '$routeParams', 
+    .controller('UploadController', ['$scope',  '$location', '$routeParams',
       'LayerStartAnalysis', 'SelectFilesServices',
         function($scope, $location, $routeParams, LayerStartAnalysis, SelectFilesServices) {
           var layerId = $routeParams.layerid;
@@ -39,7 +39,7 @@ angular
           $scope.config= {
             //TODO rerquest current map id
             query: {
-                      project_id: mapId, 
+                      project_id: mapId,
                       task_id: layerId
                    }
           };
@@ -87,11 +87,11 @@ angular
                   exifinfo.push(tags);
                   filenum++;
                   isFinishLoadFiles(files);
-                  
+
                   } catch (error) {
                     alert(error);
                   }
-      
+
                 };
                 reader.readAsArrayBuffer(files[i].file.slice(0, 128 * 1024));
             }
@@ -102,7 +102,7 @@ angular
 
         $scope.startAnalysis = function(){
            //TODO start analysis image process
-           LayerStartAnalysis.post({mapid: $scope.mapid, layerid: 1, 
+           LayerStartAnalysis.post({mapid: $scope.mapid, layerid: 1,
                                     exifinfo: exifJSON},
               function success(response){
                 var info = JSON.parse(JSON.stringify(response));
@@ -112,7 +112,7 @@ angular
                 //route to upload image page.
                 var mappath = '/task/' + $scope.mapid + '/' + $scope.layerid;
                 $location.path(mappath);
-            
+
               },
               function error(errorResponse){
                 console.log('Error:' + JSON.stringify(errorResponse));
