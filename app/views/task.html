@@ -1,66 +1,86 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+  <head>
     <title>任务</title>
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
     <!-- <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" /> -->
-    <link rel="stylesheet" href="../bower_components/leaflet-sidebar/src/L.Control.Sidebar.css" />
+    <link rel="stylesheet" href="../bower_components/leaflet-sidebar/src/L.Control.Sidebar.css"/>
     <!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.ie.css" /><![endif]-->
-</head>
+  </head>
 
-<body ng-app="uGisFrontApp" ng-controller="TaskCtrl">
-    <div dashboard-header>
-    </div>
+  <body ng-app="uGisFrontApp" ng-controller="TaskCtrl">
+    <div dashboard-header></div>
     <div class="page-main">
-        <div class="breadcrumb-wrapper">
-            <ol>
-                <!-- <li class="btn-wrapper"><a href="#/task" class="btn btn-default">返回</a></li> -->
+      <div class="breadcrumb-wrapper">
+        <ol>
+          <!-- <li class="btn-wrapper"><a href="#/task" class="btn btn-default">返回</a></li> -->
 
-                <li><a href={{getSecondNviPath()}}>易云图</a></li>
-                <li><a href={{getSecondNviPath()}}>{{getSecondNviText()}}</a></li>
-                <li class="active"><a href="javascript:void(0);">详情</a></li>
-                <!-- <li><a href="#/task/{{projectId}}/{{taskid}}">详情</a></li> -->
-            </ol>
+          <li>
+            <a href={{getSecondNviPath()}}>易云图</a>
+          </li>
+          <li>
+            <a href={{getSecondNviPath()}}>{{getSecondNviText()}}</a>
+          </li>
+          <li class="active">
+            <a href="javascript:void(0);">详情</a>
+          </li>
+          <!-- <li><a href="#/task/{{projectId}}/{{taskid}}">详情</a></li> -->
+        </ol>
+      </div>
+      <div class="sidebar-row side-left">
+        <ol class="text-left">
+          <li>
+            <label for="projectName" class="control-label">项目名称:
+              {{task.map_name}}</label>
+          </li>
+          <li>
+            <label for="projectName" class="control-label">任务名称:
+              {{task.name}}</label>
+          </li>
+          <li>
+            <label for="projectName" class="control-label">项目类别:
+              {{task.project_cat}}</label>
+          </li>
+          <li>
+            <label for="projectName" class="control-label">项目描述:
+              {{task.description}}</label>
+          </li>
+          <li>
+            <label for="projectName" class="control-label">计划开始日期:
+              {{task.start_date}}</label>
+          </li>
+          <li>
+            <label for="projectName" class="control-label">计划结束日期:
+              {{task.end_date}}</label>
+          </li>
+        </ol>
+
+        <div class="module" ng-show="isDataServiceTask()">
+          <div class="module-title">成果</div>
+          <div class="module-content">
+            <ul class="mapswitch-wrapper">
+              <li class="active" ng-click="swtichLoadMap('Orthphoto')">
+                <a class="sate" alt="影像图" class="img-thumbnail"></a>
+                <span>影像图</span>
+              </li>
+              <li ng-click="swtichLoadMap('Elevation')">
+                <a class="elevation" alt="高程图" class="img-thumbnail"></a>
+                <span>高程图</span>
+              </li>
+              <li ng-click="swtichLoadMap('NDVI')">
+                <a class="ndvi" alt="NDVI" class="img-thumbnail"></a>
+                <span>NDVI图</span>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="sidebar-row side-left">
-            <ol class="text-left">
-                <li>
-                    <label for="projectName" class="control-label">项目名称: {{task.map_name}}</label>
-                </li>
-                <li>
-                    <label for="projectName" class="control-label">任务名称: {{task.name}}</label>
-                </li>
-                <li>
-                    <label for="projectName" class="control-label">项目类别: {{task.project_cat}}</label>
-                </li>
-                <li>
-                    <label for="projectName" class="control-label">项目描述: {{task.description}}</label>
-                </li>
-                <li>
-                    <label for="projectName" class="control-label">计划开始日期: {{task.start_date}}</label>
-                </li>
-                <li>
-                    <label for="projectName" class="control-label">计划结束日期: {{task.end_date}}</label>
-                </li>
-            </ol>
-            <div class="module" ng-show="isDataServiceTask()">
-                <div class="module-title">成果</div>
-                <div class="module-content">
-                    <ul class="mapswitch-wrapper">
-                        <li class="active" ng-click="swtichLoadMap('Orthphoto')">
-                            <a class="sate" alt="影像图" class="img-thumbnail"></a><span>影像图</span></li>
-                        <li ng-click="swtichLoadMap('Elevation')">
-                            <a class="elevation" alt="高程图" class="img-thumbnail"></a><span>高程图</span></li>
-                        <li ng-click="swtichLoadMap('NDVI')">
-                            <a class="ndvi" alt="NDVI" class="img-thumbnail"></a><span>NDVI图</span></li>
-                    </ul>
-                </div>
-            </div>
-            <hr ng-show="isShowUploadPhoto()">
-            <span class="btn btn-success" ng-show="!isDataServiceTask()" ng-click="uploadPhoto(projectid, taskid)"><i class="icon icon-file"></i>选择上传照片</span>
-            <a class="btn btn-info" ng-show="!isDataServiceTask()" ng-click="uploadOnClick()">提交处理<span class="badge">{{imageNum}}</span></a>
-            <!--  <hr ng-show="isShowUploadProcessImage()">
+        <hr ng-show="isShowUploadPhoto()">
+        <span class="btn btn-success" ng-show="!isDataServiceTask()" ng-click="uploadPhoto(projectid, taskid)">
+          <i class="icon icon-file"></i>选择上传照片</span>
+        <a class="btn btn-info" ng-show="!isDataServiceTask()" ng-click="uploadOnClick()">提交处理<span class="badge">{{imageNum}}</span>
+        </a>
+        <!--  <hr ng-show="isShowUploadProcessImage()">
               <span class="btn btn-success" flow-btn ng-show="isShowUploadProcessImage()"><i class="icon icon-file"></i>选择处理结果</span>
               <a class="btn btn-small btn-success" ng-click="$flow.resume()" ng-show="$flow.files.length>0">提交</a>
               <table class="table table-hover table-bordered table-striped" flow-transfers ng-show="transfers.length>0">
@@ -68,7 +88,7 @@
               <tr>
                 <th>Name</th>
                 <th>Progress</th>
-             
+
 
               </tr>
               </thead>
@@ -86,24 +106,23 @@
                   </div>
                 </div>
                 </td>
-               
+
               </tr>
               </tbody>
             </table> -->
-            <div ng-repeat="image in upload_images" class="gallery-box">
-                <!-- class="gallery-box" -->
-                <span class="title">{{image.name}}</span>
-                <div class="thumbnail" ng-show="upload_images.length">
-                    <img src={{image.thumbnail_url}} height="200" width="200" />
-                </div>
-            </div>
+        <div ng-repeat="image in upload_images" class="gallery-box">
+          <!-- class="gallery-box" -->
+          <span class="title">{{image.name}}</span>
+          <div class="thumbnail" ng-show="upload_images.length">
+            <img src={{image.thumbnail_url}} height="200" width="200"/>
+          </div>
         </div>
-        <div class="main-content">
-            <div id="mapid" class="map"></div>
-        </div>
-        <div flow-init flow-object="flowObj" flow-complete="uploadComplete()">
-        </div>
+      </div>
+      <div class="main-content">
+        <div id="mapid" class="map"></div>
+      </div>
+      <div flow-init flow-object="flowObj" flow-complete="uploadComplete()"></div>
     </div>
-</body>
+  </body>
 
 </html>
