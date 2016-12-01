@@ -7028,8 +7028,8 @@ ul {
   box-shadow: none;
   border-radius: 0px;
 }
-.leaflet-bar a.leaflet-control-zoom-in,
-.leaflet-bar a.leaflet-control-zoom-out {
+.leaflet-control-zoom a.leaflet-control-zoom-in,
+.leaflet-control-zoom a.leaflet-control-zoom-out {
   width: 35px;
   height: 35px;
   line-height: 35px;
@@ -7134,13 +7134,16 @@ ul {
 /******projectlist start******/
 
 .projectlist {}
+.projectlist .btn {
+  height: 20px;
+  line-height: 19px;
+  margin-bottom: 10px;
+  padding: 0px;
+  font-weight: 500;
+}
 .projectlist .operation-list {}
 .projectlist .operation-list .btn-default {
   width: 100px;
-  height: 20px;
-  line-height: 20px;
-  margin-bottom: 10px;
-  padding: 0px;
 }
 .projectlist .btn {
   height: 22px;
@@ -7180,6 +7183,10 @@ ul {
 .projectitem .list-group-item-text label {
   color: #667276;
 }
+.projectitem .col-md-3.vertical-center {
+  padding-top: 60px;
+}
+.projectitem .btn-detail {}
 .projectlist-treegrid-wrapper {
   font-size: 14px;
   color: #252829;
