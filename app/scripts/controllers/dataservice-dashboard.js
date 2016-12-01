@@ -1,18 +1,18 @@
 
 'use strict';
 angular.module('uGisFrontApp')
-  .controller('DataServiceDashboardCtrl', ['$scope', '$location', '$cookies', 
-    'TaskService', 'LayerService', 'MapReportListService', 'SelectFilesServices', 
+  .controller('DataServiceDashboardCtrl', ['$scope', '$location', '$cookies',
+    'TaskService', 'LayerService', 'MapReportListService', 'SelectFilesServices',
     'LayerUploadOrthphoto','ngDialog',
-   function ($scope, $location, $cookies, 
+   function ($scope, $location, $cookies,
     TaskService, LayerService, MapReportListService, SelectFilesServices,
       LayerUploadOrthphoto, ngDialog) {
-  
+
       $scope.username = $cookies.get('EDM_username');
 
       $scope.config= {
             query: {
-                  
+
                    }
           };
 
@@ -20,7 +20,7 @@ angular.module('uGisFrontApp')
       //$scope.reportUploadTarget = 'http://localhost:8000/map/';
       $scope.reportUploadTarget = 'http://112.74.189.43:9000/map/';
       var flowObj;
-      
+
 
       var _getTasks = function(){
            TaskService.get(
@@ -31,7 +31,7 @@ angular.module('uGisFrontApp')
               function error(errorResponse){
                 console.log('Error:' + JSON.stringify(errorResponse));
                  if (errorResponse.status == 401) {
-                 
+
                   $location.path("#/login");
                 }
               }
@@ -42,8 +42,8 @@ angular.module('uGisFrontApp')
 
       //完成数据处理任务
       $scope.completeServiceTask = function (projectid, taskid) {
-       
-          LayerService.update({mapid: projectid, layerid: taskid, status: 'D', 
+
+          LayerService.update({mapid: projectid, layerid: taskid, status: 'D',
                               map: projectid, stack_order: 1},
               function success(response){
                 console.log('Success:' + JSON.stringify(response));
@@ -64,7 +64,7 @@ angular.module('uGisFrontApp')
         else {
         // $scope.config= {
         //     query: {
-        //               project_id: projectid, 
+        //               project_id: projectid,
         //               task_id: taskid
         //            },
         //     target: 'http://112.74.189.43:3000/upload/'
@@ -87,7 +87,7 @@ angular.module('uGisFrontApp')
                 closeByDocument: false,
                 scope: $scope,
                 className: 'ngdialog-theme-default',
-                controller: ['$scope', 'SelectFilesServices', 
+                controller: ['$scope', 'SelectFilesServices',
                     function($scope, SelectFilesServices) {
                     // controller logic
                     $scope.flowObj = SelectFilesServices.getFlow();
@@ -100,8 +100,8 @@ angular.module('uGisFrontApp')
        $scope.uploadProcessImageComplete = function(mapId, layerId) {
 
          //上传处理的geotiff文件后，通知后台进行处理，由后台把任务状态修改为‘D’
-          LayerUploadOrthphoto.post({mapid: mapId, layerid: layerId, 
-                                    geotiff_file_name: $scope.filename, 
+          LayerUploadOrthphoto.post({mapid: mapId, layerid: layerId,
+                                    geotiff_file_name: $scope.filename,
                                     format: $scope.map_format
                               },
               function success(response){
@@ -111,6 +111,20 @@ angular.module('uGisFrontApp')
                 console.log('Error:' + JSON.stringify(errorResponse));
               }
             );
+      };
+
+      $scope.getTaskResultType = function(task) {
+          var rtn = ""
+          if (task.check_Orth) {
+            rtn = rtn + " 正射影像";
+          }
+          if (task.check_Ele){
+            rtn = rtn + " 高程图";
+          }
+          if (task.check_NVDI){
+            rtn = rtn + " NVDI";
+          }
+          return rtn;
       };
 
 
