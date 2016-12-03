@@ -79,7 +79,7 @@ angular.module('uGisFrontApp')
         _getProjectCat();
 
         var map = $window.L.map('mapid',{zoomControl: false}).setView([39.58, 116.38], 9);
-        map.addControl(new $window.L.control.zoom({position: 'bottomright'}));
+        map.addControl(new $window.L.control.zoom({position: 'bottomright',zoomInText:'',zoomOutText:''}));
 
         $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
           maxZoom: 30,
