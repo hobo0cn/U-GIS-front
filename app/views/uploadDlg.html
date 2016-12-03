@@ -5,8 +5,8 @@
 </head>
 <body ng-controller="uploadDlgCtrl" ng-style="style">
 <div class="container-fluid">
-    <span class="label label-info">数据量: {{flowObj.getSize()}}</span>
-    <span class="label label-info">是否正在上传: {{flowObj.isUploading()}}</span>
+    <span class="label label-info">数据量: {{flowObj.getSize()/1024}}MB</span>
+    <span class="label label-info">是否正在上传: {{isUploading()}}</span>
   </p>
   <table class="table table-hover table-bordered table-striped">
     <thead>
