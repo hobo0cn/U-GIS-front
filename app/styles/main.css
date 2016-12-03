@@ -7323,7 +7323,9 @@ ul {
   bottom: 0px;
   width: 100%;
 }
-.side-left .module-projectinfo {}
+.side-left .module-projectinfo {
+  color: #13bde7;
+}
 .side-left .module-projectinfo .module-content {
   padding: 13px 0px 0px 18px;
 }
