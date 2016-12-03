@@ -186,7 +186,7 @@ angular.module('uGisFrontApp')
           highy = lngs[vertices.length - 1];
           var center_x = lowx + ((highx-lowx) / 2);
           var center_y = lowy + ((highy - lowy) / 2);
-          return {center_x, center_y};
+          return {"center_x": center_x, "center_y": center_y};
         };
 
         $scope.createProject = function() {
