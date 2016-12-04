@@ -92,6 +92,14 @@ angular.module('uGisFrontApp')
                     // controller logic
                     $scope.flowObj = SelectFilesServices.getFlow();
                     $scope.flowObj.upload();
+                    $scope.isUploading = function () {
+                    if ($scope.flowObj.isUploading()) {
+                      return "正在上传";
+                    }
+                    else {
+                      return "否";
+                    }
+                  }
 
                 }]
             });
