@@ -108,7 +108,9 @@
                         <!-- class="gallery-box" -->
                         <span class="title">{{image.name}}</span>
                         <div class="thumbnail" ng-show="upload_images.length">
+                            <a href={{image.image_url}} target="_blank">
                             <img src={{image.thumbnail_url}} height="200" width="200" />
+                            </a>
                         </div>
                     </div>
                 </div>
