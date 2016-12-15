@@ -8,13 +8,13 @@
  * Controller of the uGisFrontApp
  */
 angular.module('uGisFrontApp')
-	.controller('NewTaskCtrl', ['$scope', '$window', '$location', '$routeParams', 
-    '$cookies', 'LayerListService', 
+	.controller('NewTaskCtrl', ['$scope', '$window', '$location', '$routeParams',
+    '$cookies', 'LayerListService',
     'MapService', 'ProfileService',
-  	function ($scope, $window, $location, $routeParams, 
-      $cookies, LayerListService, 
+  	function ($scope, $window, $location, $routeParams,
+      $cookies, LayerListService,
       MapService, ProfileService) {
-     
+
      var mapId = $routeParams.projectid;
 
      var _getProjectArea = function(){
@@ -40,7 +40,7 @@ angular.module('uGisFrontApp')
         ProfileService.get({user_cate: 'S'},
             function success(response){
                 $scope.serviceUsers = response;
-                
+
                 console.log('Success:' + JSON.stringify(response));
 
               },
@@ -81,13 +81,13 @@ angular.module('uGisFrontApp')
       };
 
         $scope.dateOptions = {
-          
+
           formatYear: 'yy',
           maxDate: new Date(2020, 5, 22),
           minDate: new Date(),
           startingDay: 1
         };
-        
+
 
         $scope.open_startdate = function() {
           $scope.popup_startdate.opened = true;
@@ -96,14 +96,14 @@ angular.module('uGisFrontApp')
         $scope.open_enddate = function() {
           $scope.popup_enddate.opened = true;
         };
-      
+
 
         var map = $window.L.map('mapid',{zoomControl: false}).setView([39.58, 116.38], 9);
         map.addControl(new $window.L.control.zoom({position: 'bottomright',zoomInText:'',zoomOutText:''}));
 
-        $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
+        $window.L.tileLayer('http://map.yiyuntu.cn:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
           maxZoom: 30,
-        
+
         }).addTo(map);
 
         _getProjectArea();
@@ -117,7 +117,7 @@ angular.module('uGisFrontApp')
         });
         map.addControl(sidebar);
         sidebar.show();
-        
+
 
         // Initialise the FeatureGroup to store editable layers
         var drawnItems = new $window.L.FeatureGroup();
@@ -150,14 +150,14 @@ angular.module('uGisFrontApp')
         $(window).on("resize", function() {
           $("#mapid").height($(window).height())
                 .width($(window).width());
-          
+
           map.invalidateSize();
       }).trigger("resize");
 
-        
+
 
       $scope.createTask = function() {
-          
+
           LayerListService.post(
              {
               mapid: $scope.map.id,
@@ -166,7 +166,7 @@ angular.module('uGisFrontApp')
               start_date: $scope.startdate.getFullYear()+ '-'+ $scope.startdate.getMonth() + '-' + $scope.startdate.getDate(),
               end_date: $scope.enddate.getFullYear()+ '-'+ $scope.enddate.getMonth() + '-' + $scope.enddate.getDate(),
               area: $scope.taskAreaPoly,
-              stack_order: 1, 
+              stack_order: 1,
               //指派的飞行员、数据处理工程师
               service: $scope.selectedService,
               pilot: $scope.selectedPilot,
@@ -175,10 +175,10 @@ angular.module('uGisFrontApp')
               check_Ele: $scope.check_Ele,
               check_NVDI: $scope.check_NVDI
               // project_category: 1
-            }, 
+            },
             function success(response){
                $location.path('/project');
-        
+
             },
             function error(errorResponse){
                 console.log('Error:' + JSON.stringify(errorResponse));

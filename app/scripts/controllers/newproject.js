@@ -8,11 +8,11 @@
  * Controller of the uGisFrontApp
  */
 angular.module('uGisFrontApp')
-	.controller('NewProjectCtrl', ['$scope', '$window', '$location', '$cookies', 'MapListService', 
+	.controller('NewProjectCtrl', ['$scope', '$window', '$location', '$cookies', 'MapListService',
     'MapService', 'ProfileService', 'ProjectCatListService',
-  	function ($scope, $window, $location, $cookies, MapListService, 
+  	function ($scope, $window, $location, $cookies, MapListService,
       MapService, ProfileService, ProjectCatListService) {
-        
+
 
 
         $scope.start_today = function() {
@@ -32,13 +32,13 @@ angular.module('uGisFrontApp')
         };
 
         $scope.dateOptions = {
-          
+
           formatYear: 'yy',
           maxDate: new Date(2020, 5, 22),
           minDate: new Date(),
           startingDay: 1
         };
-        
+
 
         $scope.open_startdate = function() {
           $scope.popup_startdate.opened = true;
@@ -52,7 +52,7 @@ angular.module('uGisFrontApp')
         ProfileService.get({user_cate: 'O'},
             function success(response){
                 $scope.ownerUsers = response;
-                
+
                 console.log('Success:' + JSON.stringify(response));
 
               },
@@ -81,9 +81,9 @@ angular.module('uGisFrontApp')
         var map = $window.L.map('mapid',{zoomControl: false}).setView([39.58, 116.38], 9);
         map.addControl(new $window.L.control.zoom({position: 'bottomright',zoomInText:'',zoomOutText:''}));
 
-        $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
+        $window.L.tileLayer('http://map.yiyuntu.cn:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
           maxZoom: 30,
-        
+
         }).addTo(map);
 
         var sidebar = $window.L.control.sidebar('sidebar', {
@@ -139,7 +139,7 @@ angular.module('uGisFrontApp')
         });
 
         //测量面积工具
-        // setting options 
+        // setting options
        var mes_options = {geodesic: true};
 
        //input parameter is Array of layers
@@ -147,7 +147,7 @@ angular.module('uGisFrontApp')
 
        // initialize control
        $scope.mes_control = $window.L.Control.measureAreaControl(mes_options, mes_layers).addTo(map);
-        
+
        //地址查询工具
        var search = new L.Control.GeoSearch({
           provider:  new L.GeoSearch.Provider.OpenStreetMap(),
@@ -160,7 +160,7 @@ angular.module('uGisFrontApp')
         $(window).on("resize", function() {
           $("#mapid").height($(window).height())
                 .width($(window).width());
-          
+
           map.invalidateSize();
         }).trigger("resize");
 
@@ -190,9 +190,9 @@ angular.module('uGisFrontApp')
         };
 
         $scope.createProject = function() {
-          
+
           var center = polygonCenter($scope.projectShape);
-          
+
           MapListService.post(
              {
               name: $scope.projectName,
@@ -205,17 +205,17 @@ angular.module('uGisFrontApp')
               area: $scope.projectAreaPoly,
               owner: $scope.selectedOwner,
               pro_cat: $scope.selectedProjectCat
-            }, 
+            },
             function success(response){
                $location.path('/project');
-        
+
             },
             function error(errorResponse){
                 console.log('Error:' + JSON.stringify(errorResponse));
             });
         };
 
-        
+
 
 
   }]);

@@ -2,10 +2,10 @@
 
 
 // angular.module('uGisFrontApp')
-// .config(['flowFactoryProvider', 
+// .config(['flowFactoryProvider',
 //   function (flowFactoryProvider) {
 //   flowFactoryProvider.defaults = {
-    
+
 //     //target: 'http://192.168.66.146:3000/upload/',
 //     target: 'http://112.74.189.43:3000/upload/',
 //     permanentErrors: [404, 500, 501],
@@ -34,13 +34,13 @@
  * Controller of the uGisFrontApp
  */
 angular.module('uGisFrontApp')
-	.controller('TaskCtrl', ['$scope', '$window', '$location', '$routeParams', 
-    'ngDialog', '$cookies', 'LayerService', 
+	.controller('TaskCtrl', ['$scope', '$window', '$location', '$routeParams',
+    'ngDialog', '$cookies', 'LayerService',
     'MapService', 'SelectFilesServices', 'LayerUploadOrthphoto', 'LayerUploadImageDone',
-  	function ($scope, $window, $location, $routeParams, 
-      ngDialog, $cookies, LayerService, 
+  	function ($scope, $window, $location, $routeParams,
+      ngDialog, $cookies, LayerService,
       MapService, SelectFilesServices, LayerUploadOrthphoto, LayerUploadImageDone) {
-     
+
      var mapId = $routeParams.projectid;
      var layerId = $routeParams.taskid;
 
@@ -53,7 +53,7 @@ angular.module('uGisFrontApp')
      $scope.config= {
             //TODO rerquest current map id
             query: {
-                      project_id: mapId, 
+                      project_id: mapId,
                       task_id: layerId
                    }
           };
@@ -72,7 +72,7 @@ angular.module('uGisFrontApp')
           fillOpacity: 0.001
       };
 
-      
+
      var _getMapInfo = function(){
            MapService.get({id: mapId},
               function success(response){
@@ -90,7 +90,7 @@ angular.module('uGisFrontApp')
                 _loadResultLayers("Orthphoto");
                 console.log('Success:' + JSON.stringify(response));
 
-                
+
                 //_jugeMapStatus();
               },
               function error(errorResponse){
@@ -100,12 +100,12 @@ angular.module('uGisFrontApp')
         }
 
         var _getTask = function() {
-          
+
           LayerService.get(
              {
               mapid: mapId,
-              layerid: layerId 
-            }, 
+              layerid: layerId
+            },
             function success(response){
                $scope.task = response;
                //加载当前任务范围geojson
@@ -129,7 +129,7 @@ angular.module('uGisFrontApp')
                   crs: $window.L.CRS.GCJ02,
                   maxZoom: 30
                   }).addTo(map);
-          
+
           loadedLayerGroup.push(wmsLayer);
 
         };
@@ -147,7 +147,7 @@ angular.module('uGisFrontApp')
         //     //加载任务范围矢量数据？
 
         //   }
-          
+
         // };
         //加载当前项目所有可用任务结果
         var _loadResultLayers  = function(layer_format){
@@ -163,19 +163,19 @@ angular.module('uGisFrontApp')
             //加载任务范围矢量数据？
 
           }
-          
+
         };
-        
-      
+
+
         var map = $window.L.map('mapid',{zoomControl: false}).setView([39.58, 116.38], 12);
         map.addControl(new $window.L.control.zoom({position: 'bottomright',zoomInText:'',zoomOutText:''}));
         _getMapInfo();
         _getTask();
-        
 
-        $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
+
+        $window.L.tileLayer('http://map.yiyuntu.cn:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
           maxZoom: 30,
-        
+
         }).addTo(map);
 
 
@@ -186,12 +186,12 @@ angular.module('uGisFrontApp')
         // });
         // map.addControl(sidebar);
         // sidebar.show();
-        
+
          var selFilesInfo = SelectFilesServices.getFilesInfo();
          if(selFilesInfo.length>0){
             $scope.flowObj = SelectFilesServices.getFlow();
             $scope.imageNum = selFilesInfo.length;
-            
+
             //Set map center
             map.panTo({lat: selFilesInfo[0].lat, lng: selFilesInfo[0].lon});
             $scope.isSelectFile = true;
@@ -208,18 +208,18 @@ angular.module('uGisFrontApp')
                     color: 'red',
                     fillColor: '#f03',
                     fillOpacity: 0.1
-                  }).addTo(map).bindPopup(selFilesInfo[i].ImageDescription);  
+                  }).addTo(map).bindPopup(selFilesInfo[i].ImageDescription);
          }
 
 
       //   $(window).on("resize", function() {
       //     $("#mapid").height($(window).height())
       //           .width($(window).width());
-          
+
       //     map.invalidateSize();
       // }).trigger("resize");
 
-        
+
       $scope.uploadComplete = function() {
           //等待上传图片计数清零
           $scope.imageNum = 0;
@@ -234,7 +234,7 @@ angular.module('uGisFrontApp')
             );
 
          //上传图片完成后，设置任务状态到FD
-         LayerService.update({mapid: mapId, layerid: layerId, status: 'FD', 
+         LayerService.update({mapid: mapId, layerid: layerId, status: 'FD',
                               map: mapId, stack_order: 1},
               function success(response){
                 console.log('Success:' + JSON.stringify(response));
@@ -246,8 +246,8 @@ angular.module('uGisFrontApp')
               }
             );
       };
-      
-     
+
+
       $scope.uploadOnClick = function(){
                 if ($scope.imageNum == 0){
                   return;
@@ -258,7 +258,7 @@ angular.module('uGisFrontApp')
                 closeByDocument: false,
                 scope: $scope,
                 className: 'ngdialog-theme-default',
-                controller: ['$scope', 'SelectFilesServices', 
+                controller: ['$scope', 'SelectFilesServices',
                     function($scope, SelectFilesServices) {
                     // controller logic
                     $scope.flowObj = SelectFilesServices.getFlow();
@@ -270,10 +270,10 @@ angular.module('uGisFrontApp')
 
       $scope.uploadPhoto = function (projectid, taskid) {
          var uploadpath = '/upload/' + projectid + '/' + taskid;
-         $location.path(uploadpath); 
+         $location.path(uploadpath);
       };
 
-      $scope.isShowUploadProcessImage = function() {  
+      $scope.isShowUploadProcessImage = function() {
           if ($scope.task==null) return false;
           if ($scope.task.status == 'P') {
             return true;
@@ -289,11 +289,11 @@ angular.module('uGisFrontApp')
           return false;
       };
 
-     
+
        $scope.isDataServiceTask = function() {
         if ($scope.usercat == "P") {
                 return  false;
-            } 
+            }
         else if ($scope.usercat == 'S'){
                 return  true;
             }
@@ -303,7 +303,7 @@ angular.module('uGisFrontApp')
       $scope.getSecondNviText = function () {
             if ($scope.usercat == "P") {
                 return  "飞行任务管理";
-            } 
+            }
             else if ($scope.usercat == 'S'){
                 return  "数据任务管理";
             }
@@ -312,7 +312,7 @@ angular.module('uGisFrontApp')
         $scope.getSecondNviPath = function () {
             if ($scope.usercat == "P") {
                 return  "#/task";
-            } 
+            }
             else if ($scope.usercat == 'S'){
                 return  "#/datadashboard";
             }

@@ -1,8 +1,8 @@
 
 'use strict';
 angular.module('uGisFrontApp')
-  .controller('OwnerProjectCtrl', 
-    ['$scope', '$location', '$cookies', '$window', '$routeParams', 'MapService', 
+  .controller('OwnerProjectCtrl',
+    ['$scope', '$location', '$cookies', '$window', '$routeParams', 'MapService',
    function ($scope, $location, $cookies, $window, $routeParams, MapService) {
       var mapId = $routeParams.projectid;
       $scope.projectId = mapId;
@@ -11,7 +11,7 @@ angular.module('uGisFrontApp')
 
       //TEST DATA
       $scope.reports = [];
-      
+
       if ($scope.username == null) {
         $location.path("#/login")
       }
@@ -33,7 +33,7 @@ angular.module('uGisFrontApp')
       $scope.getSecondNviText = function () {
             if ($scope.usercat == "O") {
                 return  "已完成项目";
-            } 
+            }
             else if ($scope.usercat == 'S'){
                 return  "数据管理任务";
             }
@@ -45,7 +45,7 @@ angular.module('uGisFrontApp')
         $scope.getSecondNviPath = function () {
             if ($scope.usercat == "O") {
                 return  "#/dashboard";
-            } 
+            }
             else if ($scope.usercat == 'S'){
                 return  "#/datadashboard";
             }
@@ -56,7 +56,7 @@ angular.module('uGisFrontApp')
 
 
       var _getOwneProject = function(){
-          
+
            MapService.get({id: mapId},
               function success(response){
                 console.log('Success:' + JSON.stringify(response));
@@ -76,7 +76,7 @@ angular.module('uGisFrontApp')
                 console.log('Error:' + JSON.stringify(errorResponse));
               }
             );
-        
+
         };
 
 
@@ -110,7 +110,7 @@ angular.module('uGisFrontApp')
             //加载任务范围矢量数据？
 
           }
-          
+
         };
         //切换地图数据类型
         $scope.swtichLoadMap  = function(layer_format){
@@ -124,14 +124,14 @@ angular.module('uGisFrontApp')
         };
 
 
-        
+
         _getOwneProject();
 
         var map = $window.L.map('mapid',{zoomControl: false}).setView([39.58, 116.38], 15);
         map.addControl(new $window.L.control.zoom({position: 'bottomright',zoomInText:'',zoomOutText:''}));
-       $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
+       $window.L.tileLayer('http://map.yiyuntu.cn:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
           maxZoom: 30,
-        
+
         }).addTo(map);
 
         // var hybird = $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
@@ -177,11 +177,11 @@ angular.module('uGisFrontApp')
         // }).addTo(map);
 
 
-       
+
 
         // $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
         //   maxZoom: 30,
-        
+
         // }).addTo(map);
 
 
@@ -197,14 +197,14 @@ angular.module('uGisFrontApp')
       //    $(window).on("resize", function() {
       //     $("#mapid").height($(window).height())
       //           .width($(window).width());
-          
+
       //     map.invalidateSize();
       // }).trigger("resize");
-      
+
    // $(window).on("resize", function() {
    //        $("#mapid").height($(window).height()-70)
    //              .width($(window).width()*83.33333333/100);
-          
+
    //        map.invalidateSize();
    //    }).trigger("resize");
 
