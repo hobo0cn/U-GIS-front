@@ -7031,9 +7031,8 @@ ul {
 .leaflet-bar a:first-child {
   border: 0px;
 }
-.leaflet-control-zoom {}
-.leaflet-control-zoom a,
-.leaflet-control-zoom a:hover {
+.leaflet-bar a.leaflet-control-zoom-in,.leaflet-bar a.leaflet-control-zoom-out,
+.leaflet-bar a.leaflet-control-zoom-in:hover,.leaflet-bar a.leaflet-control-zoom-out:hover {
   position: relative;
   display: block;
   width: 40px;
@@ -7044,9 +7043,9 @@ ul {
   border-radius: 3px;
   -webkit-transition: width .2s;
   transition: width .2s;
-  opacity: 0.7;
+  opacity: 0.8;
 }
-.leaflet-control-zoom .leaflet-control-zoom-in::after {
+.leaflet-bar a.leaflet-control-zoom-in::after {
   content: '';
   position: absolute;
   display: block;
@@ -7056,14 +7055,14 @@ ul {
   background: #b1b1b1;
   width: 70%;
 }
-.leaflet-control-zoom a.leaflet-control-zoom-in,
-.leaflet-control-zoom a:hover.leaflet-control-zoom-in {
+.leaflet-bar a.leaflet-control-zoom-in,
+.leaflet-bar a.leaflet-control-zoom-in:hover{
   border-radius: 1px 1px 0px 0px;
   margin-bottom: 0px;
   background: url("../images/map/tools/zoomin.png") center;
 }
-.leaflet-control-zoom a.leaflet-control-zoom-out,
-.leaflet-control-zoom a:hover.leaflet-control-zoom-out {
+.leaflet-bar a.leaflet-control-zoom-out,
+.leaflet-bar a.leaflet-control-zoom-out:hover {
   border-radius: 0px 0px 1px 1px;
   background: url("../images/map/tools/zoomout.png") center;
 }
