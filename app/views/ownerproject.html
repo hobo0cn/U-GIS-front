@@ -38,7 +38,35 @@
                     </ul>
                 </div>
             </div>
-            <div class="module report">
+
+            <div class="module">
+                <div class="module-title">标注工具</div>
+                <div class="module-content">
+                    <ul class="mapswitch-wrapper">
+                        <li class="active" ng-click="startDrawMarker()">
+                            <a class="sate" alt="点" class="img-thumbnail"></a><span>点</span></li>
+                        <li ng-click="startDrawPolyline()">
+                            <a class="elevation" alt="线" class="img-thumbnail"></a><span>线</span></li>
+                        <li ng-click="startDrawPolygon()">
+                            <a class="ndvi" alt="多边形" class="img-thumbnail"></a><span>多边形</span></li>
+
+                        <div class="module-Annotation">
+                            <div class="col-md-12" ng-show="isShowMarkerPanel()">
+                              <div class="col-md-4">
+                                坐标
+                              </div>
+                              <div class="col-md-8">
+                                {{markerPos}}
+                              </div>
+
+                            </div>
+
+                        </div>
+                    </ul>
+                </div>
+            </div>
+
+           <!--  <div class="module report">
                 <div class="module-title">报告</div>
                 <div class="module-content">
                     <table class="table" ng-repeat="report in reports">
@@ -51,7 +79,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="main-content">
             <div id="mapid" class="map"></div>

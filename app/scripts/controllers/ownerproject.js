@@ -79,8 +79,6 @@ angular.module('uGisFrontApp')
 
         };
 
-
-
         var _loadWMSLayer  = function(layerName){
           var wmsLayer = $window.L.tileLayer.wms('http://112.74.189.43:8080/geoserver/wsgeotiff/wms?', {
                   layers: layerName,
@@ -112,6 +110,53 @@ angular.module('uGisFrontApp')
           }
 
         };
+
+        //显示图元编辑面板
+        var isShowFeaturePanel = false;
+        var panelType = 0; //1-点  2-线  3-面  0-不显示
+        $scope.markerPos = "0.0, 0.0";
+        $scope.polylineLen = 0;
+        $scope.polygonArea = 0;
+        var _showFeaturePanel = function(targetFeature){
+            if (targetFeature instanceof L.Marker) {
+                panelType = 1;
+                //获取位置点经纬度
+
+            }
+            else if (targetFeature instanceof L.Polyline) {
+                panelType = 2;
+                //获取线长度
+            }
+            else if (targetFeature instanceof L.Polygon) {
+                panelType = 3;
+                //获取面积数值
+
+            }
+
+            return panelType;
+        };
+
+        $scope.isShowMarkerPanel = function() {
+            if (panelType == 1) {
+              return true;
+            }
+            return false;
+        };
+
+        $scope.isShowPolylinePanel = function() {
+            if (panelType == 2) {
+              return true;
+            }
+            return false;
+        };
+
+        $scope.isShowPolygonPanel = function() {
+            if (panelType == 3) {
+              return true;
+            }
+            return false;
+        };
+
         //切换地图数据类型
         $scope.swtichLoadMap  = function(layer_format){
           //清除已经加载的层
@@ -123,17 +168,108 @@ angular.module('uGisFrontApp')
           map.panTo({lat: $scope.map.center_x, lng: $scope.map.center_y});
         };
 
+        $scope.startDrawMarker = function() {
+            //画Marker
+            $scope.marker = new $window.L.Draw.Marker($scope.mapCtrl, $scope.drawControl.options);
+            $scope.marker.enable();
+        };
+
+        $scope.startDrawPolyline = function() {
+            //画线
+            $scope.polyline = new $window.L.Draw.Polyline($scope.mapCtrl, $scope.drawControl.options);
+            $scope.polyline.enable();
+        };
+
+        $scope.startDrawPolygon = function() {
+            //画多边形
+            $scope.polygon = new $window.L.Draw.Polygon($scope.mapCtrl, $scope.drawControl.options);
+            $scope.polygon.enable();
+        };
 
 
         _getOwneProject();
 
         var map = $window.L.map('mapid',{zoomControl: false}).setView([39.58, 116.38], 15);
         map.addControl(new $window.L.control.zoom({position: 'bottomright',zoomInText:'',zoomOutText:''}));
-       $window.L.tileLayer('http://map.yiyuntu.cn:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
+       $window.L.tileLayer('http://60.205.127.41:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
           maxZoom: 30,
 
         }).addTo(map);
+       $scope.mapCtrl = map;
 
+
+       // Initialise the FeatureGroup to store editable layers
+        var drawnItems = new $window.L.FeatureGroup();
+        map.addLayer(drawnItems);
+
+        // Initialise the draw control and pass it the FeatureGroup of editable layers
+        $scope.drawControl = new $window.L.Control.Draw({
+            draw: {
+              polyline: false,
+              marker: false,
+              rectangle: false,
+              circle: false,
+              polygon: false
+            },
+            edit: {
+                featureGroup: drawnItems
+            }
+        });
+        map.addControl($scope.drawControl);
+
+        var feature_list = [];
+        var editingFeature = null;
+
+        map.on('draw:created', function (e) {
+            var type = e.layerType,
+                layer = e.layer;
+            if (type == 'marker') {
+              $scope.marker.disable();
+            }
+            if (type == 'polyline') {
+              $scope.polyline.disable();
+            }
+            if (type == 'polygon') {
+               $scope.polygon.disable();
+            }
+
+            // Do whatever you want with the layer.
+            // e.type will be the type of layer that has been draw (polyline, marker, polygon, rectangle, circle)
+            // E.g. add it to the map
+            layer.addTo(map);
+            layer.on({
+            'mouseover': function (e) {
+                // highlight(e.target);
+            },
+            'mouseout': function (e) {
+                // dehighlight(e.target);
+            },
+            'click': function (e) {
+              // layer.editing.enable();
+              if (editingFeature) {
+                editingFeature.editing.disable();
+              }
+              var target = e.target;
+              target.editing.enable();
+              editingFeature = target;
+              //TODO 触发侧边栏点（位置）、线（长度）、面（面积）测量显示，并且显示删除按键
+              _showFeaturePanel(target);
+            }
+        });
+            feature_list.push(layer);
+            // layer.editing.enable();
+        });
+
+         map.on('click', function (e) {
+            // var type = e.layerType,
+            //     layer = e.layer;
+
+
+            // Do whatever you want with the layer.
+            // e.type will be the type of layer that has been draw (polyline, marker, polygon, rectangle, circle)
+            // E.g. add it to the map
+
+        });
         // var hybird = $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
         //   maxZoom: 30,
         // });

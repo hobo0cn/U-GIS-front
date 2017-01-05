@@ -22,7 +22,7 @@
     "angular-ui-tree": "^2.17.0",
     "leaflet-sidebar": "^0.1.9",
     "ui-bootstrap": "^1.3.3",
-    "leaflet-draw": "^0.3.0",
+    "leaflet-draw": "https://github.com/hobo0cn/Leaflet.draw.git",
     "angular-recaptcha": "^3.0.4",
     "leaflet-gcj02": "https://github.com/hobo0cn/leaflet-gcj02.git",
     "Leaflet.MeasureAreaControl": "https://github.com/zvaraondrej/Leaflet.MeasureAreaControl.git",
