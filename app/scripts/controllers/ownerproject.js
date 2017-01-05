@@ -8,6 +8,7 @@ angular.module('uGisFrontApp')
       $scope.projectId = mapId;
       $scope.username = $cookies.get('EDM_username');
       $scope.usercat =  $cookies.get('EDM_usercat');
+      var panelType=0;
 
       //TEST DATA
       $scope.reports = [];
@@ -118,8 +119,8 @@ angular.module('uGisFrontApp')
         $scope.polylineLen = 0;
         $scope.polygonArea = 0;
         var _showFeaturePanel = function(targetFeature){
-            if (targetFeature instanceof L.Marker) {
-                panelType = 1;
+            if (targetFeature instanceof L.Polygon) {
+                 panelType = 3;
                 //获取位置点经纬度
 
             }
@@ -127,12 +128,12 @@ angular.module('uGisFrontApp')
                 panelType = 2;
                 //获取线长度
             }
-            else if (targetFeature instanceof L.Polygon) {
-                panelType = 3;
+            else if (targetFeature instanceof L.Marker) {
+               panelType = 1;
                 //获取面积数值
 
             }
-
+            console.log(panelType);
             return panelType;
         };
 
@@ -253,7 +254,7 @@ angular.module('uGisFrontApp')
               target.editing.enable();
               editingFeature = target;
               //TODO 触发侧边栏点（位置）、线（长度）、面（面积）测量显示，并且显示删除按键
-              _showFeaturePanel(target);
+              $scope.$apply(_showFeaturePanel(target));
             }
         });
             feature_list.push(layer);

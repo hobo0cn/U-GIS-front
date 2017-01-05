@@ -49,8 +49,8 @@
                             <a class="elevation" alt="线" class="img-thumbnail"></a><span>线</span></li>
                         <li ng-click="startDrawPolygon()">
                             <a class="ndvi" alt="多边形" class="img-thumbnail"></a><span>多边形</span></li>
-
-                        <div class="module-Annotation">
+                    </ul>
+                                            <div class="module-Annotation">
                             <div class="col-md-12" ng-show="isShowMarkerPanel()">
                               <div class="col-md-4">
                                 坐标
@@ -60,9 +60,23 @@
                               </div>
 
                             </div>
-
+                            <div class="col-md-12" ng-show="isShowPolylinePanel()">
+                              <div class="col-md-4">
+                                线坐标
+                              </div>
+                              <div class="col-md-8">
+                                {{markerPos}}
+                              </div>
+                            </div>
+                           <div class="col-md-12" ng-show="isShowPolygonPanel()">
+                              <div class="col-md-4">
+                                面坐标
+                              </div>
+                              <div class="col-md-8">
+                                {{markerPos}}
+                              </div>
+                            </div>
                         </div>
-                    </ul>
                 </div>
             </div>
 
