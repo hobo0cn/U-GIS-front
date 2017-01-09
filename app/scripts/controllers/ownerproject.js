@@ -116,24 +116,45 @@ angular.module('uGisFrontApp')
         var isShowFeaturePanel = false;
         var panelType = 0; //1-点  2-线  3-面  0-不显示
         $scope.markerPos = "0.0, 0.0";
-        $scope.polylineLen = 0;
-        $scope.polygonArea = 0;
+        $scope.polylineLen = "";
+        $scope.polygonArea = "";
+
+        var _round = function(num, len) {
+                   return Math.round(num*(Math.pow(10, len)))/(Math.pow(10, len));
+               };
+        var strLatLng = function(latlng) {
+            return "("+_round(latlng.lat, 6)+", "+_round(latlng.lng, 6)+")";
+        };
+
         var _showFeaturePanel = function(targetFeature){
             if (targetFeature instanceof L.Polygon) {
-                 panelType = 3;
-                //获取位置点经纬度
-
+                panelType = 3;
+               //获取面积数值
+               var latlngs = targetFeature._defaultShape ? targetFeature._defaultShape() : targetFeature.getLatLngs(),
+                    area = L.GeometryUtil.geodesicArea(latlngs);
+                $scope.polygonArea =  "面积: "+L.GeometryUtil.readableArea(area, true);
             }
             else if (targetFeature instanceof L.Polyline) {
                 panelType = 2;
                 //获取线长度
+                var latlngs = targetFeature._defaultShape ? targetFeature._defaultShape() : targetFeature.getLatLngs(),
+                    distance = 0;
+                if (latlngs.length < 2) {
+                    $scope.polylineLen = "距离: N/A";
+                } else {
+                    for (var i = 0; i < latlngs.length-1; i++) {
+                        distance += latlngs[i].distanceTo(latlngs[i+1]);
+                    }
+                    $scope.polylineLen = "距离: "+_round(distance, 2)+" 米";
+                }
             }
             else if (targetFeature instanceof L.Marker) {
-               panelType = 1;
-                //获取面积数值
+                panelType = 1;
+               //获取位置点经纬度
+               $scope.markerPos = strLatLng(targetFeature.getLatLng());
 
             }
-            console.log(panelType);
+            // console.log(panelType);
             return panelType;
         };
 
@@ -156,6 +177,17 @@ angular.module('uGisFrontApp')
               return true;
             }
             return false;
+        };
+        $scope.isShowDelButton = function() {
+            if (panelType != 0) {
+              return true;
+            }
+            return false;
+        };
+        $scope.onDelFeatureClick = function() {
+          //TODO 删除图元
+          drawnItems.removeLayer(editingFeature);
+          editingFeature = null;
         };
 
         //切换地图数据类型
@@ -213,13 +245,15 @@ angular.module('uGisFrontApp')
               polygon: false
             },
             edit: {
-                featureGroup: drawnItems
+                featureGroup: drawnItems,
+                remove: true
             }
         });
         map.addControl($scope.drawControl);
 
         var feature_list = [];
         var editingFeature = null;
+        var editingFeatureLayer = null;
 
         map.on('draw:created', function (e) {
             var type = e.layerType,
@@ -238,12 +272,17 @@ angular.module('uGisFrontApp')
             // e.type will be the type of layer that has been draw (polyline, marker, polygon, rectangle, circle)
             // E.g. add it to the map
             layer.addTo(map);
+
             layer.on({
             'mouseover': function (e) {
                 // highlight(e.target);
             },
-            'mouseout': function (e) {
+            'moveend': function (e) {
                 // dehighlight(e.target);
+                var target = e.target;
+                //触发侧边栏点（位置）、线（长度）、面（面积）测量显示，并且显示删除按键
+                $scope.$apply(_showFeaturePanel(target));
+                //TODO 编辑图元，调用更新API
             },
             'click': function (e) {
               // layer.editing.enable();
@@ -253,12 +292,14 @@ angular.module('uGisFrontApp')
               var target = e.target;
               target.editing.enable();
               editingFeature = target;
-              //TODO 触发侧边栏点（位置）、线（长度）、面（面积）测量显示，并且显示删除按键
+
+              // 触发侧边栏点（位置）、线（长度）、面（面积）测量显示，并且显示删除按键
               $scope.$apply(_showFeaturePanel(target));
             }
         });
             feature_list.push(layer);
             // layer.editing.enable();
+            //TODO 创建时图元时，调用API保存图元
         });
 
          map.on('click', function (e) {
@@ -271,6 +312,19 @@ angular.module('uGisFrontApp')
             // E.g. add it to the map
 
         });
+
+        map.on('draw:editvertex', function (e) {
+           var type = e.layerType,
+               layer = e.layer;
+
+           var target = e.poly;
+
+           $scope.$apply(_showFeaturePanel(target));
+
+           //TODO 编辑图元，调用更新API
+       });
+
+
         // var hybird = $window.L.tileLayer('http://121.69.39.114:9009/arctiler/arcgis/services/GoogleChinaHybridMap/MapServer/tile/{z}/{y}/{x}', {
         //   maxZoom: 30,
         // });
