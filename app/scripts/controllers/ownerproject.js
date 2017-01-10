@@ -3,7 +3,9 @@
 angular.module('uGisFrontApp')
   .controller('OwnerProjectCtrl',
     ['$scope', '$location', '$cookies', '$window', '$routeParams', 'MapService',
-   function ($scope, $location, $cookies, $window, $routeParams, MapService) {
+    'AnnotationListService', 'AnnotationService',
+   function ($scope, $location, $cookies, $window, $routeParams, MapService,
+     AnnotationListService, AnnotationService) {
       var mapId = $routeParams.projectid;
       $scope.projectId = mapId;
       $scope.username = $cookies.get('EDM_username');
@@ -112,6 +114,7 @@ angular.module('uGisFrontApp')
 
         };
 
+
         //显示图元编辑面板
         var isShowFeaturePanel = false;
         var panelType = 0; //1-点  2-线  3-面  0-不显示
@@ -127,6 +130,7 @@ angular.module('uGisFrontApp')
         };
 
         var _showFeaturePanel = function(targetFeature){
+
             if (targetFeature instanceof L.Polygon) {
                 panelType = 3;
                //获取面积数值
@@ -156,6 +160,56 @@ angular.module('uGisFrontApp')
             }
             // console.log(panelType);
             return panelType;
+        };
+
+        var _createAnnotation = function(categroy, geojson, feature) {
+          //TODO 需要计算创建图元API参数所需的measure_str
+          AnnotationListService.post(
+          {
+                mapid: $scope.projectId,
+                categroy: categroy,
+                // title: title,
+                geojson: geojson ,
+                // measure_str: measure_str,
+          },
+          function success(response){
+              console.log('Success:' + JSON.stringify(response));
+              feature.options.dbid = response.id;
+          },
+          function error(errorResponse){
+              console.log('Error:' + JSON.stringify(errorResponse));
+          });
+
+        };
+
+        var _updateAnnotation = function(annotationid, geojson) {
+          AnnotationService.update(
+          {
+                mapid: $scope.projectId,
+                annotationid: annotationid,
+                geojson: geojson
+          },
+          function success(response){
+              console.log('Success:' + JSON.stringify(response));
+          },
+          function error(errorResponse){
+              console.log('Error:' + JSON.stringify(errorResponse));
+          });
+        };
+
+        $scope.updateAnnotationTitle = function(annotationid, title) {
+          AnnotationService.update(
+          {
+                mapid: $scope.projectId,
+                annotationid: annotationid,
+                title: title
+          },
+          function success(response){
+              console.log('Success:' + JSON.stringify(response));
+          },
+          function error(errorResponse){
+              console.log('Error:' + JSON.stringify(errorResponse));
+          });
         };
 
         $scope.isShowMarkerPanel = function() {
@@ -258,19 +312,30 @@ angular.module('uGisFrontApp')
         map.on('draw:created', function (e) {
             var type = e.layerType,
                 layer = e.layer;
+            var anno_cat = "";
+            var anno_geojson = "";
             if (type == 'marker') {
               $scope.marker.disable();
+              anno_cat = "Marker";
             }
             if (type == 'polyline') {
               $scope.polyline.disable();
+              anno_cat = "Polyline";
             }
             if (type == 'polygon') {
                $scope.polygon.disable();
+               anno_cat = "Polygon";
             }
 
             // Do whatever you want with the layer.
             // e.type will be the type of layer that has been draw (polyline, marker, polygon, rectangle, circle)
             // E.g. add it to the map
+            layer.options.dbid = 1;//test
+
+            // 创建时图元时，调用API保存图元
+            anno_geojson = JSON.stringify(layer.toGeoJSON());
+            _createAnnotation(anno_cat, anno_geojson, layer);
+
             layer.addTo(map);
 
             layer.on({
@@ -282,7 +347,9 @@ angular.module('uGisFrontApp')
                 var target = e.target;
                 //触发侧边栏点（位置）、线（长度）、面（面积）测量显示，并且显示删除按键
                 $scope.$apply(_showFeaturePanel(target));
-                //TODO 编辑图元，调用更新API
+                // 编辑图元，调用更新API
+                anno_geojson = JSON.stringify(target.toGeoJSON());
+                _updateAnnotation(target.options.dbid, anno_geojson);
             },
             'click': function (e) {
               // layer.editing.enable();
@@ -298,8 +365,6 @@ angular.module('uGisFrontApp')
             }
         });
             feature_list.push(layer);
-            // layer.editing.enable();
-            //TODO 创建时图元时，调用API保存图元
         });
 
          map.on('click', function (e) {
@@ -321,7 +386,9 @@ angular.module('uGisFrontApp')
 
            $scope.$apply(_showFeaturePanel(target));
 
-           //TODO 编辑图元，调用更新API
+           //编辑图元，调用更新API
+           var anno_geojson = JSON.stringify(target.toGeoJSON());
+           _updateAnnotation(target.options.dbid, anno_geojson);
        });
 
 

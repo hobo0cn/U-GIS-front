@@ -1,7 +1,7 @@
 
 'use strict';
 /* Services */
-var uGisServices = 
+var uGisServices =
 	angular.module('uGisServices', ['ngResource']);
 //var API_SERVER_PATH = 'http://localhost:8000';
 var API_SERVER_PATH = 'http://112.74.189.43:9000';
@@ -9,12 +9,12 @@ var API_SERVER_PATH = 'http://112.74.189.43:9000';
 uGisServices
 	.factory('ProjectCatListService', ['$resource', '$cookies',
 		function($resource, $cookies) {
-			
+
 			return $resource( API_SERVER_PATH+'/projectcat/', {}, {
 			  // get: {method: 'GET'},
-			  
-			  get: {method: 'GET', cache: false, isArray: true, 
-					
+
+			  get: {method: 'GET', cache: false, isArray: true,
+
 				},
 			  // delete: {method: 'DELETE', cache: false, isArray: false}
 			  query: {method: 'GET', cache: false, isArray: true
@@ -34,18 +34,18 @@ uGisServices
 			//TODO Just for test address
 			return $resource( API_SERVER_PATH+'/map/', {}, {
 			  // get: {method: 'GET'},
-			  post: {method: 'POST',  cache: false, isArray: false, 
+			  post: {method: 'POST',  cache: false, isArray: false,
 						 headers: {
 			                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
 			                }
               },
-			  get: {method: 'GET', cache: false, isArray: true, 
+			  get: {method: 'GET', cache: false, isArray: true,
 						headers: {
 			                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
 			                }
 				},
 			  // delete: {method: 'DELETE', cache: false, isArray: false}
-			  query: {method: 'GET', cache: false, isArray: true, 
+			  query: {method: 'GET', cache: false, isArray: true,
 						headers: {
 			                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
 			                }}
@@ -116,7 +116,7 @@ uGisServices
 	.factory('LayerStartAnalysis', ['$resource',
 		function($resource) {
 			//TODO Just for test address
-			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/analysis-image/', 
+			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/analysis-image/',
 				{mapid: '@mapid', layerid: '@layerid'},
 				{
 				  post: {method: 'POST', cache: false, isArray: true}
@@ -131,7 +131,7 @@ uGisServices
 	.factory('LayerCoverageAnalysis', ['$resource',
 		function($resource) {
 			//TODO Just for test address
-			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/coverage-analysis/', 
+			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/coverage-analysis/',
 				{mapid: '@mapid', layerid: '@layerid'},
 				{
 				  post: {method: 'POST', cache: false, isArray: true}
@@ -146,7 +146,7 @@ uGisServices
 	.factory('LayerUploadOrthphoto', ['$resource',
 		function($resource) {
 			//TODO Just for test address
-			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/upload-orthphoto/', 
+			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/upload-orthphoto/',
 				{mapid: '@mapid', layerid: '@layerid'},
 				{
 				  post: {method: 'POST', cache: false, isArray: false}
@@ -161,7 +161,7 @@ uGisServices
 	.factory('LayerStartProcess', ['$resource', '$cookies', 'ProfileServices',
 		function($resource, $cookies, ProfileServices) {
 			//TODO Just for test address
-			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/process-image/', 
+			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/process-image/',
 				{mapid: '@mapid', layerid: '@layerid'},
 				{
 				  post: {method: 'POST', cache: false, isArray: false,
@@ -180,7 +180,7 @@ uGisServices
 	.factory('LayerUploadImageDone', ['$resource', '$cookies', 'ProfileServices',
 		function($resource, $cookies, ProfileServices) {
 			//TODO Just for test address
-			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/upload-images-done/', 
+			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/upload-images-done/',
 				{mapid: '@mapid', layerid: '@layerid'},
 				{
 				  post: {method: 'POST', cache: false, isArray: false,
@@ -200,7 +200,7 @@ uGisServices
 	.factory('LayerImageListService', ['$resource',
 		function($resource) {
 			//TODO Just for test address
-			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/image/', 
+			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/image/',
 							{mapid: '@mapid', layerid: '@layerid'},
 						  {
 						  		get: {method: 'GET', cache: false, isArray: false},
@@ -214,7 +214,7 @@ uGisServices
 	.factory('LayerImageService', ['$resource',
 		function($resource) {
 			//TODO Just for test address
-			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/image/:imageid', 
+			return $resource(API_SERVER_PATH+'/map/:mapid/layer/:layerid/image/:imageid',
 				{mapid: '@mapid', layerid: '@layerid', imageid: '@imageid'},
 				  {
 				  	get: {method: 'GET', cache: false, isArray: false},
@@ -227,12 +227,12 @@ uGisServices
 	]);
 
 uGisServices
-	.factory('TaskService', ['$resource','$cookies', 
+	.factory('TaskService', ['$resource','$cookies',
 		function($resource, $cookies) {
-			
-			return $resource(API_SERVER_PATH+'/UGIS/tasks/', {}, 
+
+			return $resource(API_SERVER_PATH+'/UGIS/tasks/', {},
 				  {
-				  	get: {method: 'GET', cache: false, isArray: false, 
+				  	get: {method: 'GET', cache: false, isArray: false,
 				  			headers: {
 			                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
 			                }
@@ -246,13 +246,13 @@ uGisServices
 	]);
 
 uGisServices
-	.factory('MapReportService', ['$resource','$cookies', 
+	.factory('MapReportService', ['$resource','$cookies',
 		function($resource, $cookies) {
-			
-			return $resource(API_SERVER_PATH+'/map/:mapid/report/:reportid/', 
-				{mapid: '@mapid', reportid: '@reportid'}, 
+
+			return $resource(API_SERVER_PATH+'/map/:mapid/report/:reportid/',
+				{mapid: '@mapid', reportid: '@reportid'},
 				  {
-				  	get: {method: 'GET', cache: false, isArray: false, 
+				  	get: {method: 'GET', cache: false, isArray: false,
 				  			headers: {
 			                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
 			                }
@@ -266,10 +266,10 @@ uGisServices
 	])
 	.factory('MapReportListService', ['$resource','$cookies',
 		function($resource, $cookies) {
-			return $resource(API_SERVER_PATH+'/map/:mapid/report/', 
-				{mapid: '@mapid'}, 
+			return $resource(API_SERVER_PATH+'/map/:mapid/report/',
+				{mapid: '@mapid'},
 				  {
-				  	post: {method: 'POST',  cache: false, isArray: false, 
+				  	post: {method: 'POST',  cache: false, isArray: false,
 						 headers: {
 			                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
 			                }
@@ -281,6 +281,65 @@ uGisServices
 
 		}
 	]);
+	uGisServices
+		.factory('AnnotationListService', ['$resource', '$cookies',
+			function($resource, $cookies) {
 
+				return $resource( API_SERVER_PATH+'/map/:mapid/annotation/',
+				 {mapid: '@mapid'}, {
 
+				  post: {method: 'POST',  cache: false, isArray: false,
+						// headers: {
+				    //                 'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
+				    //             }
 
+				     },
+				},
+				  {
+				  	stripTrailingSlashes: false
+				  });
+
+			}
+		]);
+
+		uGisServices
+			.factory('AnnotationService', ['$resource', '$cookies',
+				function($resource, $cookies) {
+
+					return $resource( API_SERVER_PATH+'/map/:mapid/annotation/:annotationid/',
+					 {mapid: '@mapid', annotationid: '@annotationid'}, {
+
+					  update: {method: 'PUT',  cache: false, isArray: false,
+							// headers: {
+					    //                 'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
+					    //             }
+
+					     },
+					},
+					  {
+					  	stripTrailingSlashes: false
+					  });
+
+				}
+			]);
+
+	uGisServices
+		.factory('AnnotationCommentService', ['$resource', '$cookies',
+			function($resource, $cookies) {
+
+				return $resource( API_SERVER_PATH+'/map/:mapid/annotation/:annotationid/comment/',
+				 {mapid: '@mapid', annotationid: '@annotationid'}, {
+
+				  post: {method: 'POST',  cache: false, isArray: false,
+						// headers: {
+				    //                 'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
+				    //             }
+
+				     },
+				},
+				  {
+				  	stripTrailingSlashes: false
+				  });
+
+			}
+		]);
