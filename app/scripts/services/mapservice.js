@@ -289,9 +289,6 @@ uGisServices
 				 {mapid: '@mapid'}, {
 
 				  post: {method: 'POST',  cache: false, isArray: false,
-						// headers: {
-				    //                 'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
-				    //             }
 
 				     },
 				},
@@ -310,11 +307,11 @@ uGisServices
 					 {mapid: '@mapid', annotationid: '@annotationid'}, {
 
 					  update: {method: 'PUT',  cache: false, isArray: false,
-							// headers: {
-					    //                 'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
-					    //             }
 
 					     },
+						get: {method: 'GET', cache: false, isArray: false,
+
+									},
 					},
 					  {
 					  	stripTrailingSlashes: false

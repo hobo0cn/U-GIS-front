@@ -3,9 +3,9 @@
 angular.module('uGisFrontApp')
   .controller('OwnerProjectCtrl',
     ['$scope', '$location', '$cookies', '$window', '$routeParams', 'MapService',
-    'AnnotationListService', 'AnnotationService',
+    'AnnotationListService', 'AnnotationService','AnnotationCommentService',
    function ($scope, $location, $cookies, $window, $routeParams, MapService,
-     AnnotationListService, AnnotationService) {
+     AnnotationListService, AnnotationService, AnnotationCommentService) {
       var mapId = $routeParams.projectid;
       $scope.projectId = mapId;
       $scope.username = $cookies.get('EDM_username');
@@ -25,11 +25,19 @@ angular.module('uGisFrontApp')
           // "weight": 5,
           // "opacity": 0.01
 
-    fillColor: "#ff7800",
-    color: "#ff7800",
-    weight: 3,
-    opacity: 1,
-    fillOpacity: 0.001
+          fillColor: "#ff7800",
+          color: "#ff7800",
+          weight: 3,
+          opacity: 1,
+          fillOpacity: 0.001
+      };
+
+      var annotationStyle = {
+        fillColor: "#13bde7",
+        color: "#13bde7",
+        weight: 3,
+        opacity: 1,
+        fillOpacity: 0.001
       };
 
 
@@ -74,6 +82,9 @@ angular.module('uGisFrontApp')
                   style: geojsonStyle
                 }).addTo(map);
                 map.panTo({lat: $scope.map.center_x, lng: $scope.map.center_y});
+
+                //TODO 加载标注
+                _loadAnnotation($scope.map.anno_set);
               },
               function error(errorResponse){
                 console.log('Error:' + JSON.stringify(errorResponse));
@@ -94,7 +105,6 @@ angular.module('uGisFrontApp')
           loadedLayerGroup.push(wmsLayer);
 
           // loadedLayerGroup_1.addLayer(wmsLayer).addTo(map);
-
         };
 
         //加载当前项目所有可用任务结果
@@ -114,6 +124,39 @@ angular.module('uGisFrontApp')
 
         };
 
+        var _getAnnotation = function() {
+          AnnotationService.get(
+          {
+                mapid: $scope.projectId,
+                annotationid: editingFeature.options.dbid,
+          },
+          function success(response){
+              console.log('Success:' + JSON.stringify(response));
+              $scope.annoComms = response.comment_set;
+              editingFeature.options.dbcomms = response.comment_set;
+          },
+          function error(errorResponse){
+              console.log('Error:' + JSON.stringify(errorResponse));
+          });
+        };
+
+        var _loadAnnotation = function(annoSet){
+            //加载标注
+            for (var i = 0; i < annoSet.length; i++) {
+              var parsedGeoJson = JSON.parse(annoSet[i].geojson);
+              var feature = new $window.L.geoJson(parsedGeoJson, {
+                style: annotationStyle
+              });
+              feature.options.dbid = annoSet[i].id;
+              map.addLayer(feature);
+              var editFeatureId = feature._leaflet_id-1;
+              map._layers[editFeatureId].options.dbid = annoSet[i].id;
+              map._layers[editFeatureId].options.dbtitle = annoSet[i].title;
+              map._layers[editFeatureId].options.dbcomms = annoSet[i].comment_set;
+              _addEditFeatureOnCallback(feature);
+              _addEditFeatureOnCallback(map._layers[editFeatureId]);
+            }
+        };
 
         //显示图元编辑面板
         var isShowFeaturePanel = false;
@@ -197,15 +240,36 @@ angular.module('uGisFrontApp')
           });
         };
 
-        $scope.updateAnnotationTitle = function(annotationid, title) {
+        $scope.updateAnnotationTitle = function() {
+          var annotationid = editingFeature.options.dbid;
+          editingFeature.options.dbtitle = $scope.annotationTitle;
           AnnotationService.update(
           {
                 mapid: $scope.projectId,
                 annotationid: annotationid,
-                title: title
+                title: $scope.annotationTitle
           },
           function success(response){
               console.log('Success:' + JSON.stringify(response));
+          },
+          function error(errorResponse){
+              console.log('Error:' + JSON.stringify(errorResponse));
+          });
+        };
+
+        $scope.onNewCommentAcceptClick = function() {
+          //保存新的备注
+          AnnotationCommentService.post(
+          {
+                mapid: $scope.projectId,
+                annotationid: editingFeature.options.dbid,
+                comment: $scope.newComment
+          },
+          function success(response){
+              console.log('Success:' + JSON.stringify(response));
+              $scope.newComment = "";
+              _getAnnotation();
+
           },
           function error(errorResponse){
               console.log('Error:' + JSON.stringify(errorResponse));
@@ -273,6 +337,43 @@ angular.module('uGisFrontApp')
             $scope.polygon.enable();
         };
 
+        var _addEditFeatureOnCallback = function (feature) {
+          feature.on({
+              'mouseover': function (e) {
+                  // highlight(e.target);
+              },
+              'moveend': function (e) {
+                  // dehighlight(e.target);
+                  var target = e.target;
+                  //触发侧边栏点（位置）、线（长度）、面（面积）测量显示，并且显示删除按键
+                  $scope.$apply(_showFeaturePanel(target));
+                  // 编辑图元，调用更新API
+                  var anno_geojson = JSON.stringify(target.toGeoJSON());
+                  _updateAnnotation(target.options.dbid, anno_geojson);
+              },
+              'click': function (e) {
+                // layer.editing.enable();
+                if (editingFeature) {
+                  editingFeature.editing.disable();
+                  $scope.annotationTitle = "";
+                  $scope.annoComms = [];
+                }
+                // var target = e.target;
+                var target = e.layer;
+                if (!target) {
+                  target = e.target;
+                }
+                target.editing.enable();
+                editingFeature = target;
+                $scope.annotationTitle = editingFeature.options.dbtitle;
+                $scope.annoComms = editingFeature.options.dbcomms;
+                // 触发侧边栏点（位置）、线（长度）、面（面积）测量显示，并且显示删除按键
+                $scope.$apply(_showFeaturePanel(target));
+              }
+          });
+
+        };
+
 
         _getOwneProject();
 
@@ -330,40 +431,13 @@ angular.module('uGisFrontApp')
             // Do whatever you want with the layer.
             // e.type will be the type of layer that has been draw (polyline, marker, polygon, rectangle, circle)
             // E.g. add it to the map
-            layer.options.dbid = 1;//test
 
             // 创建时图元时，调用API保存图元
             anno_geojson = JSON.stringify(layer.toGeoJSON());
             _createAnnotation(anno_cat, anno_geojson, layer);
 
             layer.addTo(map);
-
-            layer.on({
-            'mouseover': function (e) {
-                // highlight(e.target);
-            },
-            'moveend': function (e) {
-                // dehighlight(e.target);
-                var target = e.target;
-                //触发侧边栏点（位置）、线（长度）、面（面积）测量显示，并且显示删除按键
-                $scope.$apply(_showFeaturePanel(target));
-                // 编辑图元，调用更新API
-                anno_geojson = JSON.stringify(target.toGeoJSON());
-                _updateAnnotation(target.options.dbid, anno_geojson);
-            },
-            'click': function (e) {
-              // layer.editing.enable();
-              if (editingFeature) {
-                editingFeature.editing.disable();
-              }
-              var target = e.target;
-              target.editing.enable();
-              editingFeature = target;
-
-              // 触发侧边栏点（位置）、线（长度）、面（面积）测量显示，并且显示删除按键
-              $scope.$apply(_showFeaturePanel(target));
-            }
-        });
+            _addEditFeatureOnCallback(layer);
             feature_list.push(layer);
         });
 
