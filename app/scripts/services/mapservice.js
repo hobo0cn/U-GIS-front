@@ -311,7 +311,13 @@ uGisServices
 					     },
 						get: {method: 'GET', cache: false, isArray: false,
 
-									},
+							},
+
+						delete: {method: 'DELETE', cache: false, isArray: false,
+
+							}
+
+
 					},
 					  {
 					  	stripTrailingSlashes: false

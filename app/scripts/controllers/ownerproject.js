@@ -83,7 +83,7 @@ angular.module('uGisFrontApp')
                 }).addTo(map);
                 map.panTo({lat: $scope.map.center_x, lng: $scope.map.center_y});
 
-                //TODO 加载标注
+                // 加载标注
                 _loadAnnotation($scope.map.anno_set);
               },
               function error(errorResponse){
@@ -257,6 +257,24 @@ angular.module('uGisFrontApp')
           });
         };
 
+        var _delAnnotation = function() {
+          var annotationid = editingFeature.options.dbid;
+          AnnotationService.delete(
+          {
+                mapid: $scope.projectId,
+                annotationid: annotationid,
+          },
+          function success(response){
+              console.log('Success:' + JSON.stringify(response));
+              //从地图上删除图元
+              map.removeLayer(editingFeature);
+              editingFeature = null;
+          },
+          function error(errorResponse){
+              console.log('Error:' + JSON.stringify(errorResponse));
+          });
+        };
+
         $scope.onNewCommentAcceptClick = function() {
           //保存新的备注
           AnnotationCommentService.post(
@@ -303,9 +321,9 @@ angular.module('uGisFrontApp')
             return false;
         };
         $scope.onDelFeatureClick = function() {
-          //TODO 删除图元
-          drawnItems.removeLayer(editingFeature);
-          editingFeature = null;
+          //删除图元
+          //调用删除标注API
+          _delAnnotation();
         };
 
         //切换地图数据类型
