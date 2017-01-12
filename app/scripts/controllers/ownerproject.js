@@ -475,6 +475,9 @@ angular.module('uGisFrontApp')
                layer = e.layer;
 
            var target = e.poly;
+           if(!target){
+             target = e.target;
+           }
 
            $scope.$apply(_showFeaturePanel(target));
 
