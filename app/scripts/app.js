@@ -98,6 +98,10 @@ angular
         templateUrl: 'views/dataservice-dashboard.html',
         controller: 'DataServiceDashboardCtrl'
       })
+      .when('/share/:token', {
+        templateUrl: 'views/share.html',
+        controller: 'ShareCtrl'
+      })
 
       //以下routing设置为旧程序，不再使用
       .when('/map', {
@@ -108,7 +112,7 @@ angular
         templateUrl: 'views/map.html',
         controller: 'MapViewCtrl'
       })
-      
+
       // .when('/dashboard', {
       //   templateUrl: 'views/dashboard.html',
       //   controller: 'DashboardCtrl'
