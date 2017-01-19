@@ -1,0 +1,74 @@
+<div class="module" annotationPanel>
+  <button  class="btn btn-block btn-info"
+  ng-show="isAnnotationSelected()"
+  ng-click="unSelectAnnotation()">返回</button>
+
+    <div class="module-title">标注工具</div>
+    <div class="module-content">
+        <ul class="mapswitch-wrapper">
+            <li class="active" ng-click="startDrawMarker()">
+                <a class="sate" alt="点" class="img-thumbnail"></a><span>点</span></li>
+            <li ng-click="startDrawPolyline()">
+                <a class="elevation" alt="线" class="img-thumbnail"></a><span>线</span></li>
+            <li ng-click="startDrawPolygon()">
+                <a class="ndvi" alt="多边形" class="img-thumbnail"></a><span>多边形</span></li>
+        </ul>
+                                <div class="module-Annotation">
+                <div class="col-md-12" ng-show="isShowMarkerPanel()">
+                  <div class="col-md-4">
+                    坐标
+                  </div>
+                  <div class="col-md-8">
+                    {{markerPos}}
+                  </div>
+
+                </div>
+                <div class="col-md-12" ng-show="isShowPolylinePanel()">
+                  <div class="col-md-4">
+                    长度
+                  </div>
+                  <div class="col-md-8">
+                    {{polylineLen}}
+                  </div>
+                </div>
+               <div class="col-md-12" ng-show="isShowPolygonPanel()">
+                  <div class="col-md-4">
+                    面积
+                  </div>
+                  <div class="col-md-4">
+                    {{polygonArea}}
+                  </div>
+                </div>
+                <button  class="btn btn-block btn-info"
+                ng-show="isAnnotationSelected()"
+                ng-click="onDelFeatureClick()">删除</button>
+
+                <div class="col-md-12" ng-show="isAnnotationSelected()">
+                  <div class="col-md-4">
+                    标题
+                  </div>
+                  <input class="form-control  ng-dirty ng-invalid" id="annotationTitle"
+                  ng-model="annotationTitle" ng-blur="updateAnnotationTitle()">
+
+                  <div class="col-md-4">
+                    备注
+                  </div>
+                  <input class="form-control  ng-dirty ng-invalid" id="newComment"
+                  ng-model="newComment">
+
+                  <button  class="btn btn-block btn-info"
+                    ng-click="onNewCommentAcceptClick()">发送</button>
+
+                  <table class="table" ng-repeat="comment in annoComms" ng-show="isAnnotationSelected()">
+                      <tbody>
+                          <tr>
+                              <!-- <td> <img alt="report_pdf" src="./images/pdf.png"></td> -->
+                              <td>{{comment.comment}}</td>
+                              <!-- <td><a class="btn btn-primary btn-sm" href={{report.report_file_url}}>下载</a></td> -->
+                          </tr>
+                      </tbody>
+                  </table>
+                </div>
+            </div>
+    </div>
+</div>

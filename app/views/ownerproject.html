@@ -25,7 +25,7 @@
             </ol>
         </div>
         <div class="sidebar-row side-left">
-            <div class="module">
+            <div class="module" ng-show="!isAnnotationSelected()">
                 <div class="module-title">成果</div>
                 <div class="module-content">
                     <ul class="mapswitch-wrapper">
@@ -39,7 +39,10 @@
                 </div>
             </div>
 
-            <div class="module">
+            <div annotation-panel>
+            </div>
+
+             <!-- <div class="module">
                 <div class="module-title">标注工具</div>
                 <div class="module-content">
                     <ul class="mapswitch-wrapper">
@@ -99,18 +102,18 @@
                               <table class="table" ng-repeat="comment in annoComms" ng-show="isShowDelButton()">
                                   <tbody>
                                       <tr>
-                                          <!-- <td> <img alt="report_pdf" src="./images/pdf.png"></td> -->
+
                                           <td>{{comment.comment}}</td>
-                                          <!-- <td><a class="btn btn-primary btn-sm" href={{report.report_file_url}}>下载</a></td> -->
+
                                       </tr>
                                   </tbody>
                               </table>
                             </div>
                         </div>
                 </div>
-            </div>
+            </div>  -->
 
-           <!--  <div class="module report">
+            <!-- <div class="module report">
                 <div class="module-title">报告</div>
                 <div class="module-content">
                     <table class="table" ng-repeat="report in reports">
