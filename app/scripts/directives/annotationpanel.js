@@ -10,17 +10,6 @@ angular.module('uGisFrontApp')
       restrict: 'A',
       templateUrl: './views/annotationpanel.html',
       link: function(scope, element, attrs) {
-        var geojsonStyle = {
-            // "color": "#ff7800",
-            // "weight": 5,
-            // "opacity": 0.01
-
-            fillColor: "#ff7800",
-            color: "#ff7800",
-            weight: 3,
-            opacity: 1,
-            fillOpacity: 0.001
-        };
 
         var annotationStyle = {
           fillColor: "#13bde7",
