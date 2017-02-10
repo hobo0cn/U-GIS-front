@@ -351,8 +351,8 @@ uGisServices
 			.factory('MapShareService', ['$resource', '$cookies',
 				function($resource, $cookies) {
 
-					return $resource( API_SERVER_PATH+'/map/:mapid/share/',
-					 {mapid: '@mapid'}, {
+					return $resource( API_SERVER_PATH+'/map/:mapid/share/:shareid/',
+					 {mapid: '@mapid', shareid: '@shareid'}, {
 
 						post: {method: 'POST',  cache: false, isArray: false,},
 
@@ -371,7 +371,7 @@ uGisServices
 						return $resource( API_SERVER_PATH+'/UGIS/share/',
 						 { }, {
 
-							get: {method: 'GET', cache: false, isArray: true,},
+							get: {method: 'GET', cache: false, isArray: false,},
 						},
 							{
 								stripTrailingSlashes: false
