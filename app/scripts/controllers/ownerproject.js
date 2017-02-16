@@ -3,9 +3,9 @@
 angular.module('uGisFrontApp')
   .controller('OwnerProjectCtrl',
     ['$scope', '$rootScope', '$location', '$cookies', '$window', '$routeParams', 'MapService',
-    'AnnotationListService', 'AnnotationService','AnnotationCommentService',
+    'AnnotationListService', 'AnnotationService','AnnotationCommentService','ngDialog','MapShareListService',
    function ($scope, $rootScope, $location, $cookies, $window, $routeParams, MapService,
-     AnnotationListService, AnnotationService, AnnotationCommentService) {
+     AnnotationListService, AnnotationService, AnnotationCommentService, ngDialog, MapShareListService) {
       var mapId = $routeParams.projectid;
       $scope.projectId = mapId;
       $scope.username = $cookies.get('EDM_username');
@@ -135,6 +135,41 @@ angular.module('uGisFrontApp')
         };
 
 
+
+        $scope.shareMap = function() {
+            //打开共享对话框
+            MapShareListService.post({mapid: mapId},
+               function success(response){
+                 console.log('Success:' + JSON.stringify(response));
+                 //服务器返回验证码
+                 $scope.authCode = response.authCode;
+                 $scope.shareURL = 'http://localhost:4000/#/share/'+response.token;
+                 //TODO 设置二维码与共享
+
+                 $scope.shareDlg = ngDialog.open({ template: '../views/shareDlg.html',
+                                 className: 'ngdialog-theme-default',
+                                 scope: $scope,
+                                 mapId: mapId,
+                                 shareURL: $scope.shareURL,
+                                 authCode: $scope.authCode,
+                                 // controller: 'shareDlgCtrl',
+                                 controller: ['$scope', 'MapShareListService','$window',
+                                     function($scope, MapShareListService, $window) {
+                                     // controller logic
+                                     $window.shareURL = $scope.shareURL;
+                                     $window.authCodeShare = "验证码：" + $scope.authCode + "##";
+
+                                 }],
+                                 controllerAs: 'shareDlgCtrl'
+                               });
+               },
+               function error(errorResponse){
+                 console.log('Error:' + JSON.stringify(errorResponse));
+               }
+             );
+
+          
+        };
 
 
         _getOwneProject();

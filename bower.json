@@ -27,8 +27,8 @@
     "leaflet-gcj02": "https://github.com/hobo0cn/leaflet-gcj02.git",
     "Leaflet.MeasureAreaControl": "https://github.com/zvaraondrej/Leaflet.MeasureAreaControl.git",
     "Leaflet.Coordinates": "leaflet-coordinates#^0.1.5",
-    "Leaflet.GeoSearch": "https://github.com/smeijer/L.GeoSearch.git"
-
+    "Leaflet.GeoSearch": "https://github.com/smeijer/L.GeoSearch.git",
+    "angular-qr": "latest"
   },
   "devDependencies": {
     "angular-mocks": "^1.3.0"

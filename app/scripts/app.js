@@ -34,7 +34,9 @@ angular
     'ngDialog',
     'flow',
     'ui.bootstrap',
-    'ui.tree'
+    'ui.tree',
+    'ja.qr'
+
   ])
   .config(function ($routeProvider) {
     $routeProvider
