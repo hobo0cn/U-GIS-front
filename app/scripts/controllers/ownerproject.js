@@ -143,7 +143,7 @@ angular.module('uGisFrontApp')
                  console.log('Success:' + JSON.stringify(response));
                  //服务器返回验证码
                  $scope.authCode = response.authCode;
-                 $scope.shareURL = 'http://localhost:4000/#/share/'+response.token;
+                 $scope.shareURL = 'http://test.yiyuntu.cn/#/share/'+response.token;
                  //TODO 设置二维码与共享
 
                  $scope.shareDlg = ngDialog.open({ template: '../views/shareDlg.html',
@@ -168,7 +168,7 @@ angular.module('uGisFrontApp')
                }
              );
 
-          
+
         };
 
 

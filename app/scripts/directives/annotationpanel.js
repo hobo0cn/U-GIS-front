@@ -191,7 +191,7 @@ angular.module('uGisFrontApp')
                    return Math.round(num*(Math.pow(10, len)))/(Math.pow(10, len));
                };
         var strLatLng = function(latlng) {
-            return "("+_round(latlng.lat, 6)+", "+_round(latlng.lng, 6)+")";
+            return _round(latlng.lat, 6)+", "+_round(latlng.lng, 6);
         };
 
         scope._showFeaturePanel = function(targetFeature){
@@ -201,7 +201,7 @@ angular.module('uGisFrontApp')
                //获取面积数值
                var latlngs = targetFeature._defaultShape ? targetFeature._defaultShape() : targetFeature.getLatLngs(),
                     area = L.GeometryUtil.geodesicArea(latlngs);
-                scope.polygonArea =  "面积: "+L.GeometryUtil.readableArea(area, true);
+                scope.polygonArea =  L.GeometryUtil.readableArea(area, true);
             }
             else if (targetFeature instanceof L.Polyline) {
                 panelType = 2;
@@ -209,12 +209,12 @@ angular.module('uGisFrontApp')
                 var latlngs = targetFeature._defaultShape ? targetFeature._defaultShape() : targetFeature.getLatLngs(),
                     distance = 0;
                 if (latlngs.length < 2) {
-                    scope.polylineLen = "距离: N/A";
+                    scope.polylineLen = "N/A";
                 } else {
                     for (var i = 0; i < latlngs.length-1; i++) {
                         distance += latlngs[i].distanceTo(latlngs[i+1]);
                     }
-                    scope.polylineLen = "距离: "+_round(distance, 2)+" 米";
+                    scope.polylineLen = _round(distance, 2)+" 米";
                 }
             }
             else if (targetFeature instanceof L.Marker) {

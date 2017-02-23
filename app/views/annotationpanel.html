@@ -1,19 +1,24 @@
 <div class="module" annotationPanel>
-  <button  class="btn btn-block btn-info"
+  <!-- <button  class="btn btn-block btn-info"
   ng-show="isAnnotationSelected()"
-  ng-click="unSelectAnnotation()">返回</button>
+  ng-click="unSelectAnnotation()">返回</button> -->
+    <button class="btn btn-return" ng-show="isAnnotationSelected()"
+    ng-click="unSelectAnnotation()">
+      返回
+    </button>
 
-    <div class="module-title">标注工具</div>
-    <div class="module-content">
-        <ul class="mapswitch-wrapper">
+
+    <div class="module-title" ng-show="!isAnnotationSelected()">标注工具</div>
+    <div class="module-content" >
+        <ul class="annotation-switch-wrapper" ng-show="!isAnnotationSelected()">
             <li class="active" ng-click="startDrawMarker()">
-                <a class="sate" alt="点" class="img-thumbnail"></a><span>点</span></li>
+                <a class="mark" alt="标注" class="img-thumbnail"></a><span>标注</span></li>
             <li ng-click="startDrawPolyline()">
-                <a class="elevation" alt="线" class="img-thumbnail"></a><span>线</span></li>
+                <a class="polyline" alt="距离测量" class="img-thumbnail"></a><span>距离测量</span></li>
             <li ng-click="startDrawPolygon()">
-                <a class="ndvi" alt="多边形" class="img-thumbnail"></a><span>多边形</span></li>
+                <a class="polygon" alt="面积测量" class="img-thumbnail"></a><span>面积测量</span></li>
         </ul>
-                                <div class="module-Annotation">
+            <div class="module-Annotation">
                 <div class="col-md-12" ng-show="isShowMarkerPanel()">
                   <div class="col-md-4">
                     坐标
