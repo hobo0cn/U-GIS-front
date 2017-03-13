@@ -11,7 +11,7 @@ uGisAuthServices
 			//TODO Just for test address
 			return $resource( API_SERVER_PATH+'/profile/', {}, {
 
-			  get: {method: 'GET',  cache: false, isArray: false,
+			  get: {method: 'GET',  cache: false, isArray: true,
 					headers: {
 			                    'Authorization': 'Token ' + $cookies.get('EDM_usertoken')
 			                }
