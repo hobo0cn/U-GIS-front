@@ -38,13 +38,8 @@
                     </ul>
                 </div>
             </div>
-            <button  class="btn btn-block btn-info"
-            ng-show="!isAnnotationSelected()"
-            ng-click="shareMap()">共享</button>
-
             <div annotation-panel>
             </div>
-
             <!-- <div class="module report">
                 <div class="module-title">报告</div>
                 <div class="module-content">
@@ -60,12 +55,27 @@
                 </div>
             </div> -->
         </div>
-
         <div class="main-content">
-          <!-- <div class="annotation-toolbar">
+            <!-- <div class="annotation-toolbar">
             <p>toolbar</p>
           </div> -->
             <div id="mapid" class="map"></div>
+            <div class="map-toolbar" ng-show="!isAnnotationSelected()">
+                <ul class="annotation-switch-wrapper">
+                    <li class="active" ng-click="startDrawMarker()">
+                        <a class="marker" alt="标注">标注</a>
+                    </li>
+                    <li ng-click="startDrawPolyline()">
+                        <a class="polyline" alt="距离测量">距离测量</a>
+                    </li>
+                    <li ng-click="startDrawPolygon()">
+                        <a class="polygon" alt="面积测量">面积测量</a>
+                    </li>
+                    <li ng-click="shareMap()">
+                        <a class="share" alt="分享">分享</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </body>
