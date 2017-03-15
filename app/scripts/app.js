@@ -104,7 +104,10 @@ angular
         templateUrl: 'views/share.html',
         controller: 'ShareCtrl'
       })
-
+      .when('/3dviewer', {
+        templateUrl: 'views/3dviewer.html',
+        controller: 'New3dviewerCtrl'
+      })
       //以下routing设置为旧程序，不再使用
       .when('/map', {
         templateUrl: 'views/maplist.html',
