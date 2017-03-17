@@ -7535,6 +7535,46 @@ ul {
 /******map end******/
 
 
+/****** share dialog start********/
+
+.ngdialog.share-dialog {}
+.ngdialog.share-dialog .ngdialog-content {
+  padding: 0px;
+}
+.ngdialog.share-dialog .ngdialog-content table {
+  width: 100%;
+}
+.ngdialog.share-dialog .ngdialog-content table th {
+  width: 70px;
+  text-align: right;
+}
+.ngdialog.share-dialog .ngdialog-content table th,
+.ngdialog.share-dialog .ngdialog-content table td {
+  vertical-align: middle;
+}
+.ngdialog.share-dialog .ngdialog-content .form-control {
+  display: inline-block;
+}
+.ngdialog.share-dialog .ngdialog-content input.form-control {
+  width: 80%;
+  border-radius: 0;
+}
+.ngdialog.share-dialog .ngdialog-content .sharitems-wrap {
+  padding-top: 20px;
+}
+.ngdialog.share-dialog .ngdialog-content .sharitems-wrap a {}
+.ngdialog.share-dialog .ngdialog-content .jiathis_counter_style {
+  display: none;
+}
+.ngdialog.share-dialog .ngdialog-content qr {
+  position: relative;
+  left: 65px;
+  top: -10px;
+}
+
+/****** share dialog end********/
+
+
 /******footer start******/
 
 .footer {

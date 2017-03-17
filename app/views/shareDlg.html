@@ -1,85 +1,66 @@
 <html>
 
-  <head>
+<head>
+
     <head>
-     <link rel="stylesheet" href="../styles/ngDialog-custom-width.css">
+        <link rel="stylesheet" href="../styles/ngDialog-custom-width.css">
     </head>
-  </head>
+</head>
 
-  <body>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4"></div>
-          <div class="col-md-4">
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h3 class="panel-title">共享</h3>
-              </div>
-              <div class="panel-body">
-                <form class="form-horizontal" role="form">
-                  <div class="form-group">
-                    <div class="col-sm-3">
-                      <label for="inputEmail3" class="control-label">链接:</label>
-                    </div>
-                    <div class="col-sm-9">
-                      <input type="email" class="form-control" id="inputEmail3" placeholder="链接"
-                      ng-model="shareURL">
-                      <a href="#"><i class="fa fa-clipboard fa-fw fa-lg"></i></a>
-                      <p>验证码：{{authCode}}</p>
-                    </div>
-                  </div>
-                  <div class="col-sm-9">
-                    <div class="form-group">
-                      <div class="col-sm-4">
-                        <label for="inputEmail3" class="control-label">分享到</label>
-                      </div>
-                      <!-- <div class="col-sm-8">
-                        <img src="../images/share/QQ.png" class="img-responsive">
-                        <img src="../images/share/微信.png" class="img-responsive">
-                        <img src="../images/share/微博.png" class="img-responsive">
-                      </div> -->
-                      <!-- JiaThis Button BEGIN -->
-                      <div class="jiathis_style_32x32">
-                        <a class="jiathis_button_weixin" ></a>
-                        <a class="jiathis_button_tsina" ></a>
-                        <a class="jiathis_button_cqq" ></a>
-                      <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
-                      <a class="jiathis_counter_style"></a>
-                      </div>
-                      <script type="text/javascript">
-
-                        // var shareURL = $('[ng-controller="shareDlgCtrl"]').scope().shareURL;
-                        // var title = $('[ng-controller="shareDlgCtrl"]').scope().authCodeShare;
-                        // var shareURL = angular.element(document.querySelector('[ng-controller="shareDlgCtrl"]')).scope().shareURL;
-                        // var title = angular.element(document.querySelector('[ng-controller="shareDlgCtrl"]')).scope().authCodeShare;
-                        var jiathis_config={
-                         siteNum:4,
-                         sm:"copy,tsina,weixin,cqq",
-                         url: shareURL,
-                         summary:"",
-                         title: authCodeShare,
-                         shortUrl:false,
-                         hideMore:false
-                       };
-                      </script>
-
-                      <script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js" charset="utf-8"></script>
-                      <!-- JiaThis Button END -->
-
-                      <qr size="52" type-number="0" text="shareURL"></qr>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-
-          </div>
+<body>
+    <div class="panel">
+        <div class="panel-heading">
+            <h3 class="panel-title">分享</h3>
         </div>
-      </div>
+        <div class="panel-body">
+            <form class="form-horizontal" role="form">
+                <table>
+                    <tr>
+                        <th>
+                            <label for="inputEmail3">链接：</label>
+                        </th>
+                        <td>
+                            <input type="email" class="form-control" id="inputEmail3" placeholder="链接" ng-model="shareURL">
+                            <a class="hidden" href="#"><i class="fa fa-clipboard fa-fw fa-lg"></i></a>
+                            <p class="hidden">验证码：{{authCode}}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="inputEmail3">分享到：</label>
+                        </th>
+                        <td class="sharitems-wrap">
+                            <div class="jiathis_style_32x32">
+                                <a class="jiathis_button_weixin"></a>
+                                <a class="jiathis_button_tsina"></a>
+                                <a class="jiathis_button_cqq"></a>
+                                <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+                                <a class="jiathis_counter_style"></a>
+                            </div>
+                            <script type="text/javascript">
+                            // var shareURL = $('[ng-controller="shareDlgCtrl"]').scope().shareURL;
+                            // var title = $('[ng-controller="shareDlgCtrl"]').scope().authCodeShare;
+                            // var shareURL = angular.element(document.querySelector('[ng-controller="shareDlgCtrl"]')).scope().shareURL;
+                            // var title = angular.element(document.querySelector('[ng-controller="shareDlgCtrl"]')).scope().authCodeShare;
+                            var jiathis_config = {
+                                siteNum: 4,
+                                sm: "copy,tsina,weixin,cqq",
+                                url: shareURL,
+                                summary: "",
+                                title: authCodeShare,
+                                shortUrl: false,
+                                hideMore: false
+                            };
+                            </script>
+                            <script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js" charset="utf-8"></script>
+                            <!-- JiaThis Button END -->
+                            <qr size="52" type-number="0" text="shareURL"></qr>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
     </div>
-  </body>
+</body>
 
 </html>
