@@ -201,7 +201,7 @@ angular.module('uGisFrontApp')
                //获取面积数值
                var latlngs = targetFeature._defaultShape ? targetFeature._defaultShape() : targetFeature.getLatLngs(),
                     area = L.GeometryUtil.geodesicArea(latlngs);
-                scope.polygonArea =  L.GeometryUtil.readableArea(area, true);
+                scope.polygonArea = (area/666.6666).toFixed(2)+ '亩';
             }
             else if (targetFeature instanceof L.Polyline) {
                 panelType = 2;
